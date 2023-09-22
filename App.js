@@ -7,9 +7,9 @@ import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 
 //Screens
-import Home from "./src/screen/Home";
-import Books from "./src/screen/Books";
-import BooksDetail from "./src/screen/BookDatail";
+import Home from "./src/screens/Home";
+import BooksSearch from "./src/screens/BooksSearch";
+import BooksDetail from "./src/screens/BookDatail";
 
 export default function App() {
   //Permite usar fuentes personalizadas
@@ -25,7 +25,7 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.container}>
         <Home />
-        <Books />
+        <BooksSearch />
         <BooksDetail />
         <StatusBar style='auto' />
       </View>

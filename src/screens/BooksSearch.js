@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-const Books = () => {
+const BooksSearch = () => {
   return (
     <View>
       <Text>Book</Text>
@@ -8,6 +8,6 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default BooksSearch;
 
 const styles = StyleSheet.create({});
