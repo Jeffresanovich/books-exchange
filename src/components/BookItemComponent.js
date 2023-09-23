@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     ...flex("flex-start"),
   },
   image: {
-    margin: 20,
+    margin: 10,
   },
   infoContainer: {
     width: "70%",

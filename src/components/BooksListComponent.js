@@ -2,15 +2,16 @@ import { StyleSheet, View, FlatList, Image } from "react-native";
 
 import BookItemComponent from "./BookItemComponent";
 
-import booksDB from "../data/booksDB";
+import { useSelector } from "react-redux";
 
 const BooksListComponent = ({ imageVisible }) => {
+  const booksDB = useSelector((state) => state.homeSlice.allBooks);
   return (
     <View>
       {imageVisible ? (
         <Image
           style={styles.image}
-          //source={require("../../assets/product-not-found.png")} //EN PROCESO DE APLICACION
+          source={require("../../assets/product-not-found.png")} //EN PROCESO DE APLICACION
         />
       ) : (
         <FlatList
