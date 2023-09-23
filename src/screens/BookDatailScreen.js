@@ -14,14 +14,14 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 //Components
 import TitleComponent from "../components/TitleComponent";
-import DescriptionComponent from "../components/DescriptionComponent/";
+import DescriptionComponent from "../components/DescriptionComponent";
 
 //Styles
 import { flex } from "../theme/stylesFunctions";
 import { useSelector } from "react-redux";
 
 const BookDatailScreen = () => {
-  const book = useSelector((state) => state.homeSlice.allBooks[2]);
+  const book = useSelector((state) => state.homeSlice.allBooks[4]);
 
   return (
     <View style={styles.container}>
