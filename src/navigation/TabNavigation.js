@@ -18,7 +18,7 @@ const TabNavigation = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Ionicons name='home' size={focused ? 30 : 20} color='black' />
+            <Ionicons name='home' size={focused ? 35 : 20} color='black' />
           ),
         }}
       />
@@ -27,7 +27,7 @@ const TabNavigation = () => {
         component={BooksSearchScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <FontAwesome name='search' size={focused ? 30 : 20} color='black' />
+            <FontAwesome name='search' size={focused ? 35 : 20} color='black' />
           ),
         }}
       />
@@ -38,7 +38,7 @@ const TabNavigation = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name='exchange'
-              size={focused ? 30 : 20}
+              size={focused ? 35 : 20}
               color='black'
             />
           ),
