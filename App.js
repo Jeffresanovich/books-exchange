@@ -1,15 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import TabNavigation from "./src/navigation/TabNavigation";
 
 //Redux
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-
-//Screens
-import Home from "./src/screens/Home";
-import BooksSearch from "./src/screens/BooksSearch";
-import BooksDetail from "./src/screens/BookDatail";
 
 export default function App() {
   //Permite usar fuentes personalizadas
@@ -23,21 +18,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Home />
-        <BooksSearch />
-        <BooksDetail />
-        <StatusBar style='auto' />
-      </View>
+      <NavigationContainer>
+        <TabNavigation />
+      </NavigationContainer>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

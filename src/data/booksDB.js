@@ -12,6 +12,21 @@ export default book = [
     publisher: "string",
     date_published: "2021-03-04T00:00:00.000Z",
     subjects: ["string", "string", "string", "string"],
+    currentUser: [
+      {
+        userName: "string",
+        startDate: "2021-03-04T00:00:00.000Z",
+        endDate: "2021-03-04T00:00:00.000Z",
+      },
+    ],
+    previousUsers: [
+      {
+        userName: "string",
+        rate: 0.0,
+        date: "2021-03-04T00:00:00.000Z",
+        comment: "string",
+      },
+    ],
   },
   {
     id: 0,
