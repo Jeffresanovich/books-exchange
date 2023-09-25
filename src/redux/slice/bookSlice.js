@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import books from "../../data/booksDB";
 
-const homeSlice = createSlice({
+const bookSlice = createSlice({
   name: "home",
   initialState: {
     allBooks: books,
@@ -10,16 +10,16 @@ const homeSlice = createSlice({
     booksFilterByTitle: [],
   },
   reducers: {
-    setBooksSearch: ({ textSearch, booksFilterByTitle, allBooks }, action) => {
-      textSearch = action.payload;
+    setBooksSearch: (state, action) => {
+      state.textSearch = action.payload;
 
-      booksFilterByTitle = allBooks.filter(({ title }) => {
+      state.booksFilterByTitle = state.allBooks.filter(({ title }) => {
         textSearch.toLocaleLowerCase() === title.toLowerCase;
       });
     },
   },
 });
 
-export const { setBooksSearch } = homeSlice.actions;
+export const { setBooksSearch } = bookSlice.actions;
 
-export default homeSlice.reducer;
+export default bookSlice.reducer;

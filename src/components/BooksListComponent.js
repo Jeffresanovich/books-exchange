@@ -5,7 +5,7 @@ import BookItemComponent from "./BookItemComponent";
 import { useSelector } from "react-redux";
 
 const BooksListComponent = ({ imageVisible }) => {
-  const booksDB = useSelector((state) => state.homeSlice.allBooks);
+  const booksDB = useSelector((state) => state.bookSlice.allBooks);
   return (
     <View>
       {imageVisible ? (

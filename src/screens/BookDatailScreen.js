@@ -21,7 +21,7 @@ import { flex } from "../theme/stylesFunctions";
 import { useSelector } from "react-redux";
 
 const BookDatailScreen = () => {
-  const book = useSelector((state) => state.homeSlice.allBooks[3]);
+  const book = useSelector((state) => state.bookSlice.allBooks[3]);
 
   return (
     <View style={styles.container}>
