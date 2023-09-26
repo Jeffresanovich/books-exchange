@@ -10,13 +10,25 @@ const BooksSearchStack = () => {
     <Stack.Navigator
       initialRouteName='BooksSearchScreen'
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='BooksSearchScreen' component={BooksSearchScreen} />
-      <Stack.Screen name='BookDatailScreen' component={BookDatailScreen} />
+      <Stack.Screen
+        name='BooksSearchScreen'
+        component={BooksSearchScreen}
+        options={{
+          title: "BUSCADOR",
+        }}
+      />
+      <Stack.Screen
+        name='BookDatailScreen'
+        component={BookDatailScreen}
+        options={{
+          title: "DETALLES",
+        }}
+      />
     </Stack.Navigator>
   );
 };
-
 export default BooksSearchStack;

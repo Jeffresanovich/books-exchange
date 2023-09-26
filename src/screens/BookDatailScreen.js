@@ -8,9 +8,7 @@ import {
 } from "react-native";
 
 //Icons
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Components
 import TitleComponent from "../components/TitleComponent";
@@ -41,12 +39,8 @@ const BookDatailScreen = ({ route }) => {
         <DescriptionComponent description={book.long_title} />
         <View style={styles.buttonContainer}>
           <Pressable style={[styles.button, styles.buyButton]}>
-            <MaterialIcons name='payment' size={50} color='white' />
-            <Text style={styles.buttonText}>Buy</Text>
-          </Pressable>
-          <Pressable style={[styles.button, styles.cartButton]}>
-            <Text style={styles.buttonText}>Cart</Text>
-            <FontAwesome5 name='shopping-cart' size={40} color='white' />
+            <MaterialCommunityIcons name='book-lock' size={50} color='white' />
+            <Text style={styles.buttonText}>RESERVAR</Text>
           </Pressable>
         </View>
       </ScrollView>

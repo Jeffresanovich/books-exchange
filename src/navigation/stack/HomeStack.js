@@ -10,11 +10,26 @@ const HomeStack = () => {
     <Stack.Navigator
       initialRouteName='HomeScreen'
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='HomeScreen' component={HomeScreen} />
-      <Stack.Screen name='BookDatailScreen' component={BookDatailScreen} />
+      <Stack.Screen
+        name='HomeScreen'
+        component={HomeScreen}
+        options={{
+          headerShown: true,
+          title: "INICIO",
+        }}
+      />
+      <Stack.Screen
+        name='BookDatailScreen'
+        component={BookDatailScreen}
+        options={{
+          headerShown: true,
+          title: "DETALLE",
+        }}
+      />
     </Stack.Navigator>
   );
 };

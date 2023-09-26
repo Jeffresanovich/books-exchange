@@ -10,13 +10,27 @@ const ExchangeStack = () => {
     <Stack.Navigator
       initialRouteName='ExChangeScreen'
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='ExChangeScreen' component={ExChangeScreen} />
-      <Stack.Screen name='BookDatailScreen' component={BookDatailScreen} />
+      <Stack.Screen
+        name='ExChangeScreen'
+        component={ExChangeScreen}
+        options={{
+          headerShown: true,
+          title: "INTERCAMBIO",
+        }}
+      />
+      <Stack.Screen
+        name='BookDatailScreen'
+        component={BookDatailScreen}
+        options={{
+          headerShown: true,
+          title: "DETALLES",
+        }}
+      />
     </Stack.Navigator>
   );
 };
-
 export default ExchangeStack;
