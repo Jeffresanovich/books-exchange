@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 const BooksSearchScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>BookSearch</Text>
+      <Text>BooksSearchScreen</Text>
     </View>
   );
 };

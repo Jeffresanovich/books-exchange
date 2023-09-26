@@ -5,8 +5,7 @@ import BookDetaileScreen from "./BookDatailScreen";
 const ExChangeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>ExChange</Text>
-      <BookDetaileScreen />
+      <Text>ExChangeScreen</Text>
     </View>
   );
 };

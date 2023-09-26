@@ -4,22 +4,19 @@ import BookItemComponent from "./BookItemComponent";
 
 import { useSelector } from "react-redux";
 
-const BooksListComponent = ({ imageVisible }) => {
+const BooksListComponent = ({ navigation }) => {
   const booksDB = useSelector((state) => state.bookSlice.allBooks);
+
+  console.log(JSON.stringify(booksDB, null, ""));
   return (
     <View>
-      {imageVisible ? (
-        <Image
-          style={styles.image}
-          source={require("../../assets/product-not-found.png")} //EN PROCESO DE APLICACION
-        />
-      ) : (
-        <FlatList
-          data={booksDB}
-          keyExtractor={booksDB.id}
-          renderItem={({ item }) => <BookItemComponent item={item} />}
-        />
-      )}
+      <FlatList
+        data={booksDB}
+        keyExtractor={booksDB.id}
+        renderItem={({ item }) => (
+          <BookItemComponent book={item} navigation={navigation} />
+        )}
+      />
     </View>
   );
 };

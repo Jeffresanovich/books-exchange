@@ -30,7 +30,7 @@ export default book = [
     subjects: ["Finanzas personales", "No ficcion"],
   },
   {
-    id: 3,
+    id: 2,
     title: "La canción de Aquiles",
     long_title: "De la autora de Circe, una epopeya inolvidable",
     authors: ["Madeline Miller"],
@@ -49,7 +49,7 @@ export default book = [
     subjects: ["Novela", "Ficcion historica", "Fantastico"],
   },
   {
-    id: 4,
+    id: 3,
     title: "Hábitos atómicos",
     long_title:
       "Un método sencillo y comprobado para desarrollar buenos hábitos y eliminar los malos",

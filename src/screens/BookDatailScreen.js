@@ -18,10 +18,9 @@ import DescriptionComponent from "../components/DescriptionComponent";
 
 //Styles
 import { flex } from "../theme/stylesFunctions";
-import { useSelector } from "react-redux";
 
-const BookDatailScreen = () => {
-  const book = useSelector((state) => state.bookSlice.allBooks[3]);
+const BookDatailScreen = ({ route }) => {
+  const { book } = route.params;
 
   return (
     <View style={styles.container}>

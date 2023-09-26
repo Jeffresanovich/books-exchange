@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+//Stacks
+import RootNavigation from "./RootNavigation";
+
 //Screens
-import HomeScreen from "../screens/HomeScreen";
-import BooksSearchScreen from "../screens/BooksSearchScreen";
 import ExChangeScreen from "../screens/ExChangeScreen";
 
 // Icons
@@ -12,27 +13,36 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator screenOptions={{ title: "", headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerTitleAlign: "center",
+      }}
+    >
       <Tab.Screen
-        name={"home"}
-        component={HomeScreen}
+        name='HomeScreen'
+        component={RootNavigation}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons name='home' size={focused ? 35 : 20} color='black' />
           ),
+          headerShown: true,
+          title: "INICIO",
         }}
       />
       <Tab.Screen
-        name={"bookSearch"}
-        component={BooksSearchScreen}
+        name='BooksSearchScreen'
+        component={RootNavigation}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome name='search' size={focused ? 35 : 20} color='black' />
           ),
+          headerShown: true,
+          title: "BUSCADOR",
         }}
       />
       <Tab.Screen
-        name={"ExChange"}
+        name='exchangeScreen'
         component={ExChangeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -42,6 +52,8 @@ const TabNavigation = () => {
               color='black'
             />
           ),
+          headerShown: true,
+          title: "INTERCAMBIO",
         }}
       />
     </Tab.Navigator>

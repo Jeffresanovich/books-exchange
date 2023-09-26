@@ -3,19 +3,22 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 
 import { flex } from "../theme/stylesFunctions";
 
-const BookItemComponent = ({ item }) => {
+const BookItemComponent = ({ book, navigation }) => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button} onPress={() => {}}>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("BookDatailScreen", { book: book })}
+      >
         <Image
           style={styles.image}
           height={150}
           width={100}
-          source={{ uri: item.image[0] }}
+          source={{ uri: book.image[0] }}
           resizeMode='cover'
         />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{book.title}</Text>
         </View>
       </Pressable>
     </View>
