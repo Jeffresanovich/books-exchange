@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import BookDetaileScreen from "./BookDatailScreen";
-
 const ExChangeScreen = () => {
   return (
     <View style={styles.container}>

@@ -4,10 +4,7 @@ import BookItemComponent from "./BookItemComponent";
 
 import { useSelector } from "react-redux";
 
-const BooksListComponent = ({ navigation }) => {
-  const booksDB = useSelector((state) => state.bookSlice.allBooks);
-
-  console.log(JSON.stringify(booksDB, null, ""));
+const BooksListComponent = ({ navigation, booksDB }) => {
   return (
     <View>
       <FlatList

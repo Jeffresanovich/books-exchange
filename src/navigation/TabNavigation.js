@@ -1,10 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 //Stacks
-import RootNavigation from "./RootNavigation";
-
-//Screens
-import ExChangeScreen from "../screens/ExChangeScreen";
+import HomeStack from "./stack/HomeStack";
+import BooksSearchStack from "./stack/BooksSearchStack";
+import ExchangeStack from "./stack/ExchangeStack";
 
 // Icons
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
@@ -20,8 +19,8 @@ const TabNavigation = () => {
       }}
     >
       <Tab.Screen
-        name='HomeScreen'
-        component={RootNavigation}
+        name='HomeStack'
+        component={HomeStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicons name='home' size={focused ? 35 : 20} color='black' />
@@ -31,8 +30,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name='BooksSearchScreen'
-        component={RootNavigation}
+        name='BooksSearchStack'
+        component={BooksSearchStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome name='search' size={focused ? 35 : 20} color='black' />
@@ -42,8 +41,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name='exchangeScreen'
-        component={ExChangeScreen}
+        name='ExchangeStack'
+        component={ExchangeStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome
