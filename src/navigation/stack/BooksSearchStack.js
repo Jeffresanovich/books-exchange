@@ -5,6 +5,8 @@ import { headerStyles } from "../../theme/commonStyles";
 import BooksSearchScreen from "../../screens/tabScreens/BooksSearchScreen";
 import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 
+import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
+
 const Stack = createNativeStackNavigator();
 
 const BooksSearchStack = () => {
@@ -21,6 +23,7 @@ const BooksSearchStack = () => {
         options={{
           title: "Buscardor",
           ...headerStyles,
+          headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen

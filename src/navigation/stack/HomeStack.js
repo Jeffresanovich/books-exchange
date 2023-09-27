@@ -1,9 +1,15 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//Styles
 import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import HomeScreen from "../../screens/tabScreens/HomeScreen";
 import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
+
+//Component
+import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
+
+//Drawer
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +27,7 @@ const HomeStack = () => {
         options={{
           title: "Inicio",
           ...headerStyles,
+          headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen

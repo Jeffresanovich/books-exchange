@@ -5,6 +5,8 @@ import { headerStyles } from "../../theme/commonStyles";
 import ExChangeScreen from "../../screens/tabScreens/ExChangeScreen";
 import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 
+import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
+
 const Stack = createNativeStackNavigator();
 
 const ExchangeStack = () => {
@@ -21,6 +23,7 @@ const ExchangeStack = () => {
         options={{
           title: "Intercambio",
           ...headerStyles,
+          headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen

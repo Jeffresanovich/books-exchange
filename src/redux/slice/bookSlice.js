@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const bookSlice = createSlice({
-  name: "home",
+  name: "book",
   initialState,
   reducers: {
     setBooksSearch: (state, action) => {

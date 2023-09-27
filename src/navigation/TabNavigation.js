@@ -12,9 +12,19 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNavigation } from "../redux/slice/routingSlice";
+
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = () => {
+const TabNavigation = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setNavigation(navigation));
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{

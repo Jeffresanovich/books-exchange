@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import BooksListComponent from "../../components/BooksListComponent";
 
 const HomeScreen = ({ navigation }) => {
   const booksDB = useSelector((state) => state.bookSlice.allBooks);
+
   return (
     <View style={styles.container}>
       <BooksListComponent navigation={navigation} booksDB={booksDB} />
