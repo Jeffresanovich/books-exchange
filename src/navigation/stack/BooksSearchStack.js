@@ -10,22 +10,17 @@ const BooksSearchStack = () => {
     <Stack.Navigator
       initialRouteName='BooksSearchScreen'
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen
-        name='BooksSearchScreen'
-        component={BooksSearchScreen}
-        options={{
-          title: "BUSCADOR",
-        }}
-      />
+      <Stack.Screen name='BooksSearchScreen' component={BooksSearchScreen} />
       <Stack.Screen
         name='BookDatailScreen'
         component={BookDatailScreen}
         options={{
-          title: "DETALLES",
+          //headerShown: true,
+          title: "Detalles",
         }}
       />
     </Stack.Navigator>

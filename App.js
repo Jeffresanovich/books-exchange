@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigation from "./src/navigation/TabNavigation";
@@ -5,6 +6,7 @@ import TabNavigation from "./src/navigation/TabNavigation";
 //Redux
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
+import DrawerNavigation from "./src/navigation/DrawerNavigation";
 
 export default function App() {
   //Permite usar fuentes personalizadas
@@ -19,8 +21,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <TabNavigation />
+        <DrawerNavigation />
       </NavigationContainer>
     </Provider>
   );
 }
+
+//<TabNavigation />
