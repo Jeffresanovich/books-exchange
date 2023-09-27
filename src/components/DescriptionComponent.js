@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from "react-native";
 
-import colors from "../theme/color";
+import { themeColors } from "../theme/commonStyles";
 
 const DescriptionComponent = ({ description }) => {
   return <Text style={styles.description}>{description}</Text>;
@@ -11,7 +11,7 @@ export default DescriptionComponent;
 const styles = StyleSheet.create({
   description: {
     fontSize: 20,
-    backgroundColor: colors.white,
+    backgroundColor: themeColors.lightBlue,
     padding: 20,
     textAlign: "center",
     fontWeight: "300",

@@ -1,7 +1,6 @@
 import "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import TabNavigation from "./src/navigation/TabNavigation";
 
 //Redux
 import { Provider } from "react-redux";
@@ -21,7 +20,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <TabNavigation />
+        <DrawerNavigation />
       </NavigationContainer>
     </Provider>
   );

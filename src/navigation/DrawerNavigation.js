@@ -1,10 +1,11 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { headerStyles } from "../theme/commonStyles";
 
-//Stacks
-import HomeStack from "./stack/HomeStack";
-import BooksSearchStack from "./stack/BooksSearchStack";
-import ExchangeStack from "./stack/ExchangeStack";
+import TabNavigation from "./TabNavigation";
+import ProfileScreen from "../screens/ProfileScreen";
+import NotificationScreen from "../screens/NotificationScreen";
+import SettingScreen from "../screens/SettingScreen";
 
 // Icons
 import {
@@ -19,42 +20,39 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerShown: true,
-        headerTitleAlign: "center",
+        headerShown: false,
+        //drawerPosition: "right",
       }}
     >
       <Drawer.Screen
-        name='HomeStack'
-        component={HomeStack}
+        name='TabNavigation'
+        component={TabNavigation}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name='home' size={focused ? 35 : 20} color='black' />
-          ),
           title: "Inicio",
         }}
       />
       <Drawer.Screen
-        name='BooksSearchStack'
-        component={BooksSearchStack}
+        name='ProfileScreen'
+        component={ProfileScreen}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome name='search' size={focused ? 35 : 20} color='black' />
-          ),
-          title: "Buscador",
+          title: "Perfil",
+          ...headerStyles,
         }}
       />
       <Drawer.Screen
-        name='ExchangeStack'
-        component={ExchangeStack}
+        name='NotificationScreen'
+        component={NotificationScreen}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name='sync'
-              size={focused ? 40 : 25}
-              color='black'
-            />
-          ),
-          title: "Intercambio",
+          title: "Notificacion",
+          ...headerStyles,
+        }}
+      />
+      <Drawer.Screen
+        name='SettingScreen'
+        component={SettingScreen}
+        options={{
+          title: "Configuracion",
+          ...headerStyles,
         }}
       />
     </Drawer.Navigator>

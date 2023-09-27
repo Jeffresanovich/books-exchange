@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { headerStyles } from "../../theme/commonStyles";
 
-import ExChangeScreen from "../../screens/ExChangeScreen";
-import BookDatailScreen from "../../screens/BookDatailScreen";
+import ExChangeScreen from "../../screens/tabScreens/ExChangeScreen";
+import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +12,6 @@ const ExchangeStack = () => {
       initialRouteName='ExChangeScreen'
       screenOptions={{
         headerShown: false,
-        headerTitleAlign: "center",
       }}
     >
       <Stack.Screen
@@ -19,6 +19,7 @@ const ExchangeStack = () => {
         component={ExChangeScreen}
         options={{
           title: "Intercambio",
+          ...headerStyles,
         }}
       />
       <Stack.Screen
@@ -26,6 +27,7 @@ const ExchangeStack = () => {
         component={BookDatailScreen}
         options={{
           title: "Detalles",
+          ...headerStyles,
         }}
       />
     </Stack.Navigator>

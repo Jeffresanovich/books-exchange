@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { headerStyles } from "../../theme/commonStyles";
 
-import BooksSearchScreen from "../../screens/BooksSearchScreen";
-import BookDatailScreen from "../../screens/BookDatailScreen";
+import BooksSearchScreen from "../../screens/tabScreens/BooksSearchScreen";
+import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +12,6 @@ const BooksSearchStack = () => {
       initialRouteName='BooksSearchScreen'
       screenOptions={{
         headerShown: false,
-        headerTitleAlign: "center",
       }}
     >
       <Stack.Screen
@@ -19,6 +19,7 @@ const BooksSearchStack = () => {
         component={BooksSearchScreen}
         options={{
           title: "Buscardor",
+          ...headerStyles,
         }}
       />
       <Stack.Screen
@@ -26,6 +27,7 @@ const BooksSearchStack = () => {
         component={BookDatailScreen}
         options={{
           title: "Detalles",
+          ...headerStyles,
         }}
       />
     </Stack.Navigator>

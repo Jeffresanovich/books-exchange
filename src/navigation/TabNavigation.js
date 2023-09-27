@@ -19,14 +19,7 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        //Header Style
-        headerStyle: {
-          backgroundColor: "#9AC4F8",
-        },
-        headerTintColor: "white",
-        headerBackTitle: "Back",
-        headerShown: true,
-        headerTitleAlign: "center",
+        headerShown: false,
         //Tab Syles
         activeTintColor: "#9AC4F8",
         inactiveTintColor: "gray",
@@ -38,9 +31,6 @@ const TabNavigation = () => {
         component={HomeStack}
         options={{
           title: "Inicio",
-          tabBarIcon: ({ focused, color }) => (
-            <Ionicons name='home' size={focused ? 35 : 25} color={color} />
-          ),
         }}
       />
       <Tab.Screen

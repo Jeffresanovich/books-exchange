@@ -11,11 +11,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Components
-import TitleComponent from "../components/TitleComponent";
-import DescriptionComponent from "../components/DescriptionComponent";
+import TitleComponent from "../../components/TitleComponent";
+import DescriptionComponent from "../../components/DescriptionComponent";
 
 //Styles
-import { flex } from "../theme/stylesFunctions";
+import { flex, themeColors } from "../../theme/commonStyles";
 
 const BookDatailScreen = ({ route }) => {
   const { book } = route.params;
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   buyButton: {
     ...flex("space-evenly"),
-    backgroundColor: "blue",
+    backgroundColor: themeColors.heavyBlue,
   },
   cartButton: {
     ...flex("space-evenly"),

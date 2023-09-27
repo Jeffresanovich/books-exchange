@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const PerfilScreen = () => {
+const SettingScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>PerfilScreen</Text>
+      <Text>SettingScreen</Text>
     </View>
   );
 };
 
-export default PerfilScreen;
+export default SettingScreen;
 
 const styles = StyleSheet.create({
   container: {

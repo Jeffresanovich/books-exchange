@@ -1,3 +1,20 @@
+export const themeColors = {
+  heavyBlue: "#65A6F6",
+  mediumBlue: "#9AC4F8",
+  lightBlue: "#C5DEFB",
+};
+
+//Header Style
+export const headerStyles = {
+  headerShown: true,
+  headerStyle: {
+    backgroundColor: themeColors.mediumBlue,
+  },
+  headerTintColor: "white",
+  headerBackTitle: "Back",
+  headerTitleAlign: "center",
+};
+
 /**
  *
  * @param {string} justifyContent "center"||"flex-end"||"flex-start"||"space-around"||"space-between"||"space-evenly"
