@@ -14,12 +14,17 @@ const ExchangeStack = () => {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='ExChangeScreen' component={ExChangeScreen} />
+      <Stack.Screen
+        name='ExChangeScreen'
+        component={ExChangeScreen}
+        options={{
+          title: "Intercambio",
+        }}
+      />
       <Stack.Screen
         name='BookDatailScreen'
         component={BookDatailScreen}
         options={{
-          //headerShown: true,
           title: "Detalles",
         }}
       />

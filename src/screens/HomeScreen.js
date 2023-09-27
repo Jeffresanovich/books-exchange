@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useSelector } from "react-redux";
 
@@ -8,7 +8,8 @@ const HomeScreen = ({ navigation }) => {
   const booksDB = useSelector((state) => state.bookSlice.allBooks);
   return (
     <View style={styles.container}>
-      <BooksListComponent navigation={navigation} booksDB={booksDB} />
+      {/*<BooksListComponent navigation={navigation} booksDB={booksDB} />*/}
+      <Text>HomeScreen</Text>
       <StatusBar style='auto' />
     </View>
   );

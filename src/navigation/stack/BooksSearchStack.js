@@ -14,12 +14,17 @@ const BooksSearchStack = () => {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='BooksSearchScreen' component={BooksSearchScreen} />
+      <Stack.Screen
+        name='BooksSearchScreen'
+        component={BooksSearchScreen}
+        options={{
+          title: "Buscardor",
+        }}
+      />
       <Stack.Screen
         name='BookDatailScreen'
         component={BookDatailScreen}
         options={{
-          //headerShown: true,
           title: "Detalles",
         }}
       />

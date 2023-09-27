@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Button } from "react-native";
 
 //Stacks
 import HomeStack from "./stack/HomeStack";
@@ -18,19 +19,27 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
-        activeTintColor: "#fff",
-        activeBackgroundColor: "#feb72b",
+        //Header Style
+        headerStyle: {
+          backgroundColor: "#9AC4F8",
+        },
+        headerTintColor: "white",
+        headerBackTitle: "Back",
+        headerShown: true,
+        headerTitleAlign: "center",
+        //Tab Syles
+        activeTintColor: "#9AC4F8",
         inactiveTintColor: "gray",
+        tabBarShowLabel: false,
       }}
     >
       <Tab.Screen
         name='HomeStack'
         component={HomeStack}
         options={{
-          title: "",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name='home' size={focused ? 35 : 25} />
+          title: "Inicio",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name='home' size={focused ? 35 : 25} color={color} />
           ),
         }}
       />
@@ -38,9 +47,9 @@ const TabNavigation = () => {
         name='BooksSearchStack'
         component={BooksSearchStack}
         options={{
-          title: "",
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome name='search' size={focused ? 35 : 25} />
+          title: "Buscador",
+          tabBarIcon: ({ focused, color }) => (
+            <FontAwesome name='search' size={focused ? 35 : 25} color={color} />
           ),
         }}
       />
@@ -48,9 +57,13 @@ const TabNavigation = () => {
         name='ExchangeStack'
         component={ExchangeStack}
         options={{
-          title: "",
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons name='sync' size={focused ? 35 : 25} />
+          title: "Intercambio",
+          tabBarIcon: ({ focused, color }) => (
+            <MaterialCommunityIcons
+              name='sync'
+              size={focused ? 35 : 25}
+              color={color}
+            />
           ),
         }}
       />

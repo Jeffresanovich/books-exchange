@@ -14,12 +14,17 @@ const HomeStack = () => {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name='HomeScreen' component={HomeScreen} />
+      <Stack.Screen
+        name='HomeScreen'
+        component={HomeScreen}
+        options={{
+          title: "Inicio",
+        }}
+      />
       <Stack.Screen
         name='BookDatailScreen'
         component={BookDatailScreen}
         options={{
-          //headerShown: true,
           title: "Detalles",
         }}
       />
