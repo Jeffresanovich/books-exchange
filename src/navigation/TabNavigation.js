@@ -19,14 +19,18 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        activeTintColor: "#fff",
+        activeBackgroundColor: "#feb72b",
+        inactiveTintColor: "gray",
       }}
     >
       <Tab.Screen
         name='HomeStack'
         component={HomeStack}
         options={{
+          title: "",
           tabBarIcon: ({ focused }) => (
-            <Ionicons name='home' size={focused ? 35 : 20} color='black' />
+            <Ionicons name='home' size={focused ? 35 : 25} />
           ),
         }}
       />
@@ -34,8 +38,9 @@ const TabNavigation = () => {
         name='BooksSearchStack'
         component={BooksSearchStack}
         options={{
+          title: "",
           tabBarIcon: ({ focused }) => (
-            <FontAwesome name='search' size={focused ? 35 : 20} color='black' />
+            <FontAwesome name='search' size={focused ? 35 : 25} />
           ),
         }}
       />
@@ -43,12 +48,9 @@ const TabNavigation = () => {
         name='ExchangeStack'
         component={ExchangeStack}
         options={{
+          title: "",
           tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name='sync'
-              size={focused ? 40 : 25}
-              color='black'
-            />
+            <MaterialCommunityIcons name='sync' size={focused ? 35 : 25} />
           ),
         }}
       />
