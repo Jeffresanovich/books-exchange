@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "books-p2p",
-    "slug": "books-p2p",
+    "name": "books-exchange",
+    "slug": "books-exchange",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
