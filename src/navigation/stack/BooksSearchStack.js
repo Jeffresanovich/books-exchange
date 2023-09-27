@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { headerStyles } from "../../theme/commonStyles";
 
+//Screens
 import BooksSearchScreen from "../../screens/tabScreens/BooksSearchScreen";
 import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 

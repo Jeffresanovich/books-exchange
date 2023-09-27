@@ -1,8 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { headerStyles } from "../../theme/commonStyles";
 
-import { Button } from "react-native";
-
+//Screens
 import HomeScreen from "../../screens/tabScreens/HomeScreen";
 import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
 
@@ -14,13 +13,6 @@ const HomeStack = () => {
       initialRouteName='HomeScreen'
       screenOptions={{
         headerShown: false,
-        headerRight: () => (
-          <Button
-            onPress={() => alert("This is a button!")}
-            title='+'
-            color='white'
-          />
-        ),
       }}
     >
       <Stack.Screen

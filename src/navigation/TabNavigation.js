@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Button } from "react-native";
 
 //Stacks
 import HomeStack from "./stack/HomeStack";
@@ -31,6 +30,9 @@ const TabNavigation = () => {
         component={HomeStack}
         options={{
           title: "Inicio",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name='home' size={focused ? 35 : 25} color={color} />
+          ),
         }}
       />
       <Tab.Screen

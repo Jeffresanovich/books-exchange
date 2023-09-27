@@ -2,17 +2,13 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { headerStyles } from "../theme/commonStyles";
 
+//TabNavigation screen => Home
 import TabNavigation from "./TabNavigation";
+
+//Direct screen
 import ProfileScreen from "../screens/ProfileScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import SettingScreen from "../screens/SettingScreen";
-
-// Icons
-import {
-  Ionicons,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 
 const Drawer = createDrawerNavigator();
 
