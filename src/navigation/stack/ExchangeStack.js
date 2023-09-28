@@ -3,7 +3,7 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import ExChangeScreen from "../../screens/tabScreens/ExChangeScreen";
-import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
+import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
 import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
 
@@ -27,8 +27,8 @@ const ExchangeStack = () => {
         }}
       />
       <Stack.Screen
-        name='BookDatailScreen'
-        component={BookDatailScreen}
+        name='BookDetailScreen'
+        component={BookDetailScreen}
         options={{
           title: "Detalles",
           ...headerStyles,

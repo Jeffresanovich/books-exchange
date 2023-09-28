@@ -3,7 +3,7 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import HomeScreen from "../../screens/tabScreens/HomeScreen";
-import BookDatailScreen from "../../screens/tabScreens/BookDatailScreen";
+import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
 //Component
 import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
@@ -31,8 +31,8 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name='BookDatailScreen'
-        component={BookDatailScreen}
+        name='BookDetailScreen'
+        component={BookDetailScreen}
         options={{
           title: "Detalles",
           ...headerStyles,

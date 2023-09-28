@@ -8,7 +8,7 @@ const BookItemComponent = ({ book, navigation }) => {
     <View style={styles.container}>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("BookDatailScreen", { book: book })}
+        onPress={() => navigation.navigate("BookDetailScreen", { book: book })}
       >
         <Image
           style={styles.image}

@@ -15,9 +15,9 @@ import TitleComponent from "../../components/BookDetailScreenComponents/TitleCom
 import DescriptionComponent from "../../components/BookDetailScreenComponents/DescriptionComponent";
 
 //Styles
-import { flex, themeColors } from "../../../theme/commonStyles";
+import { flex, themeColors } from "../../theme/commonStyles";
 
-const BookDatailScreen = ({ route }) => {
+const BookDetailScreen = ({ route }) => {
   const { book } = route.params;
 
   return (
@@ -48,7 +48,7 @@ const BookDatailScreen = ({ route }) => {
   );
 };
 
-export default BookDatailScreen;
+export default BookDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
