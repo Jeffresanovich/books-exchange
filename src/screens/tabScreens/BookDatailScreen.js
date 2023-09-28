@@ -11,11 +11,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Components
-import TitleComponent from "../../components/TitleComponent";
-import DescriptionComponent from "../../components/DescriptionComponent";
+import TitleComponent from "../../components/BookDetailScreenComponents/TitleComponent";
+import DescriptionComponent from "../../components/BookDetailScreenComponents/DescriptionComponent";
 
 //Styles
-import { flex, themeColors } from "../../theme/commonStyles";
+import { flex, themeColors } from "../../../theme/commonStyles";
 
 const BookDatailScreen = ({ route }) => {
   const { book } = route.params;
