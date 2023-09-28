@@ -7,8 +7,9 @@ import ExchangeStack from "./stack/ExchangeStack";
 
 // Icons
 import {
-  Ionicons,
+  MaterialIcons,
   FontAwesome,
+  FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
@@ -41,7 +42,11 @@ const TabNavigation = ({ navigation }) => {
         options={{
           title: "Inicio",
           tabBarIcon: ({ focused, color }) => (
-            <Ionicons name='home' size={focused ? 35 : 25} color={color} />
+            <MaterialCommunityIcons
+              name='bookshelf'
+              size={focused ? 40 : 30}
+              color={color}
+            />
           ),
         }}
       />
@@ -51,7 +56,11 @@ const TabNavigation = ({ navigation }) => {
         options={{
           title: "Buscador",
           tabBarIcon: ({ focused, color }) => (
-            <FontAwesome name='search' size={focused ? 35 : 25} color={color} />
+            <MaterialIcons
+              name='search'
+              size={focused ? 40 : 30}
+              color={color}
+            />
           ),
         }}
       />
@@ -62,7 +71,7 @@ const TabNavigation = ({ navigation }) => {
           title: "Intercambio",
           tabBarIcon: ({ focused, color }) => (
             <MaterialCommunityIcons
-              name='sync'
+              name='book-sync-outline'
               size={focused ? 35 : 25}
               color={color}
             />
