@@ -1,21 +1,18 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useEffect } from "react";
 
 //Stacks
 import HomeStack from "./stack/HomeStack";
 import BooksSearchStack from "./stack/BooksSearchStack";
 import ExchangeStack from "./stack/ExchangeStack";
 
-// Icons
-import {
-  MaterialIcons,
-  FontAwesome,
-  FontAwesome5,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+//Redux
+import { useDispatch } from "react-redux";
 import { setNavigation } from "../redux/slice/routingSlice";
+
+//Icons
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 

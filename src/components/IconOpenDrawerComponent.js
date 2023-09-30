@@ -1,5 +1,4 @@
-import React from "react";
-import { StyleSheet, Pressable } from "react-native";
+import { Pressable } from "react-native";
 
 //Icon
 import { Feather } from "@expo/vector-icons";
@@ -18,5 +17,3 @@ const IconOpenDrawerComponent = () => {
 };
 
 export default IconOpenDrawerComponent;
-
-const styles = StyleSheet.create({});
