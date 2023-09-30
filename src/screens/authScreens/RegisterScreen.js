@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { firebase_auth } from "../../firebase/authFirebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import {
   StyleSheet,
@@ -11,6 +9,9 @@ import {
   Pressable,
 } from "react-native";
 
+import { firebase_auth } from "../../firebase/authFirebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { themeColors } from "../../theme/commonStyles";
 
 const RegisterScreen = ({ navigation }) => {
@@ -19,7 +20,14 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async () => {
     try {
-      createUserWithEmailAndPassword(firebase_auth, email, password);
+      const response = await createUserWithEmailAndPassword(
+        firebase_auth,
+        email,
+        password
+      );
+      console.log(response);
+
+      navigation.navigate("Login");
     } catch (error) {
       console.log("RegisterError: " + error.message);
     }

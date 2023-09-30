@@ -5,8 +5,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigation from "./DrawerNavigation";
 import AuthNavigastionStack from "./AuthNavigationStack";
 
+//Redux
+import { useSelector } from "react-redux";
+
 const MainNavigationStack = () => {
-  const [user, setUser] = useState(null);
+  const user = useSelector((state) => state.authSlice.user);
   return (
     <NavigationContainer>
       {user ? <DrawerNavigation /> : <AuthNavigastionStack />}

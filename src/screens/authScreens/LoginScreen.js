@@ -8,13 +8,34 @@ import {
   Pressable,
 } from "react-native";
 
+import { firebase_auth } from "../../firebase/authFirebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { useDispatch } from "react-redux";
+import { setUser, setIdToken, clearUser } from "../../redux/slice/authSlice";
+
 import { themeColors } from "../../theme/commonStyles";
 
 const LoginScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    try {
+      const response = await signInWithEmailAndPassword(
+        firebase_auth,
+        email,
+        password
+      );
+
+      //console.log(response);
+      dispatch(setUser(response.user.email));
+      dispatch(setIdToken(response._tokenResponse.idToken));
+    } catch (error) {
+      console.log("LoginError: " + error.message);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -37,6 +58,9 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
       <Pressable onPress={() => navigation.navigate("Register")}>
         <Text style={styles.registroText}>No tienes cuenta? Registrate</Text>
+      </Pressable>
+      <Pressable onPress={() => dispatch(clearUser())}>
+        <Text style={styles.registroText}>Salir</Text>
       </Pressable>
     </View>
   );

@@ -5,7 +5,7 @@ const initialState = {
   idToken: null,
 };
 
-const routingSlice = createSlice({
+const authSlice = createSlice({
   name: "authentication",
   initialState,
   reducers: {
@@ -22,6 +22,6 @@ const routingSlice = createSlice({
   },
 });
 
-export const { setDrawerNavigation } = routingSlice.actions;
+export const { setUser, setIdToken, clearUser } = authSlice.actions;
 
-export default routingSlice.reducer;
+export default authSlice.reducer;
