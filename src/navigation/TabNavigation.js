@@ -7,7 +7,7 @@ import ExchangeStack from "./stack/ExchangeStack";
 
 //Redux
 import { useDispatch } from "react-redux";
-import { setNavigation } from "../redux/slice/routingSlice";
+import { setDrawerNavigation } from "../redux/slice/routingSlice";
 
 //Icons
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,8 +20,8 @@ const TabNavigation = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setNavigation(navigation));
-  }, []);
+    dispatch(setDrawerNavigation(navigation));
+  }, [navigation]);
 
   return (
     <Tab.Navigator

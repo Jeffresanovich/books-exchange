@@ -8,12 +8,12 @@ const routingSlice = createSlice({
   name: "routing",
   initialState,
   reducers: {
-    setNavigation: (state, action) => {
+    setDrawerNavigation: (state, action) => {
       state.navigation = action.payload;
     },
   },
 });
 
-export const { setNavigation } = routingSlice.actions;
+export const { setDrawerNavigation } = routingSlice.actions;
 
 export default routingSlice.reducer;
