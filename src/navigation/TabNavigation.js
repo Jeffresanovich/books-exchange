@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
 //Stacks
-import HomeStack from "./stack/HomeStack";
-import BooksSearchStack from "./stack/BooksSearchStack";
-import ExchangeStack from "./stack/ExchangeStack";
+import HomeStack from "./tabNavigationStack/HomeStack";
+import BooksSearchStack from "./tabNavigationStack/BooksSearchStack";
+import ExchangeStack from "./tabNavigationStack/ExchangeStack";
 
 //Redux
 import { useDispatch } from "react-redux";

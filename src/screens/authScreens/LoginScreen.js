@@ -1,7 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 
-const LoginScreen = () => {
+import { themeColors } from "../../theme/commonStyles";
+
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {};
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Inicio de Sesión</Text>
@@ -21,7 +35,7 @@ const LoginScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-      <Pressable onPress={() => navigation.navigate("register")}>
+      <Pressable onPress={() => navigation.navigate("Register")}>
         <Text style={styles.registroText}>No tienes cuenta? Registrate</Text>
       </Pressable>
     </View>
@@ -43,7 +57,7 @@ const styles = StyleSheet.create({
   input: {
     width: "85%",
     height: 50,
-    borderColor: colors.pink,
+    borderColor: themeColors.mediumBlue,
     borderWidth: 2,
     borderRadius: 5,
     marginBottom: 20,
@@ -51,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   button: {
-    backgroundColor: colors.pink,
+    backgroundColor: themeColors.mediumBlue,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -64,6 +78,6 @@ const styles = StyleSheet.create({
   registroText: {
     marginTop: 30,
     fontSize: 18,
-    color: colors.heavyBlue,
+    color: themeColors.mediumBlue,
   },
 });
