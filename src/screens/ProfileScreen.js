@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     marginLeft: 15,
-    fontFamily: "Pacifico",
+
     fontSize: 20,
   },
 });
