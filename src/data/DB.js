@@ -34,7 +34,7 @@ const user = [
     last_name: "string",
     age: "string",
     email: "string",
-    favorite_genre: "string",
+    favorite_subjects: ["string"],
     page_xday: 0,
   },
 ];
