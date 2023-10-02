@@ -1,0 +1,11 @@
+[
+  {
+    "user_name": "string",
+    "first_name": "string",
+    "last_name": "string",
+    "age": "string",
+    "email": "string",
+    "favorite_subjects": ["string"],
+    "page_xday": 0
+  }
+]

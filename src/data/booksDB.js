@@ -1,4 +1,4 @@
-export default book = [
+const books = [
   {
     id: 0,
     title: "Little Women",
@@ -67,3 +67,8 @@ export default book = [
     subjects: ["Motivación", "Autoayuda"],
   },
 ];
+
+const toJson = JSON.stringify(books);
+console.log(toJson);
+
+//export default books;
