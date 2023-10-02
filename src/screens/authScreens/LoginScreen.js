@@ -13,7 +13,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
 import { setUser, setIdToken } from "../../redux/slice/authSlice";
-import { LoadingComponent } from "../../components/LoadingComponent";
 
 import { themeColors } from "../../theme/commonStyles";
 
@@ -34,13 +33,11 @@ const LoginScreen = ({ navigation }) => {
 
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
-      if (response.user.email) setIsLoading(false);
     } catch (error) {
       console.log("LoginError: " + error.message);
     }
   };
 
-  console.log(isLoading);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Inicio de Sesión</Text>
