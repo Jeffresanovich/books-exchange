@@ -1,17 +1,21 @@
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 
-//Redux
-import { useSelector } from "react-redux";
+import { useGetAllBooksQuery } from "../../services/bookApi";
 
 //Components
 import BooksListComponent from "../../components/BooksListComponent";
 
 const HomeScreen = ({ navigation }) => {
-  const booksDB = useSelector((state) => state.bookSlice.allBooks);
+  const { data, isLoading } = useGetAllBooksQuery();
 
+  console.log("DATA> " + data);
   return (
     <View style={styles.container}>
-      <BooksListComponent navigation={navigation} booksDB={booksDB} />
+      {isLoading ? (
+        <ActivityIndicator size='large' color='grey' />
+      ) : (
+        <BooksListComponent navigation={navigation} booksDB={data} />
+      )}
     </View>
   );
 };

@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import books from "../../data/booksDB";
 
+//import { useGetAllBooksQuery } from "../../services/bookApi";
+
 const initialState = {
   allBooks: books,
   textSearch: null,
@@ -20,12 +22,9 @@ const bookSlice = createSlice({
         textSearch.toLocaleLowerCase() === title.toLowerCase;
       });
     },
-    setNavigation: (state, action) => {
-      state.navigation = action.payload;
-    },
   },
 });
 
-export const { setBooksSearch, setNavigation } = bookSlice.actions;
+export const { setBooksSearch } = bookSlice.actions;
 
 export default bookSlice.reducer;

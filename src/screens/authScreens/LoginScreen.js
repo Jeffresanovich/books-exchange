@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 
 import { firebase_auth } from "../../firebase/authFirebase";
@@ -19,6 +20,7 @@ import { themeColors } from "../../theme/commonStyles";
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,8 +35,11 @@ const LoginScreen = ({ navigation }) => {
 
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
+      setIsLoading(false);
     } catch (error) {
       console.log("LoginError: " + error.message);
+      setErrorText(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -54,9 +59,16 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </TouchableOpacity>
+      {isLoading ? (
+        <ActivityIndicator size='large' color='#65A6F6' />
+      ) : (
+        <>
+          <Text style={{ color: "red", marginVertical: 5 }}>{errorText}</Text>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+          </TouchableOpacity>
+        </>
+      )}
       <Pressable onPress={() => navigation.navigate("Register")}>
         <Text style={styles.registroText}>No tienes cuenta? Registrate</Text>
       </Pressable>

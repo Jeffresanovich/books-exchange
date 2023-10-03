@@ -1,8 +1,6 @@
-import { StyleSheet, View, FlatList, Image } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import BookItemComponent from "./BookItemComponent";
-
-import { useSelector } from "react-redux";
 
 const BooksListComponent = ({ navigation, booksDB }) => {
   return (
