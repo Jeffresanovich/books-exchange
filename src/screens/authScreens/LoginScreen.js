@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setUser, setIdToken } from "../../redux/slice/authSlice";
 
 import { themeColors } from "../../theme/commonStyles";
+import { errorMessage } from "../../data/errorMessage";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -37,8 +38,8 @@ const LoginScreen = ({ navigation }) => {
       dispatch(setIdToken(response._tokenResponse.idToken));
       setIsLoading(false);
     } catch (error) {
-      console.log("LoginError: " + error.message);
-      setErrorText(error.message);
+      console.log("Error: " + error.message);
+      setErrorText(errorMessage(error.message));
       setIsLoading(false);
     }
   };

@@ -8,7 +8,6 @@ import BooksListComponent from "../../components/BooksListComponent";
 const HomeScreen = ({ navigation }) => {
   const { data, isLoading } = useGetAllBooksQuery();
 
-  console.log("DATA> " + data);
   return (
     <View style={styles.container}>
       {isLoading ? (

@@ -67,8 +67,8 @@ const books = [
     subjects: ["Motivación", "Autoayuda"],
   },
 ];
-
+/*
 const toJson = JSON.stringify(books);
 console.log(toJson);
-
-//export default books;
+*/
+export default books;
