@@ -1,18 +1,18 @@
 [
   {
     "book_data": {
-      "id": 0,
       "title": "string",
-      "long_title": "string",
-      "authors": ["string", "string"],
-      "edition": "string",
       "synopsis": "string",
-      "image": ["string"],
-      "pages": 566,
-      "language": "string",
-      "publisher": "string",
-      "date_published": "2017-08-29T00:00:00.000Z",
       "subjects": ["string", "string"],
+      "publisher": "string",
+      "pages": 566,
+      "long_title": "string",
+      "language": "string",
+      "image": ["string"],
+      "id": 0,
+      "edition": "string",
+      "date_published": "2017-08-29T00:00:00.000Z",
+      "authors": ["string", "string"],
       "owner": {
         "user_name": "string",
         "shared_date": "2017-08-29T00:00:00.000Z"
@@ -21,10 +21,10 @@
     "user_history": [
       {
         "user_name": "string",
-        "contact_exchange_date": "2017-08-29T00:00:00.000Z",
         "start_reading": "2017-08-29T00:00:00.000Z",
-        "end_reading": "2017-08-29T00:00:00.000Z",
         "rate": 0,
+        "end_reading": "2017-08-29T00:00:00.000Z",
+        "contact_exchange_date": "2017-08-29T00:00:00.000Z",
         "comment": "string"
       }
     ]
