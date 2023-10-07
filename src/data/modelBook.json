@@ -21,7 +21,7 @@
     "user_history": [
       {
         "user_name": "string",
-        "contact_date": "2017-08-29T00:00:00.000Z",
+        "contact_exchange_date": "2017-08-29T00:00:00.000Z",
         "start_reading": "2017-08-29T00:00:00.000Z",
         "end_reading": "2017-08-29T00:00:00.000Z",
         "rate": 0,

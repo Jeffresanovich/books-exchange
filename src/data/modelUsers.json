@@ -6,12 +6,12 @@
       "first_name": "string",
       "last_name": "string",
       "age": "string",
-      "email": "string",
-      "favorite_subjects": ["string"]
+      "email": "string"
     },
     "config": {
-      "page_xday": 0,
-      "dark_mode": false
+      "favorite_subjects": ["string"],
+      "page_per_day": 0,
+      "dark_mode_app": false
     },
     "reading": [{}]
   }
