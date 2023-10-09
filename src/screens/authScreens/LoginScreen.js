@@ -33,13 +33,16 @@ const LoginScreen = ({ navigation }) => {
         email,
         password
       );
-
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
       setIsLoading(false);
     } catch (error) {
       console.log("Error: " + error.message);
-      setErrorText(errorMessage(error.message));
+      setErrorText(
+        errorMessage(
+          email === "" || password === "" ? "campo-obligatorio" : error.message
+        )
+      );
       setIsLoading(false);
     }
   };
@@ -64,7 +67,7 @@ const LoginScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='#65A6F6' />
       ) : (
         <>
-          <Text style={{ color: "red", marginVertical: 5 }}>{errorText}</Text>
+          <Text style={{ color: "red", marginBottom: 15 }}>{errorText}</Text>
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           </TouchableOpacity>

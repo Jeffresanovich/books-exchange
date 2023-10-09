@@ -13,7 +13,7 @@ export const store = configureStore({
   reducer: {
     bookSlice,
     authSlice,
-    routingSlice,
+    //routingSlice,
     [bookApi.reducerPath]: bookApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

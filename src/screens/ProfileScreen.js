@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import React from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import { Entypo, FontAwesome, Feather } from "@expo/vector-icons";
 import { themeColors } from "../theme/commonStyles";
@@ -10,82 +11,66 @@ import { firebase_auth } from "../firebase/authFirebase";
 import { signOut } from "firebase/auth";
 
 const ProfileScreen = () => {
-  const dispatch = useDispatch();
-
-  const handleSignOut = () => {
-    signOut(firebase_auth);
-    dispatch(clearUser());
-  };
   return (
-    <View>
-      <View style={{ alignItems: "center", marginTop: 15 }}>
-        <Image
-          style={styles.imagen}
-          source={{
-            uri: "https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg?w=2000",
-          }}
-        />
-
-        <View style={styles.buttonContainer}>
-          <View style={styles.containerButton}>
-            <Pressable
-              style={styles.containerIcon}
-              onPress={() => console.log("abrir camara..")}
-            >
-              <Entypo name='camera' size={24} color='black' />
-            </Pressable>
-            <Text style={styles.textButton}>Abrir Cámara</Text>
-          </View>
-          <View style={styles.containerButton}>
-            <Pressable
-              style={styles.containerIcon}
-              onPress={() => console.log("abrir galería de fotos..")}
-            >
-              <FontAwesome name='photo' size={24} color='black' />
-            </Pressable>
-            <Text style={styles.textButton}>Abrir Galería de fotos</Text>
-          </View>
-          <View style={styles.containerButton}>
-            <Pressable
-              style={styles.containerIcon}
-              onPress={() => console.log("abrir mapa..")}
-            >
-              <Feather name='map' size={24} color='black' />
-            </Pressable>
-            <Text style={styles.textButton}>Abrir Mapa</Text>
-          </View>
-          <Pressable onPress={() => handleSignOut()}>
-            <Text style={{ color: "blue" }}>Cerrar Sesion</Text>
-          </Pressable>
-        </View>
-      </View>
+    <View style={styles.container}>
+      <Image
+        source={{ uri: "https://via.placeholder.com/150" }} // Cambia la URL por la imagen de perfil real
+        style={styles.profileImage}
+      />
+      <Text style={styles.username}>Nombre de Usuario</Text>
+      <Text style={styles.email}>correo@ejemplo.com</Text>
+      <TouchableOpacity style={styles.editButton}>
+        <Text style={styles.editButtonText}>Editar perfil</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.logoutButton}>
+        <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default ProfileScreen;
-
 const styles = StyleSheet.create({
-  imagen: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginTop: 10,
-  },
-  containerButton: {
-    marginVertical: 20,
-    flexDirection: "row",
+  container: {
+    flex: 1,
     alignItems: "center",
+    padding: 16,
   },
-  containerIcon: {
-    borderWidth: 2,
-    padding: 5,
-    borderRadius: 8,
-    borderColor: themeColors.heavyBlue,
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    marginBottom: 20,
   },
-  textButton: {
-    marginLeft: 15,
-
-    fontSize: 20,
+  username: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  email: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  editButton: {
+    backgroundColor: "blue",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  editButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
+  logoutButton: {
+    backgroundColor: "red",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  logoutButtonText: {
+    color: "white",
+    fontSize: 16,
   },
 });
+
+export default ProfileScreen;

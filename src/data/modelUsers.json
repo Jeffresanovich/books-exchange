@@ -1,15 +1,15 @@
 [
   {
     "user_data": {
-      "user_name": "string",
-      "last_name": "string",
       "id": 0,
+      "user_name": "string",
       "first_name": "string",
+      "last_name": "string",
       "email": "string",
       "age": "string"
     },
     "config": {
-      "page_per_day": 0,
+      "page_x_day": 0,
       "favorite_subjects": ["string"],
       "dark_mode_app": false
     }

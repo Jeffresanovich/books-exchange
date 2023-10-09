@@ -1,15 +1,15 @@
 [
   {
     "book_data": {
+      "id": 0,
       "title": "string",
+      "long_title": "string",
       "synopsis": "string",
       "subjects": ["string", "string"],
       "publisher": "string",
       "pages": 566,
-      "long_title": "string",
       "language": "string",
       "image": ["string"],
-      "id": 0,
       "edition": "string",
       "date_published": "2017-08-29T00:00:00.000Z",
       "authors": ["string", "string"],
@@ -21,10 +21,10 @@
     "user_history": [
       {
         "user_name": "string",
-        "start_reading": "2017-08-29T00:00:00.000Z",
-        "rate": 0,
-        "end_reading": "2017-08-29T00:00:00.000Z",
         "contact_exchange_date": "2017-08-29T00:00:00.000Z",
+        "start_reading_date": "2017-08-29T00:00:00.000Z",
+        "end_reading_date": "2017-08-29T00:00:00.000Z",
+        "rate": 0,
         "comment": "string"
       }
     ]

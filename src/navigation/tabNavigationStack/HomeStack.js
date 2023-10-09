@@ -27,7 +27,7 @@ const HomeStack = () => {
         options={{
           title: "Inicio",
           ...headerStyles,
-          headerLeft: () => <IconOpenDrawerComponent />,
+          //headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen
