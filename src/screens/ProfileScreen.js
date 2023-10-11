@@ -1,30 +1,152 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Pressable,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
 
-import { Entypo, FontAwesome, Feather } from "@expo/vector-icons";
-import { themeColors } from "../theme/commonStyles";
-
+//Redux
 import { useDispatch } from "react-redux";
 import { clearUser } from "../redux/slice/authSlice";
 
+//Firebase
 import { firebase_auth } from "../firebase/authFirebase";
 import { signOut } from "firebase/auth";
 
+//Styles
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { flex, border } from "../theme/commonStyles";
+
+//Cam and ImageGalery
+import * as ImagePicker from "expo-image-picker";
+
+//Services
+import {
+  useGetUserByIdQuery,
+  usePutUserImageProfileMutation,
+} from "../services/bookApi";
+
 const ProfileScreen = () => {
+  const userId = 1;
+
+  const dispatch = useDispatch();
+
+  const [putUserImageProfile, result] = usePutUserImageProfileMutation();
+
+  const { data, isLoading, refetch } = useGetUserByIdQuery(userId);
+  const [userImage, setUserImage] = useState(null);
+
+  const [editVisible, setEditVisible] = useState(false);
+
+  const handleEditImage = () => {
+    setEditVisible(true);
+  };
+
+  const handleOpenCam = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      Alert.alert(
+        "ATENCION!",
+        "La app no tiene permiso para acceder a la camara"
+      );
+      return;
+    } else {
+      const result = await ImagePicker.launchCameraAsync({
+        base64: true,
+      });
+
+      changeImage(result);
+    }
+    setEditVisible(false);
+  };
+
+  const handleOpenGalery = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+      base64: true,
+    });
+    changeImage(result);
+    setEditVisible(false);
+  };
+
+  const changeImage = async (result) => {
+    if (!result.canceled) {
+      await setUserImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+
+      refetch();
+    }
+  };
+
+  const handleSignOut = () => {
+    signOut(firebase_auth);
+    dispatch(clearUser());
+  };
+
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: "https://via.placeholder.com/150" }} // Cambia la URL por la imagen de perfil real
-        style={styles.profileImage}
-      />
-      <Text style={styles.username}>Nombre de Usuario</Text>
-      <Text style={styles.email}>correo@ejemplo.com</Text>
-      <TouchableOpacity style={styles.editButton}>
-        <Text style={styles.editButtonText}>Editar perfil</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.logoutButton}>
-        <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
-      </TouchableOpacity>
+      {isLoading ? (
+        <ActivityIndicator size='large' color='#65A6F6' />
+      ) : (
+        <>
+          <Image
+            source={{
+              uri: userImage
+                ? userImage
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
+            }}
+            style={styles.profileImage}
+          />
+          <View style={styles.imageEdit}>
+            {editVisible ? (
+              <View style={styles.openCamGaleryContainer}>
+                <Pressable onPress={handleOpenCam}>
+                  <MaterialCommunityIcons
+                    name='camera'
+                    size={35}
+                    color='grey'
+                  />
+                </Pressable>
+                <Pressable onPress={() => setEditVisible(false)}>
+                  <MaterialCommunityIcons
+                    style={{ marginHorizontal: 40 }}
+                    name='window-close'
+                    size={25}
+                    color='grey'
+                  />
+                </Pressable>
+                <Pressable onPress={handleOpenGalery}>
+                  <MaterialCommunityIcons
+                    name='folder-image'
+                    size={35}
+                    color='grey'
+                  />
+                </Pressable>
+              </View>
+            ) : (
+              <Pressable onPress={() => setEditVisible(true)}>
+                <Feather name='edit-2' size={25} color='grey' />
+              </Pressable>
+            )}
+          </View>
+          <Text style={styles.username}>
+            {data.user_data.first_name} {data.user_data.last_name}
+          </Text>
+          <Text style={styles.email}>{data.user_data.email}</Text>
+
+          <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
+            <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -33,20 +155,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 16,
+    padding: 50,
   },
   profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+  imageEdit: {
     width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginBottom: 20,
+    height: 35,
+    marginBottom: 10,
+    alignItems: "center",
+    //...border(),
+  },
+  openCamGaleryContainer: {
+    ...flex("center", "center"),
   },
   username: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginTop: 20,
   },
   email: {
+    marginTop: 10,
     fontSize: 18,
     marginBottom: 20,
   },

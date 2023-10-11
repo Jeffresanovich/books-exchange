@@ -1,4 +1,4 @@
-const books = [
+export const books = [
   {
     id: 0,
     title: "Little Women",
@@ -67,8 +67,50 @@ const books = [
     subjects: ["Motivación", "Autoayuda"],
   },
 ];
-/*
-const toJson = JSON.stringify(books);
-console.log(toJson);
-*/
-export default books;
+
+export const users = [
+  {
+    user_data: {
+      id: 0,
+      user_name: "juanperez",
+      first_name: "Juan",
+      last_name: "Perez",
+      email: "juanperez@mail.com",
+      birthday: "2000-08-29T00:00:00.000Z",
+      image: "string",
+    },
+    config: {
+      exchange_point: [
+        {
+          place_name: "Patio Olmos",
+          latitude: "456789",
+          longitude: "456789",
+        },
+      ],
+      page_x_day: 2,
+      favorite_subjects: ["Drama"],
+    },
+  },
+  {
+    user_data: {
+      id: 2,
+      user_name: "josepaz",
+      first_name: "Jose",
+      last_name: "Paz",
+      email: "josepaz@mail.com",
+      birthday: "1979-08-29T00:00:00.000Z",
+      image: "string",
+    },
+    config: {
+      exchange_point: [
+        {
+          place_name: "Patio Olmos",
+          latitude: "456789",
+          longitude: "456789",
+        },
+      ],
+      page_x_day: 10,
+      favorite_subjects: ["Action"],
+    },
+  },
+];
