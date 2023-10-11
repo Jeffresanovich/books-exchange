@@ -1,0 +1,17 @@
+[
+  {
+    "user_data": {
+      "id": 0,
+      "user_name": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "email": "string",
+      "age": "string"
+    },
+    "config": {
+      "page_x_day": 0,
+      "favorite_subjects": ["string"],
+      "dark_mode_app": false
+    }
+  }
+]

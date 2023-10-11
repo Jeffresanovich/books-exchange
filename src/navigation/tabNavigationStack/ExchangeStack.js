@@ -23,7 +23,7 @@ const ExchangeStack = () => {
         options={{
           title: "Intercambio",
           ...headerStyles,
-          headerLeft: () => <IconOpenDrawerComponent />,
+          //headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen

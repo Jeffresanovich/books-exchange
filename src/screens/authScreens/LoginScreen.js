@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setUser, setIdToken } from "../../redux/slice/authSlice";
 
 import { themeColors } from "../../theme/commonStyles";
+import { errorMessage } from "../../data/errorMessage";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -32,13 +33,16 @@ const LoginScreen = ({ navigation }) => {
         email,
         password
       );
-
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
       setIsLoading(false);
     } catch (error) {
-      console.log("LoginError: " + error.message);
-      setErrorText(error.message);
+      console.log("Error: " + error.message);
+      setErrorText(
+        errorMessage(
+          email === "" || password === "" ? "campo-obligatorio" : error.message
+        )
+      );
       setIsLoading(false);
     }
   };
@@ -63,7 +67,7 @@ const LoginScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='#65A6F6' />
       ) : (
         <>
-          <Text style={{ color: "red", marginVertical: 5 }}>{errorText}</Text>
+          <Text style={{ color: "red", marginBottom: 15 }}>{errorText}</Text>
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           </TouchableOpacity>

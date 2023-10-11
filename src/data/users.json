@@ -1,11 +1,46 @@
 [
   {
-    "user_name": "string",
-    "first_name": "string",
-    "last_name": "string",
-    "age": "string",
-    "email": "string",
-    "favorite_subjects": ["string"],
-    "page_xday": 0
+    "user_data": {
+      "id": 0,
+      "user_name": "juanperez",
+      "first_name": "Juan",
+      "last_name": "Perez",
+      "email": "juanperez@mail.com",
+      "age": "30"
+    },
+    "config": {
+      "exchange_point": [
+        {
+          "place_name": "Patio Olmos",
+          "latitude": "456789",
+          "longitude": "456789"
+        }
+      ],
+      "page_x_day": 2,
+      "favorite_subjects": ["Drama"],
+      "dark_mode_app": true
+    }
+  },
+  {
+    "user_data": {
+      "id": 2,
+      "user_name": "josepaz",
+      "first_name": "Jose",
+      "last_name": "Paz",
+      "email": "josepaz@mail.com",
+      "age": "50"
+    },
+    "config": {
+      "exchange_point": [
+        {
+          "place_name": "Patio Olmos",
+          "latitude": "456789",
+          "longitude": "456789"
+        }
+      ],
+      "page_x_day": 10,
+      "favorite_subjects": ["Action"],
+      "dark_mode_app": false
+    }
   }
 ]
