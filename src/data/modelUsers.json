@@ -1,17 +1,22 @@
 [
   {
-    "user_data": {
-      "id": 0,
-      "user_name": "string",
-      "first_name": "string",
-      "last_name": "string",
-      "email": "string",
-      "birthday": "2017-08-29T00:00:00.000Z",
-      "image": "string"
-    },
+    "id": 0,
+    "first_name": "string",
+    "last_name": "string",
+    "email": "string",
+    "birthday": "2017-08-29T00:00:00.000Z",
+    "image": "empty",
+    "isActive": true,
     "config": {
-      "page_x_day": 0,
-      "favorite_subjects": ["string"]
+      "exchange_point": [
+        {
+          "place_name": "Patio Olmos",
+          "latitude": "456789",
+          "longitude": "456789"
+        }
+      ],
+      "page_x_day": 2,
+      "favorite_subjects": ["Drama"]
     }
   }
 ]

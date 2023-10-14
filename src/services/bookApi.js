@@ -11,15 +11,43 @@ export const bookApi = createApi({
       query: () => `books.json`,
     }),
 
+    //Read user
     getUserById: builder.query({
-      query: (id) => `users/${id}.json`,
+      query: (authUid) => `users/${authUid}.json`,
     }),
 
-    putUserImageProfile: builder.mutation({
-      query: (id, userImage) => ({
-        url: `users/${id}/user_data/image.json`,
-        method: "PUT",
-        body: userImage,
+    //Create user
+    patchUser: builder.mutation({
+      query: (authUid, user) => ({
+        url: `users.json`,
+        method: "PATCH",
+        body: `{${authUid}:${user}}`,
+      }),
+    }),
+
+    //Update User Data
+    patchUser: builder.mutation({
+      query: (authUid, user) => ({
+        url: `users/${authUid}.json`,
+        method: "PATCH",
+        body: user,
+      }),
+    }),
+    //Update
+    patchUserImage: builder.mutation({
+      query: (authUid, image) => ({
+        url: `users/${authUid}.json`,
+        method: "PATCH",
+        body: `{ image: ${image}}`,
+      }),
+    }),
+
+    //Delete(inactive user)
+    patchUserInactive: builder.mutation({
+      query: (id) => ({
+        url: `users/${id}.json`,
+        method: "PATCH",
+        body: { isActive: false },
       }),
     }),
   }),
