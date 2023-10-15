@@ -23,7 +23,7 @@ const BooksSearchStack = () => {
         options={{
           title: "Buscardor",
           ...headerStyles,
-          //headerLeft: () => <IconOpenDrawerComponent />,
+          headerLeft: () => <IconOpenDrawerComponent />,
         }}
       />
       <Stack.Screen
