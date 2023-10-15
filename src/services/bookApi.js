@@ -11,15 +11,26 @@ export const bookApi = createApi({
       query: () => `books.json`,
     }),
 
+    //Read user
     getUserById: builder.query({
-      query: (id) => `users/${id}.json`,
+      query: (authUid) => `userss/${authUid}.json`,
     }),
 
-    putUserImageProfile: builder.mutation({
-      query: (id, userImage) => ({
-        url: `users/${id}/user_data/image.json`,
-        method: "PUT",
-        body: userImage,
+    //Create user
+    patchNewUser: builder.mutation({
+      query: (body) => ({
+        url: `userss.json`,
+        method: "PATCH",
+        body: `{"casa":${body}}`,
+      }),
+    }),
+
+    //Update User Data
+    patchUser: builder.mutation({
+      query: ([authUid, body]) => ({
+        url: `userss/${authUid}.json`,
+        method: "PATCH",
+        body: body,
       }),
     }),
   }),
@@ -28,5 +39,6 @@ export const bookApi = createApi({
 export const {
   useGetAllBooksQuery,
   useGetUserByIdQuery,
-  usePutUserImageProfileMutation,
+  usePatchNewUserMutation,
+  usePatchUserMutation,
 } = bookApi; //EndPint en forma de HOOK: use...
