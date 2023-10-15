@@ -26,20 +26,18 @@ import { flex, border } from "../theme/commonStyles";
 import * as ImagePicker from "expo-image-picker";
 
 //Services
-import {
-  useGetUserByIdQuery,
-  usePutUserImageProfileMutation,
-} from "../services/bookApi";
+import { useGetUserByIdQuery, usePatchUserMutation } from "../services/bookApi";
 
 const ProfileScreen = () => {
-  const userId = 1;
+  const userId = 0;
 
   const dispatch = useDispatch();
 
-  const [putUserImageProfile, result] = usePutUserImageProfileMutation();
+  const [patchUser, result] = usePatchUserMutation();
 
   const { data, isLoading, refetch } = useGetUserByIdQuery(userId);
-  const [userImage, setUserImage] = useState(null);
+
+  const [image, setImage] = useState("");
 
   const [editVisible, setEditVisible] = useState(false);
 
@@ -80,8 +78,8 @@ const ProfileScreen = () => {
 
   const changeImage = async (result) => {
     if (!result.canceled) {
-      await setUserImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
-
+      await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+      patchUser([userId, { image: image }]);
       refetch();
     }
   };
@@ -99,8 +97,8 @@ const ProfileScreen = () => {
         <>
           <Image
             source={{
-              uri: userImage
-                ? userImage
+              uri: data
+                ? data.image
                 : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
             }}
             style={styles.profileImage}
@@ -138,9 +136,9 @@ const ProfileScreen = () => {
             )}
           </View>
           <Text style={styles.username}>
-            {data.user_data.first_name} {data.user_data.last_name}
+            {data.first_name} {data.last_name}
           </Text>
-          <Text style={styles.email}>{data.user_data.email}</Text>
+          <Text style={styles.email}>{data.email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
             <Text style={styles.logoutButtonText}>Cerrar sesión</Text>

@@ -4,7 +4,6 @@
     "first_name": "string",
     "last_name": "string",
     "email": "string",
-    "birthday": "2017-08-29T00:00:00.000Z",
     "image": "empty",
     "isActive": true,
     "config": {

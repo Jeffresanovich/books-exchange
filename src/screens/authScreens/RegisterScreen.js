@@ -12,11 +12,17 @@ import {
 import { firebase_auth } from "../../firebase/authFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
+import { usePatchNewUserMutation } from "../../services/bookApi";
+
 import { themeColors } from "../../theme/commonStyles";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  const [patchNewUser] = usePatchNewUserMutation();
 
   const handleRegister = async () => {
     try {
@@ -25,7 +31,20 @@ const RegisterScreen = ({ navigation }) => {
         email,
         password
       );
-      console.log(response);
+
+      const newUser = {
+        config: {},
+        email: response.user.email,
+        first_name: firstName,
+        id: response.user.uid,
+        image: "",
+        isActive: true,
+        last_name: lastName,
+      };
+
+      console.log(JSON.stringify(newUser, null, " "));
+
+      patchNewUser(newUser);
 
       navigation.navigate("Login");
     } catch (error) {
@@ -37,7 +56,19 @@ const RegisterScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
       <TextInput
-        placeholder='Escriba su email aquí..'
+        placeholder='Nombre'
+        style={styles.input}
+        value={firstName}
+        onChangeText={(text) => setFirstName(text)}
+      />
+      <TextInput
+        placeholder='Apellido'
+        style={styles.input}
+        value={lastName}
+        onChangeText={(text) => setLastName(text)}
+      />
+      <TextInput
+        placeholder='Email'
         style={styles.input}
         value={email}
         onChangeText={(text) => setEmail(text)}

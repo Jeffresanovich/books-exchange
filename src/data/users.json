@@ -4,7 +4,7 @@
     "first_name": "Juan",
     "last_name": "Perez",
     "email": "juanperez@mail.com",
-    "birthday": "2000-08-29T00:00:00.000Z",
+
     "image": "string",
     "isActive": true,
     "config": {
@@ -24,7 +24,7 @@
     "first_name": "Jose",
     "last_name": "Paz",
     "email": "josepaz@mail.com",
-    "birthday": "1979-08-29T00:00:00.000Z",
+
     "image": "string",
     "isActive": true,
     "config": {
