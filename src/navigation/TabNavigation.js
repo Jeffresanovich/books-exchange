@@ -10,7 +10,11 @@ import { useDispatch } from "react-redux";
 import { setDrawerNavigation } from "../redux/slice/routingSlice";
 
 //Icons
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -67,11 +71,7 @@ const TabNavigation = ({ navigation }) => {
         options={{
           title: "Intercambio",
           tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name='book-sync-outline'
-              size={focused ? 35 : 25}
-              color={color}
-            />
+            <FontAwesome5 name='users' size={focused ? 35 : 25} color={color} />
           ),
         }}
       />

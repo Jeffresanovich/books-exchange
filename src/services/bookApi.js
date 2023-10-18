@@ -16,10 +16,10 @@ export const bookApi = createApi({
       query: (userId) => `users/${userId}.json`,
     }),
 
-    //Update User Data
+    //Update User
     patchUser: builder.mutation({
-      query: ([authUid, body]) => ({
-        url: `users.json?uId=${authUid}`,
+      query: ([userId, body]) => ({
+        url: `users/${userId}.json`,
         method: "PATCH",
         body: body,
       }),

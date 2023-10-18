@@ -26,25 +26,20 @@ import { flex, border } from "../theme/commonStyles";
 import * as ImagePicker from "expo-image-picker";
 
 //Services
-import { useGetUserByUidQuery } from "../services/bookApi";
+import {
+  useGetUserByUidQuery,
+  usePatchUserMutation,
+} from "../services/bookApi";
 
 //Redux
 import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
-  const userId = useSelector((state) => state.authSlice.userId);
-
   const dispatch = useDispatch();
-
-  //const [patchUser, result] = usePatchUserMutation();
-
+  const userId = useSelector((state) => state.authSlice.userId);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-
-  const [image, setImage] = useState("");
-
   const [editVisible, setEditVisible] = useState(false);
-
-  console.log(JSON.stringify(data, null, " "));
+  const [patchUser] = usePatchUserMutation();
 
   const handleEditImage = () => {
     setEditVisible(true);
@@ -83,10 +78,12 @@ const ProfileScreen = () => {
 
   const changeImage = async (result) => {
     if (!result.canceled) {
-      await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
-      //patchUser([userId, { image: image }]);
-      refetch();
+      await patchUser([
+        userId,
+        { image: `data:image/jpeg;base64,${result.assets[0].base64}` },
+      ]);
     }
+    refetch();
   };
 
   const handleSignOut = () => {
@@ -95,49 +92,41 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onPress={() => setEditVisible(false)}>
       {isLoading ? (
         <ActivityIndicator size='large' color='#65A6F6' />
       ) : (
         <>
-          <Image
-            source={{
-              uri: data
-                ? data.image
-                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
-            }}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: data.image }} style={styles.profileImage} />
           <View style={styles.imageEdit}>
             {editVisible ? (
               <View style={styles.openCamGaleryContainer}>
-                <Pressable onPress={handleOpenCam}>
+                <TouchableOpacity onPress={handleOpenCam}>
                   <MaterialCommunityIcons
                     name='camera'
                     size={35}
                     color='grey'
                   />
-                </Pressable>
-                <Pressable onPress={() => setEditVisible(false)}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setEditVisible(false)}>
                   <MaterialCommunityIcons
-                    style={{ marginHorizontal: 40 }}
                     name='window-close'
-                    size={25}
+                    size={30}
                     color='grey'
                   />
-                </Pressable>
-                <Pressable onPress={handleOpenGalery}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleOpenGalery}>
                   <MaterialCommunityIcons
                     name='folder-image'
                     size={35}
                     color='grey'
                   />
-                </Pressable>
+                </TouchableOpacity>
               </View>
             ) : (
-              <Pressable onPress={() => setEditVisible(true)}>
-                <Feather name='edit-2' size={25} color='grey' />
-              </Pressable>
+              <TouchableOpacity onPress={() => setEditVisible(true)}>
+                <Feather name='edit-2' size={30} color='grey' />
+              </TouchableOpacity>
             )}
           </View>
           <Text style={styles.username}>
@@ -157,40 +146,34 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    padding: 50,
   },
   profileImage: {
     width: 200,
     height: 200,
     borderRadius: 100,
   },
+
   imageEdit: {
     width: 150,
     height: 35,
-    marginBottom: 10,
+    marginVertical: 15,
     alignItems: "center",
-    //...border(),
   },
   openCamGaleryContainer: {
-    ...flex("center", "center"),
+    width: 200,
+    ...flex("space-around", "center"),
   },
   username: {
     fontSize: 24,
     fontWeight: "bold",
-    marginTop: 20,
+    marginTop: 10,
   },
   email: {
     marginTop: 10,
     fontSize: 18,
     marginBottom: 20,
-  },
-  editButton: {
-    backgroundColor: "blue",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginBottom: 10,
   },
   editButtonText: {
     color: "white",

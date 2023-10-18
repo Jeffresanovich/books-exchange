@@ -21,7 +21,7 @@ const BooksSearchStack = () => {
         name='BooksSearchScreen'
         component={BooksSearchScreen}
         options={{
-          title: "Buscardor",
+          title: "Buscador",
           ...headerStyles,
           headerLeft: () => <IconOpenDrawerComponent />,
         }}

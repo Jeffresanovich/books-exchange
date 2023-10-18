@@ -38,13 +38,12 @@ const RegisterScreen = ({ navigation }) => {
       const writeUserData = (userId) => {
         const db = getDatabase();
         set(ref(db, "users/" + userId), {
-          config: {},
-          email: response.user.email,
           first_name: firstName,
-          id: response.user.uid,
-          image: "",
-          isActive: true,
           last_name: lastName,
+          email: response.user.email,
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
+          isActive: true,
         });
       };
 
