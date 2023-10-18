@@ -5,9 +5,6 @@ import { headerStyles } from "../../theme/commonStyles";
 import HomeScreen from "../../screens/tabScreens/HomeScreen";
 import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
-//Component
-import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
-
 //Drawer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -21,23 +18,8 @@ const HomeStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name='HomeScreen'
-        component={HomeScreen}
-        options={{
-          title: "Inicio",
-          ...headerStyles,
-          headerLeft: () => <IconOpenDrawerComponent />,
-        }}
-      />
-      <Stack.Screen
-        name='BookDetailScreen'
-        component={BookDetailScreen}
-        options={{
-          title: "Detalles",
-          ...headerStyles,
-        }}
-      />
+      <Stack.Screen name='HomeScreen' component={HomeScreen} />
+      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
     </Stack.Navigator>
   );
 };

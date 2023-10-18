@@ -16,7 +16,8 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerShown: false,
+        drawerType: "slice",
+        headerShown: true,
         //drawerPosition: "right",
       }}
     >
@@ -24,7 +25,8 @@ const DrawerNavigation = () => {
         name='TabNavigation'
         component={TabNavigation}
         options={{
-          title: "Inicio",
+          title: "Biblioteca",
+          ...headerStyles,
         }}
       />
       <Drawer.Screen

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 //Icons
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Components
 import TitleComponent from "../../components/BookDetailScreenComponents/TitleComponent";
@@ -17,11 +17,14 @@ import DescriptionComponent from "../../components/BookDetailScreenComponents/De
 //Styles
 import { flex, themeColors } from "../../theme/commonStyles";
 
-const BookDetailScreen = ({ route }) => {
+const BookDetailScreen = ({ navigation, route }) => {
   const { book } = route.params;
 
   return (
     <View style={styles.container}>
+      <Pressable onPress={navigation.goBack}>
+        <AntDesign name='back' size={30} color={themeColors.heavyBlue} />
+      </Pressable>
       <ScrollView>
         <View style={styles.imageContainer}>
           <Image

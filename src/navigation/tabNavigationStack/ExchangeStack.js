@@ -5,8 +5,6 @@ import { headerStyles } from "../../theme/commonStyles";
 import ExChangeScreen from "../../screens/tabScreens/ExChangeScreen";
 import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
-import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
-
 const Stack = createNativeStackNavigator();
 
 const ExchangeStack = () => {
@@ -17,23 +15,8 @@ const ExchangeStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name='ExChangeScreen'
-        component={ExChangeScreen}
-        options={{
-          title: "Intercambio",
-          ...headerStyles,
-          headerLeft: () => <IconOpenDrawerComponent />,
-        }}
-      />
-      <Stack.Screen
-        name='BookDetailScreen'
-        component={BookDetailScreen}
-        options={{
-          title: "Detalles",
-          ...headerStyles,
-        }}
-      />
+      <Stack.Screen name='ExChangeScreen' component={ExChangeScreen} />
+      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
     </Stack.Navigator>
   );
 };

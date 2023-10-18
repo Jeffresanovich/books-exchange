@@ -1,13 +1,7 @@
-import { useEffect } from "react";
-
 //Stacks
 import HomeStack from "./tabNavigationStack/HomeStack";
 import BooksSearchStack from "./tabNavigationStack/BooksSearchStack";
 import ExchangeStack from "./tabNavigationStack/ExchangeStack";
-
-//Redux
-import { useDispatch } from "react-redux";
-import { setDrawerNavigation } from "../redux/slice/routingSlice";
 
 //Icons
 import {
@@ -20,13 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = ({ navigation }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setDrawerNavigation(navigation));
-  }, [navigation]);
-
+const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{

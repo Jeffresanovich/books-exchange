@@ -5,8 +5,6 @@ import { headerStyles } from "../../theme/commonStyles";
 import BooksSearchScreen from "../../screens/tabScreens/BooksSearchScreen";
 import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
-import IconOpenDrawerComponent from "../../components/IconOpenDrawerComponent";
-
 const Stack = createNativeStackNavigator();
 
 const BooksSearchStack = () => {
@@ -17,23 +15,8 @@ const BooksSearchStack = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name='BooksSearchScreen'
-        component={BooksSearchScreen}
-        options={{
-          title: "Buscador",
-          ...headerStyles,
-          headerLeft: () => <IconOpenDrawerComponent />,
-        }}
-      />
-      <Stack.Screen
-        name='BookDetailScreen'
-        component={BookDetailScreen}
-        options={{
-          title: "Detalles",
-          ...headerStyles,
-        }}
-      />
+      <Stack.Screen name='BooksSearchScreen' component={BooksSearchScreen} />
+      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
     </Stack.Navigator>
   );
 };
