@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
         });
       };
 
-      writeUserData(response.user.uid, newUser);
+      writeUserData(response.user.uid);
 
       navigation.navigate("Login");
     } catch (error) {
