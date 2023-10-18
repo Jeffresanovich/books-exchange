@@ -2,7 +2,7 @@
 import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
-import HomeScreen from "../../screens/tabScreens/HomeScreen";
+import LibraryScreen from "../../screens/tabScreens/LibraryScreen";
 import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
 
 //Drawer
@@ -10,18 +10,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
-const HomeStack = () => {
+const LibraryScreen = () => {
   return (
     <Stack.Navigator
-      initialRouteName='HomeScreen'
+      initialRouteName='LibraryScreen'
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name='HomeScreen' component={HomeScreen} />
+      <Stack.Screen name='LibraryScreen' component={LibraryScreen} />
       <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStack;
+export default LibraryScreen;

@@ -5,7 +5,7 @@ import { useGetAllBooksQuery } from "../../services/bookApi";
 //Components
 import BooksListComponent from "../../components/BooksListComponent";
 
-const HomeScreen = ({ navigation }) => {
+const LibraryScreen = ({ navigation }) => {
   const { data, isLoading } = useGetAllBooksQuery();
 
   return (
@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default LibraryScreen;
 
 const styles = StyleSheet.create({
   container: {

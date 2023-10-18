@@ -1,5 +1,5 @@
 //Stacks
-import HomeStack from "./tabNavigationStack/HomeStack";
+import LibraryScreen from "./tabNavigationStack/LibraryScreen";
 import BooksSearchStack from "./tabNavigationStack/BooksSearchStack";
 import ExchangeStack from "./tabNavigationStack/ExchangeStack";
 
@@ -26,8 +26,8 @@ const TabNavigation = () => {
       }}
     >
       <Tab.Screen
-        name='HomeStack'
-        component={HomeStack}
+        name='LibraryScreen'
+        component={LibraryScreen}
         options={{
           title: "Inicio",
           tabBarIcon: ({ focused, color }) => (
