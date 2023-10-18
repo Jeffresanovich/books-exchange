@@ -13,7 +13,7 @@ import { firebase_auth } from "../../firebase/authFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
-import { setUser, setIdToken } from "../../redux/slice/authSlice";
+import { setUserId } from "../../redux/slice/authSlice";
 
 import { themeColors } from "../../theme/commonStyles";
 import { errorMessage } from "../../data/errorMessage";
@@ -27,8 +27,6 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { getUserByUid } = useGetUserByUidQuery();
-
   const handleLogin = async () => {
     try {
       setIsLoading(true);
@@ -38,11 +36,8 @@ const LoginScreen = ({ navigation }) => {
         password
       );
 
-      //const res = await getUserByUid(response.user.uid);
-      //      console.log("RESPUESTA: " + res);
+      dispatch(setUserId(response.user.uid));
 
-      dispatch(setUser(response.user.email));
-      dispatch(setIdToken(response._tokenResponse.idToken));
       setIsLoading(false);
     } catch (error) {
       console.log("Error: " + error.message);

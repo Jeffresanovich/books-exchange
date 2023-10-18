@@ -28,8 +28,11 @@ import * as ImagePicker from "expo-image-picker";
 //Services
 import { useGetUserByUidQuery } from "../services/bookApi";
 
+//Redux
+import { useSelector } from "react-redux";
+
 const ProfileScreen = () => {
-  const userId = "0jNNAQccwpM3EtxfUjqDtkDyrbj1";
+  const userId = useSelector((state) => state.authSlice.userId);
 
   const dispatch = useDispatch();
 
