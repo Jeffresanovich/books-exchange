@@ -12,17 +12,15 @@ import {
 import { firebase_auth } from "../../firebase/authFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-import { usePatchNewUserMutation } from "../../services/bookApi";
-
 import { themeColors } from "../../theme/commonStyles";
+
+import { getDatabase, ref, set } from "firebase/database";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const [patchNewUser] = usePatchNewUserMutation();
 
   const handleRegister = async () => {
     try {
@@ -32,19 +30,25 @@ const RegisterScreen = ({ navigation }) => {
         password
       );
 
-      const newUser = {
-        config: {},
-        email: response.user.email,
-        first_name: firstName,
-        id: response.user.uid,
-        image: "",
-        isActive: true,
-        last_name: lastName,
+      /**
+       *
+       * @param {string} userId
+       * @param {object} newUserAdd
+       */
+      const writeUserData = (userId) => {
+        const db = getDatabase();
+        set(ref(db, "users/" + userId), {
+          config: {},
+          email: response.user.email,
+          first_name: firstName,
+          id: response.user.uid,
+          image: "",
+          isActive: true,
+          last_name: lastName,
+        });
       };
 
-      console.log(JSON.stringify(newUser, null, " "));
-
-      patchNewUser(newUser);
+      writeUserData(response.user.uid, newUser);
 
       navigation.navigate("Login");
     } catch (error) {

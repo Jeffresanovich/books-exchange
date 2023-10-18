@@ -18,12 +18,16 @@ import { setUser, setIdToken } from "../../redux/slice/authSlice";
 import { themeColors } from "../../theme/commonStyles";
 import { errorMessage } from "../../data/errorMessage";
 
+import { useGetUserByUidQuery } from "../../services/bookApi";
+
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { getUserByUid } = useGetUserByUidQuery();
 
   const handleLogin = async () => {
     try {
@@ -33,6 +37,10 @@ const LoginScreen = ({ navigation }) => {
         email,
         password
       );
+
+      //const res = await getUserByUid(response.user.uid);
+      //      console.log("RESPUESTA: " + res);
+
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
       setIsLoading(false);

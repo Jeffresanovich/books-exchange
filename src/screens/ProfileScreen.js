@@ -26,20 +26,22 @@ import { flex, border } from "../theme/commonStyles";
 import * as ImagePicker from "expo-image-picker";
 
 //Services
-import { useGetUserByIdQuery, usePatchUserMutation } from "../services/bookApi";
+import { useGetUserByUidQuery } from "../services/bookApi";
 
 const ProfileScreen = () => {
-  const userId = 0;
+  const userId = "0jNNAQccwpM3EtxfUjqDtkDyrbj1";
 
   const dispatch = useDispatch();
 
-  const [patchUser, result] = usePatchUserMutation();
+  //const [patchUser, result] = usePatchUserMutation();
 
-  const { data, isLoading, refetch } = useGetUserByIdQuery(userId);
+  const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
 
   const [image, setImage] = useState("");
 
   const [editVisible, setEditVisible] = useState(false);
+
+  console.log(JSON.stringify(data, null, " "));
 
   const handleEditImage = () => {
     setEditVisible(true);
@@ -79,7 +81,7 @@ const ProfileScreen = () => {
   const changeImage = async (result) => {
     if (!result.canceled) {
       await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
-      patchUser([userId, { image: image }]);
+      //patchUser([userId, { image: image }]);
       refetch();
     }
   };
