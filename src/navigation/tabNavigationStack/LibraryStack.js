@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
-const LibraryScreen = () => {
+const LibraryStack = () => {
   return (
     <Stack.Navigator
       initialRouteName='LibraryScreen'
@@ -24,4 +24,4 @@ const LibraryScreen = () => {
   );
 };
 
-export default LibraryScreen;
+export default LibraryStack;

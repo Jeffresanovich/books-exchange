@@ -1,5 +1,5 @@
 //Stacks
-import LibraryScreen from "./tabNavigationStack/LibraryScreen";
+import LibraryStack from "./tabNavigationStack/LibraryStack";
 import BooksSearchStack from "./tabNavigationStack/BooksSearchStack";
 import ExchangeStack from "./tabNavigationStack/ExchangeStack";
 
@@ -26,8 +26,8 @@ const TabNavigation = () => {
       }}
     >
       <Tab.Screen
-        name='LibraryScreen'
-        component={LibraryScreen}
+        name='LibraLibraryStackryScreen'
+        component={LibraryStack}
         options={{
           title: "Inicio",
           tabBarIcon: ({ focused, color }) => (
