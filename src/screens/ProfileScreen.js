@@ -92,7 +92,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container} onPress={() => setEditVisible(false)}>
+    <View style={styles.container}>
       {isLoading ? (
         <ActivityIndicator size='large' color='#65A6F6' />
       ) : (
