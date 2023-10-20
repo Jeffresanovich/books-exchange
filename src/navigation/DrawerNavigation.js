@@ -15,6 +15,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
+      initialRouteName='TabNavigation'
       screenOptions={{
         drawerType: "slice",
         headerShown: true,

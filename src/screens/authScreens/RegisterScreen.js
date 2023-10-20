@@ -14,6 +14,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import { themeColors } from "../../theme/commonStyles";
 
+import { usePutUserMutation } from "../../services/bookApi";
 import { getDatabase, ref, set } from "firebase/database";
 
 const RegisterScreen = ({ navigation }) => {
@@ -21,6 +22,8 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  const [putUser] = usePutUserMutation();
 
   const handleRegister = async () => {
     try {
@@ -30,24 +33,16 @@ const RegisterScreen = ({ navigation }) => {
         password
       );
 
-      /**
-       *
-       * @param {string} userId
-       * @param {object} newUserAdd
-       */
-      const writeUserData = (userId) => {
-        const db = getDatabase();
-        set(ref(db, "users/" + userId), {
-          first_name: firstName,
-          last_name: lastName,
-          email: response.user.email,
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
-          isActive: true,
-        });
+      const userBody = {
+        first_name: firstName,
+        last_name: lastName,
+        email: response.user.email,
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
+        isActive: true,
       };
 
-      writeUserData(response.user.uid);
+      putUser([response.user.uid, userBody]);
 
       navigation.navigate("Login");
     } catch (error) {

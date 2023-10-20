@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   StyleSheet,
   View,
@@ -15,13 +17,25 @@ import BooksListComponent from "../../components/BooksListComponent";
 const LibraryScreen = ({ navigation }) => {
   const { data, isLoading } = useGetAllBooksQuery();
 
+  const arr = [];
+  if (isLoading) {
+    for (const key in data) {
+      //arr = [arr, { ...data[key] }];
+      arr.push(data[key]);
+    }
+
+    console.log("VUELTA: ", JSON.stringify(arr, null, " "));
+    console.log("RESPUESTA: " + JSON.stringify(data, null, " "));
+    console.log("CARGA: " + isLoading);
+    console.log("CARGA: " + data);
+  }
   return (
     <View style={styles.container}>
       {isLoading ? (
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <BooksListComponent navigation={navigation} booksDB={data} />
+          <BooksListComponent navigation={navigation} booksDB={arr} />
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("BookRegisterScreen")}
