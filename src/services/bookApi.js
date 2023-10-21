@@ -8,9 +8,13 @@ export const bookApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllBooks: builder.query({
-      query: () => `users.json`,
+      query: () => `books.json`,
     }),
-
+    /*
+    getAllBooks: builder.query({
+      query: () => `ooks.json`,
+    }),
+    */
     //Read user
     getUserByUid: builder.query({
       query: (userId) => `users/${userId}.json`,
