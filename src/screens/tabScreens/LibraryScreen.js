@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   StyleSheet,
@@ -14,18 +14,15 @@ import { MaterialIcons } from "@expo/vector-icons";
 //Components
 import BooksListComponent from "../../components/BooksListComponent";
 
+import useConvertDataResponse from "../../hooks/useConvertDataResponse";
+
 const LibraryScreen = ({ navigation }) => {
   const { data, isLoading } = useGetAllBooksQuery();
+  const [response, setResponse] = useState([]);
 
-  const arr = [];
-  for (const key in data) {
-    arr.push(data[key]);
-  }
-
-  console.log("VUELTA: ", JSON.stringify(arr, null, " "));
-  console.log("RESPUESTA: " + JSON.stringify(data, null, " "));
-  console.log("CARGA: " + isLoading);
-  console.log("CARGA: " + data);
+  useEffect(() => {
+    useConvertDataResponse(data, setResponse);
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -33,7 +30,7 @@ const LibraryScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <BooksListComponent navigation={navigation} booksDB={arr} />
+          <BooksListComponent navigation={navigation} booksDB={response} />
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("BookRegisterScreen")}
