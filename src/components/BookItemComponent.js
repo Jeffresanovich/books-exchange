@@ -14,11 +14,11 @@ const BookItemComponent = ({ book, navigation }) => {
           style={styles.image}
           height={150}
           width={100}
-          source={{ uri: book.image[0] }}
+          source={{ uri: book.book_data.image }}
           resizeMode='cover'
         />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{book.title}</Text>
+          <Text style={styles.title}>{book.book_data.title}</Text>
         </View>
       </Pressable>
     </View>

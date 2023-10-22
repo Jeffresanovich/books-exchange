@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 //Icons
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Components
 import TitleComponent from "../../components/BookDetailScreenComponents/TitleComponent";
@@ -17,29 +17,26 @@ import DescriptionComponent from "../../components/BookDetailScreenComponents/De
 //Styles
 import { flex, themeColors } from "../../theme/commonStyles";
 
-const BookDetailScreen = ({ navigation, route }) => {
+const BookDetailScreen = ({ route }) => {
   const { book } = route.params;
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={navigation.goBack}>
-        <AntDesign name='back' size={30} color={themeColors.heavyBlue} />
-      </Pressable>
       <ScrollView>
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
             source={{
-              uri: book.image[0],
+              uri: book.book_data.image,
             }}
           />
         </View>
         <View style={styles.infoContainer}>
           <View style={styles.titleRatingStockContainer}>
-            <TitleComponent title={book.title} />
+            <TitleComponent title={book.book_data.title} />
           </View>
         </View>
-        <DescriptionComponent description={book.long_title} />
+        <DescriptionComponent description={book.book_data.long_title} />
         <View style={styles.buttonContainer}>
           <Pressable style={[styles.button, styles.buyButton]}>
             <MaterialCommunityIcons name='book-lock' size={50} color='white' />

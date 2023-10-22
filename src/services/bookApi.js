@@ -11,6 +11,15 @@ export const bookApi = createApi({
       query: () => `books.json`,
     }),
 
+    //Create book
+    putBook: builder.mutation({
+      query: (body) => ({
+        url: `books.json`,
+        method: "POST",
+        body: body,
+      }),
+    }),
+
     //Read user
     getUserByUid: builder.query({
       query: (userId) => `users/${userId}.json`,
@@ -46,6 +55,7 @@ export const bookApi = createApi({
 
 export const {
   useGetAllBooksQuery,
+  usePutBookMutation,
 
   //USERS
   useGetUserByUidQuery,
