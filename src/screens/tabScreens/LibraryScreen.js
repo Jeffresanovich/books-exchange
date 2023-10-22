@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
+  ScrollView,
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
@@ -25,19 +26,21 @@ const LibraryScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {isLoading ? (
-        <ActivityIndicator size='large' color='grey' />
-      ) : (
-        <>
-          <BooksListComponent navigation={navigation} booksDB={response} />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("BookRegisterScreen")}
-          >
-            <MaterialIcons name='post-add' size={60} color='white' />
-          </TouchableOpacity>
-        </>
-      )}
+      <ScrollView>
+        {isLoading ? (
+          <ActivityIndicator size='large' color='grey' />
+        ) : (
+          <>
+            <BooksListComponent navigation={navigation} booksDB={response} />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("BookRegisterScreen")}
+            >
+              <MaterialIcons name='post-add' size={60} color='white' />
+            </TouchableOpacity>
+          </>
+        )}
+      </ScrollView>
     </View>
   );
 };
@@ -52,9 +55,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    position: "absolute",
-    top: 500,
-    right: 30,
+    //position: "absolute",
+    //top: 500,
+    //right: 30,
+
+    width: 80,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 100,
     padding: 10,
