@@ -1,21 +1,20 @@
 [
   {
-    "book_data": {
-      "id": 0,
+    "book-data": {
       "title": "string",
-      "long_title": "string",
+      "long-title": "string",
       "synopsis": "string",
-      "subjects": ["string", "string"],
-      "publisher": "string",
-      "pages": 566,
-      "language": "string",
-      "image": ["string"],
+      "subjects": "string",
+      "pages": 0,
+      "image": ["string", "string"],
       "edition": "string",
-      "date_published": "2017-08-29T00:00:00.000Z",
-      "authors": ["string", "string"],
+      "published-date": "2017-08-29T00:00:00.000Z",
+      "author": "string"
+    },
+    "transacction": {
       "owner": {
-        "user_name": "string",
-        "shared_date": "2017-08-29T00:00:00.000Z"
+        "userId": "string",
+        "shared-date": "2017-08-29T00:00:00.000Z"
       }
     },
     "user_history": [

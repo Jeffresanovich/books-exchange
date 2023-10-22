@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import books from "../../data/booksDB";
 
-//import { useGetAllBooksQuery } from "../../services/bookApi";
-
 const initialState = {
   allBooks: books,
   textSearch: null,

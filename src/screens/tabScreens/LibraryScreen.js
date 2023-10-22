@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { useGetAllBooksQuery } from "../../services/bookApi";
-
 import { MaterialIcons } from "@expo/vector-icons";
 
 //Components
 import BooksListComponent from "../../components/BooksListComponent";
 
+import { useGetAllBooksQuery } from "../../services/bookApi";
 import useConvertDataResponse from "../../hooks/useConvertDataResponse";
 
 const LibraryScreen = ({ navigation }) => {
@@ -47,7 +46,6 @@ export default LibraryScreen;
 
 const styles = StyleSheet.create({
   container: {
-    //position: "relative",
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
@@ -60,8 +58,5 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 100,
     padding: 10,
-    //width: 200,
-    //height: 100,
-    //border: 3px solid #73AD21;
   },
 });
