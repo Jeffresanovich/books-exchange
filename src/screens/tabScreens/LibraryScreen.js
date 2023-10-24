@@ -40,13 +40,13 @@ const LibraryScreen = ({ navigation }) => {
     },
     key: null,
   };
-  /*
+
   const db = getDatabase();
   const starCountRef = ref(db, "books");
   onValue(starCountRef, () => {
     refetch();
   });
-*/
+
   useEffect(() => {
     useConvertDataResponse(data, setBooks);
   }, [data]);

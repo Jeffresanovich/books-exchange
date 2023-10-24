@@ -1,4 +1,5 @@
 import {
+  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -21,39 +22,45 @@ const BookDetailScreen = ({ navigation, route }) => {
   const { book } = route.params;
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: book.book_data.image,
-            }}
-          />
-        </View>
-        <View style={styles.infoContainer}>
-          <View style={styles.titleRatingStockContainer}>
-            <TitleComponent title={book.book_data.title} />
+    <SafeAreaView>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: book.book_data.image,
+              }}
+            />
           </View>
-        </View>
-        <DescriptionComponent description={book.book_data.long_title} />
-        <View style={styles.buttonContainer}>
-          <Pressable style={[styles.button, styles.buyButton]}>
-            <MaterialCommunityIcons name='book-lock' size={50} color='white' />
-            <Text style={styles.buttonText}>RESERVAR</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.button, styles.buyButton]}
-            onPress={() =>
-              navigation.navigate("BookRegisterScreen", { book: book })
-            }
-          >
-            <MaterialCommunityIcons name='book' size={50} color='white' />
-            <Text style={styles.buttonText}>EDITAR</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-    </View>
+          <View style={styles.infoContainer}>
+            <View style={styles.titleRatingStockContainer}>
+              <TitleComponent title={book.book_data.title} />
+            </View>
+          </View>
+          <DescriptionComponent description={book.book_data.long_title} />
+          <View style={styles.buttonContainer}>
+            <Pressable style={[styles.button, styles.buyButton]}>
+              <MaterialCommunityIcons
+                name='book-lock'
+                size={50}
+                color='white'
+              />
+              <Text style={styles.buttonText}>RESERVAR</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buyButton]}
+              onPress={() =>
+                navigation.navigate("BookRegisterScreen", { book: book })
+              }
+            >
+              <MaterialCommunityIcons name='book' size={50} color='white' />
+              <Text style={styles.buttonText}>EDITAR</Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 
