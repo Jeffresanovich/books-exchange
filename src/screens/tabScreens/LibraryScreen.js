@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
-  ScrollView,
   ActivityIndicator,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -16,31 +16,60 @@ import BooksListComponent from "../../components/BooksListComponent";
 import { useGetAllBooksQuery } from "../../services/bookApi";
 import useConvertDataResponse from "../../hooks/useConvertDataResponse";
 
-const LibraryScreen = ({ navigation }) => {
-  const { data, isLoading } = useGetAllBooksQuery();
-  const [response, setResponse] = useState([]);
+import { getDatabase, ref, onValue } from "firebase/database";
 
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { getAllBooks } from "../../redux/slice/bookSlice";
+
+const LibraryScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
+  const { height, width } = useWindowDimensions();
+  const [books, setBooks] = useState([]);
+  const bookInizializatedParams = {
+    book_data: {
+      title: "",
+      longTitle: "",
+      sinopsis: "",
+      subjects: "",
+      page: 0,
+      image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
+      publishedDate: "",
+      author: "",
+    },
+    key: null,
+  };
+  /*
+  const db = getDatabase();
+  const starCountRef = ref(db, "books");
+  onValue(starCountRef, () => {
+    refetch();
+  });
+*/
   useEffect(() => {
-    useConvertDataResponse(data, setResponse);
+    useConvertDataResponse(data, setBooks);
   }, [data]);
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {isLoading ? (
-          <ActivityIndicator size='large' color='grey' />
-        ) : (
-          <>
-            <BooksListComponent navigation={navigation} booksDB={response} />
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("BookRegisterScreen")}
-            >
-              <MaterialIcons name='post-add' size={60} color='white' />
-            </TouchableOpacity>
-          </>
-        )}
-      </ScrollView>
+      {isLoading ? (
+        <ActivityIndicator size='large' color='grey' />
+      ) : (
+        <>
+          <BooksListComponent navigation={navigation} books={books} />
+          <TouchableOpacity
+            style={[styles.button, { top: height - 220, left: width - 100 }]}
+            onPress={() =>
+              navigation.navigate("BookRegisterScreen", {
+                book: bookInizializatedParams,
+              })
+            }
+          >
+            <MaterialIcons name='post-add' size={60} color='white' />
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -55,9 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    //position: "absolute",
-    //top: 500,
-    //right: 30,
+    position: "absolute",
 
     width: 80,
     backgroundColor: "rgba(0, 0, 0, 0.5)",

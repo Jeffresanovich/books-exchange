@@ -17,7 +17,7 @@ import DescriptionComponent from "../../components/BookDetailScreenComponents/De
 //Styles
 import { flex, themeColors } from "../../theme/commonStyles";
 
-const BookDetailScreen = ({ route }) => {
+const BookDetailScreen = ({ navigation, route }) => {
   const { book } = route.params;
 
   return (
@@ -41,6 +41,15 @@ const BookDetailScreen = ({ route }) => {
           <Pressable style={[styles.button, styles.buyButton]}>
             <MaterialCommunityIcons name='book-lock' size={50} color='white' />
             <Text style={styles.buttonText}>RESERVAR</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.button, styles.buyButton]}
+            onPress={() =>
+              navigation.navigate("BookRegisterScreen", { book: book })
+            }
+          >
+            <MaterialCommunityIcons name='book' size={50} color='white' />
+            <Text style={styles.buttonText}>EDITAR</Text>
           </Pressable>
         </View>
       </ScrollView>

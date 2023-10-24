@@ -7,16 +7,34 @@ export const bookApi = createApi({
     baseUrl: base_url,
   }),
   endpoints: (builder) => ({
+    //ReadAllBook
     getAllBooks: builder.query({
       query: () => `books.json`,
     }),
 
     //Create book
-    putBook: builder.mutation({
+    postBook: builder.mutation({
       query: (body) => ({
         url: `books.json`,
         method: "POST",
         body: body,
+      }),
+    }),
+
+    //Update Book
+    patchBook: builder.mutation({
+      query: ([bookKey, body]) => ({
+        url: `books/${bookKey}.json`,
+        method: "PATCH",
+        body: body,
+      }),
+    }),
+
+    //Delete Book
+    deleteBook: builder.mutation({
+      query: (bookKey) => ({
+        url: `books/${bookKey}.json`,
+        method: "DELETE",
       }),
     }),
 
@@ -54,9 +72,11 @@ export const bookApi = createApi({
 });
 
 export const {
+  //BOOKS
   useGetAllBooksQuery,
-  usePutBookMutation,
-
+  usePostBookMutation,
+  usePatchBookMutation,
+  useDeleteBookMutation,
   //USERS
   useGetUserByUidQuery,
   usePutUserMutation,

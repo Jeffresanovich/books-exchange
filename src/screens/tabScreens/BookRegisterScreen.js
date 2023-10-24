@@ -17,41 +17,54 @@ import { flex, border } from "../../theme/commonStyles";
 import * as ImagePicker from "expo-image-picker";
 
 //Services
-import { usePutBookMutation } from "../../services/bookApi";
+import {
+  usePostBookMutation,
+  usePatchBookMutation,
+  useDeleteBookMutation,
+} from "../../services/bookApi";
 
-//Redux
-import { useSelector } from "react-redux";
+const BookRegisterScreen = ({ navigation, route }) => {
+  const { book } = route.params;
 
-const BookRegisterScreen = ({ navigation }) => {
-  const [putBook] = usePutBookMutation();
+  const [postBook] = usePostBookMutation();
+  const [patchBook] = usePatchBookMutation();
+  const [deleteBook] = useDeleteBookMutation();
 
-  const [title, setTitle] = useState("");
-  const [longTitle, setLongTitle] = useState("");
-  const [sinopsis, setSinopsis] = useState("");
-  const [subjects, setSubjects] = useState("");
-  const [page, setPage] = useState(0);
-  const [image, setImage] = useState(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBO_kS5HnUUUdZ_nGIrCRkqLisodCiFiCjSlFyinAvUUYNPGxIg8zBX1ReqMdMBbPMjME&usqp=CAU"
+  const [title, setTitle] = useState(book.book_data.title);
+  const [longTitle, setLongTitle] = useState(book.book_data.longTitle);
+  const [sinopsis, setSinopsis] = useState(book.book_data.sinopsis);
+  const [subjects, setSubjects] = useState(book.book_data.subjects);
+  const [page, setPage] = useState(book.book_data.page);
+  const [image, setImage] = useState(book.book_data.image);
+  const [edition, setEdition] = useState(book.book_data.edition);
+  const [publishedDate, setPublishedDate] = useState(
+    book.book_data.publishedDate
   );
-  const [edition, setEdition] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState(book.book_data.author);
 
-  const handleSubmit = () => {
-    putBook({
-      book_data: {
-        title,
-        longTitle,
-        sinopsis,
-        subjects,
-        page,
-        image,
-        edition,
-        publishedDate,
-        author,
-      },
-    });
-
+  const formBook = {
+    book_data: {
+      title,
+      longTitle,
+      sinopsis,
+      subjects,
+      page,
+      image,
+      edition,
+      publishedDate,
+      author,
+    },
+  };
+  const handleCreate = () => {
+    postBook(formBook);
+    navigation.navigate("LibraryScreen");
+  };
+  const handleUpdate = () => {
+    patchBook([book.key, formBook]);
+    navigation.navigate("LibraryScreen");
+  };
+  const handleDelete = () => {
+    deleteBook(book.key);
     navigation.navigate("LibraryScreen");
   };
 
@@ -88,7 +101,6 @@ const BookRegisterScreen = ({ navigation }) => {
     if (!result.canceled) {
       await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     }
-    //refetch();
   };
 
   return (
@@ -162,9 +174,20 @@ const BookRegisterScreen = ({ navigation }) => {
           value={sinopsis}
           onChangeText={setSinopsis}
         />
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Cargar Libro</Text>
-        </TouchableOpacity>
+        {!!book.key ? (
+          <>
+            <TouchableOpacity style={styles.button} onPress={handleUpdate}>
+              <Text style={styles.buttonText}>Actualizar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleDelete}>
+              <Text style={styles.buttonText}>Borrar</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={handleCreate}>
+            <Text style={styles.buttonText}>Cargar</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   );

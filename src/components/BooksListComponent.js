@@ -2,12 +2,12 @@ import { StyleSheet, View, FlatList } from "react-native";
 
 import BookItemComponent from "./BookItemComponent";
 
-const BooksListComponent = ({ navigation, booksDB }) => {
+const BooksListComponent = ({ navigation, books }) => {
   return (
     <View>
       <FlatList
-        data={booksDB}
-        keyExtractor={booksDB.id}
+        data={books}
+        keyExtractor={books.id}
         renderItem={({ item }) => (
           <BookItemComponent book={item} navigation={navigation} />
         )}
