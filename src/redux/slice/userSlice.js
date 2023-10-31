@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import useConvertDataResponse from "../../hooks/useConvertDataResponse";
 
 const initialState = {
   id: null,
   user: {},
+  email: "",
 };
 
 const userSlice = createSlice({
@@ -14,7 +16,7 @@ const userSlice = createSlice({
     },
 
     setUser: (state, action) => {
-      state.user = action.payload;
+      state.user = useConvertDataResponse(action.payload)[0];
     },
 
     clearUser: (state) => {

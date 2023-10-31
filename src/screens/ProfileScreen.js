@@ -10,10 +10,6 @@ import {
   Alert,
 } from "react-native";
 
-//Redux
-import { useDispatch } from "react-redux";
-import { clearUser } from "../redux/slice/userSlice";
-
 //Firebase
 import { firebase_auth } from "../firebase/authFirebase";
 import { signOut } from "firebase/auth";
@@ -32,7 +28,8 @@ import {
 } from "../services/bookApi";
 
 //Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUser, setUser } from "../redux/slice/userSlice";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -40,10 +37,6 @@ const ProfileScreen = () => {
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
   const [editVisible, setEditVisible] = useState(false);
   const [patchUser] = usePatchUserMutation();
-
-  const handleEditImage = () => {
-    setEditVisible(true);
-  };
 
   const handleOpenCam = async () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -84,6 +77,7 @@ const ProfileScreen = () => {
       ]);
     }
     refetch();
+    dispatch(setUser(data));
   };
 
   const handleSignOut = () => {

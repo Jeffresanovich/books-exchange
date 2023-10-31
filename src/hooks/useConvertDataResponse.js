@@ -5,12 +5,12 @@
  * @param {Object} data Data (object) like response from realtime database.
  * @param {Function} setStateCallback callBack where the convert info is saved.
  */
-const useConvertDataResponse = (data, setStateCallback) => {
+const useConvertDataResponse = (data) => {
   const finalArray = [];
   for (const key in data) {
     finalArray.push({ ...data[key], key });
   }
-  setStateCallback(finalArray);
+  return finalArray;
 };
 
 export default useConvertDataResponse;
