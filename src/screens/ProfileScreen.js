@@ -36,7 +36,7 @@ import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.userSlice.userId);
+  const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
   const [editVisible, setEditVisible] = useState(false);
   const [patchUser] = usePatchUserMutation();
