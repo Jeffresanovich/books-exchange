@@ -25,15 +25,15 @@ const LibraryScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const books = useSelector((state) => state.bookSlice.allBooks);
-  const bookInizializatedParams = useSelector((state) => state.bookSlice.book);
+  const bookInizializatedParams = useSelector(
+    (state) => state.bookSlice.bookInizializatedParams
+  );
 
   const { data, isLoading } = useGetAllBooksQuery();
 
-  if (!isLoading)
-    //console.log("LIBRARY SCREEN: ", data);
-    useEffect(() => {
-      dispatch(setAllBooks(data));
-    }, [data]);
+  useEffect(() => {
+    dispatch(setAllBooks(data));
+  }, [data]);
 
   return (
     <View style={styles.container}>

@@ -7,6 +7,7 @@ export const bookApi = createApi({
     baseUrl: base_url,
   }),
   endpoints: (builder) => ({
+    //*********    BOOK CRUD    **********
     //ReadAllBook
     getAllBooks: builder.query({
       query: () => `books.json`,
@@ -38,6 +39,37 @@ export const bookApi = createApi({
       }),
     }),
 
+    //*********    TRANSACTION CILCE    **********
+    //Share book button:
+    patchSharingBook: builder.mutation({
+      query: (bookKey) => ({
+        url: `books/${bookKey}/transaction.json/`,
+        method: "PATCH",
+        body: { sharingUserId: "" },
+      }),
+    }),
+
+    //Get book button:
+    patchGetBook: builder.mutation({
+      query: ([bookKey, userId]) => ({
+        url: `books/${bookKey}/transaction.json/`,
+        method: "PATCH",
+        body: { sharingUserId: userId },
+      }),
+    }),
+
+    //Succesful Transaction Button:
+    patchSuccesfulTransaction: builder.mutation({
+      query: ([bookKey, sharingUserId]) => ({
+        url: `books/${bookKey}/transaction/.json/`,
+        method: "PATCH",
+        body: {
+          currentUserId: sharingUserId,
+        },
+      }),
+    }),
+
+    //*********    USER CRUD    **********
     //Read user
     getUserByUid: builder.query({
       query: (userId) => `users/${userId}.json`,
@@ -60,6 +92,7 @@ export const bookApi = createApi({
         body: body,
       }),
     }),
+
     //"Delete" User
     deleteUser: builder.mutation({
       query: (userId) => ({
@@ -77,6 +110,10 @@ export const {
   usePostBookMutation,
   usePatchBookMutation,
   useDeleteBookMutation,
+  //TRANSACTION
+  usePatchSharingBookMutation,
+  usePatchGetBookMutation,
+  usePatchSuccesfulTransactionMutation,
   //USERS
   useGetUserByUidQuery,
   usePutUserMutation,

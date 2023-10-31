@@ -1,16 +1,15 @@
 /**
- * This custom hook get the data (object) from firebase, add the firebase key
- * and save then in a new object.
- * Then save the new object (data with firebase key) in an array state callback.
+ * This custom hook slice the data (object) from firebase and the firebase key
+ * then save then together in a new object returned an array.
  * @param {Object} data Data (object) like response from realtime database.
- * @param {Function} setStateCallback callBack where the convert info is saved.
+ * @returns Return an array
  */
 const useConvertDataResponse = (data) => {
-  const finalArray = [];
+  const convertArray = [];
   for (const key in data) {
-    finalArray.push({ ...data[key], key });
+    convertArray.push({ ...data[key], key });
   }
-  return finalArray;
+  return convertArray;
 };
 
 export default useConvertDataResponse;

@@ -25,7 +25,7 @@ import {
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
 
 const BookRegisterScreen = ({ navigation, route }) => {
@@ -33,58 +33,56 @@ const BookRegisterScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
-  const { data, isLoading, refetch } = useGetAllBooksQuery();
+  const { data, refetch } = useGetAllBooksQuery();
 
   const [postBook] = usePostBookMutation();
   const [patchBook] = usePatchBookMutation();
   const [deleteBook] = useDeleteBookMutation();
 
+  //Book Data Form
   const [title, setTitle] = useState(book.book_data.title);
   const [longTitle, setLongTitle] = useState(book.book_data.longTitle);
   const [sinopsis, setSinopsis] = useState(book.book_data.sinopsis);
   const [subjects, setSubjects] = useState(book.book_data.subjects);
   const [page, setPage] = useState(book.book_data.page);
   const [image, setImage] = useState(book.book_data.image);
-  const [edition, setEdition] = useState(book.book_data.edition);
-  const [publishedDate, setPublishedDate] = useState(
-    book.book_data.publishedDate
-  );
   const [author, setAuthor] = useState(book.book_data.author);
+
+  const userId = useSelector((state) => state.userSlice.id);
 
   const formBook = {
     book_data: {
       title,
-      longTitle,
       sinopsis,
       subjects,
       page,
       image,
-      edition,
-      publishedDate,
       author,
+      ownerUserId: userId,
     },
     transaction: {
-      currentUser: "",
-      sharing: "",
+      currentUserId: userId,
+      sharingUserId: userId,
     },
   };
+
   const handleCreate = () => {
     postBook(formBook);
-    navigation.navigate("LibraryScreen");
     refetch();
     dispatch(setAllBooks(data));
+    navigation.navigate("LibraryScreen");
   };
   const handleUpdate = () => {
     patchBook([book.key, formBook]);
-    navigation.navigate("LibraryScreen");
     refetch();
     dispatch(setAllBooks(data));
+    navigation.navigate("LibraryScreen");
   };
   const handleDelete = () => {
     deleteBook(book.key);
-    navigation.navigate("LibraryScreen");
     refetch();
     dispatch(setAllBooks(data));
+    navigation.navigate("LibraryScreen");
   };
 
   const handleOpenCam = async () => {
@@ -170,20 +168,8 @@ const BookRegisterScreen = ({ navigation, route }) => {
         <TextInput
           style={styles.input}
           placeholder='Pagina'
-          value={page.toString()}
+          value={page}
           onChangeText={setPage}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Edicion'
-          value={edition}
-          onChangeText={setEdition}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Autor'
-          value={publishedDate}
-          onChangeText={setPublishedDate}
         />
 
         <TextInput
