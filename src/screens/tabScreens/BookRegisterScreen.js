@@ -170,7 +170,7 @@ const BookRegisterScreen = ({ navigation, route }) => {
         <TextInput
           style={styles.input}
           placeholder='Pagina'
-          value={page}
+          value={page.toString()}
           onChangeText={setPage}
         />
         <TextInput

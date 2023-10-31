@@ -9,7 +9,7 @@ const initialState = {
       longTitle: "",
       sinopsis: "",
       subjects: "",
-      page: 0,
+      page: "",
       image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
       edition: "",
       publishedDate: "",

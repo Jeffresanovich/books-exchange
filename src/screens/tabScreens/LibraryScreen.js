@@ -23,14 +23,17 @@ const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
 
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetAllBooksQuery();
 
   const books = useSelector((state) => state.bookSlice.allBooks);
   const bookInizializatedParams = useSelector((state) => state.bookSlice.book);
 
-  useEffect(() => {
-    dispatch(setAllBooks(data));
-  }, [data]);
+  const { data, isLoading } = useGetAllBooksQuery();
+
+  if (!isLoading)
+    //console.log("LIBRARY SCREEN: ", data);
+    useEffect(() => {
+      dispatch(setAllBooks(data));
+    }, [data]);
 
   return (
     <View style={styles.container}>
