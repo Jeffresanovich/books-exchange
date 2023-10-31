@@ -13,7 +13,7 @@ import { firebase_auth } from "../../firebase/authFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
-import { setUserId } from "../../redux/slice/userSlice";
+import { setUser } from "../../redux/slice/userSlice";
 
 import { themeColors } from "../../theme/commonStyles";
 import { errorMessage } from "../../data/errorMessage";
@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         password
       );
 
-      dispatch(setUserId(response.user.uid));
+      dispatch(setUser(response.user.uid));
 
       setIsLoading(false);
     } catch (error) {
