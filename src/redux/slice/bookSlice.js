@@ -1,21 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//RTK
-import { useGetAllBooksQuery } from "../../services/bookApi";
+//import { useGetAllBooksQuery } from "../../services/bookApi";
 
 const initialState = {
   book: {
-    title: "",
-    longTitle: "",
-    sinopsis: "",
-    subjects: "",
-    page: 0,
-    image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
-    edition: "",
-    publishedDate: "",
-    author: "",
+    book_data: {
+      title: "",
+      longTitle: "",
+      sinopsis: "",
+      subjects: "",
+      page: 0,
+      image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
+      edition: "",
+      publishedDate: "",
+      author: "",
+    },
+    key: null,
   },
-  getAllBooks: [],
+  allBooks: [],
   isLoading: true,
   textSearch: null,
   booksFilterByTitle: [],
@@ -26,16 +28,18 @@ const bookSlice = createSlice({
   name: "book",
   initialState,
   reducers: {
-    getAllBooks: (state) => {
-      console.log(data, null, "");
-      state.books = //convertDataResponse(data);
-        state.isLoading = isLoading;
-    },
-    setBook: (state, action) => {
-      state.book = action.payload;
+    setAllBooks: (state, action) => {
+      const finalArray = [];
+      for (const key in action.payload) {
+        finalArray.push({ ...action.payload[key], key });
+      }
 
-      console.log(state.book);
+      state.allBooks = finalArray;
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+
     /*
     setBooksSearch: (state, action) => {
       state.textSearch = action.payload;
@@ -46,23 +50,23 @@ const bookSlice = createSlice({
     },
     */
   },
+  /*
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDataFromAPI.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchDataFromAPI.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchDataFromAPI.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
+  },*/
 });
 
-/**
- * This custom hook get the data (object) from firebase, add the firebase key
- * and save then in a new object.
- * Then save the new object (data with firebase key) in an array state callback.
- * @param {Object} data Data (object) like response from realtime database.
- * @param {Function} setStateCallback callBack where the convert info is saved.
- */
-const convertDataResponse = (data) => {
-  const finalArray = [];
-  for (const key in data) {
-    finalArray.push({ ...data[key], key });
-  }
-  return finalArray;
-};
-
-export const { setBook, getAllBooks } = bookSlice.actions;
+export const { setAllBooks, setIsLoading } = bookSlice.actions;
 
 export default bookSlice.reducer;

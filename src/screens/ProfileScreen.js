@@ -12,7 +12,7 @@ import {
 
 //Redux
 import { useDispatch } from "react-redux";
-import { clearUser } from "../redux/slice/authSlice";
+import { clearUser } from "../redux/slice/userSlice";
 
 //Firebase
 import { firebase_auth } from "../firebase/authFirebase";
@@ -36,7 +36,7 @@ import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.authSlice.userId);
+  const userId = useSelector((state) => state.userSlice.userId);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
   const [editVisible, setEditVisible] = useState(false);
   const [patchUser] = usePatchUserMutation();

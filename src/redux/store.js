@@ -3,7 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 
 //Sleces
 import bookSlice from "./slice/bookSlice";
-import authSlice from "./slice/authSlice";
+import userSlice from "./slice/userSlice";
 
 //Services
 import { bookApi } from "../services/bookApi";
@@ -11,7 +11,7 @@ import { bookApi } from "../services/bookApi";
 export const store = configureStore({
   reducer: {
     bookSlice,
-    authSlice,
+    userSlice,
     [bookApi.reducerPath]: bookApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

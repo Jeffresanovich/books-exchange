@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -23,8 +23,17 @@ import {
   useDeleteBookMutation,
 } from "../../services/bookApi";
 
+import { useGetAllBooksQuery } from "../../services/bookApi";
+
+import { useDispatch } from "react-redux";
+import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
+
 const BookRegisterScreen = ({ navigation, route }) => {
   const { book } = route.params;
+
+  const dispatch = useDispatch();
+
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
 
   const [postBook] = usePostBookMutation();
   const [patchBook] = usePatchBookMutation();
@@ -54,18 +63,28 @@ const BookRegisterScreen = ({ navigation, route }) => {
       publishedDate,
       author,
     },
+    transaction: {
+      currentUser: "",
+      sharing: "",
+    },
   };
   const handleCreate = () => {
     postBook(formBook);
     navigation.navigate("LibraryScreen");
+    refetch();
+    dispatch(setAllBooks(data));
   };
   const handleUpdate = () => {
     patchBook([book.key, formBook]);
     navigation.navigate("LibraryScreen");
+    refetch();
+    dispatch(setAllBooks(data));
   };
   const handleDelete = () => {
     deleteBook(book.key);
     navigation.navigate("LibraryScreen");
+    refetch();
+    dispatch(setAllBooks(data));
   };
 
   const handleOpenCam = async () => {

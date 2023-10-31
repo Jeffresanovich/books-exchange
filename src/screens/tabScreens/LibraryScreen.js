@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import {
   StyleSheet,
@@ -14,41 +14,22 @@ import { MaterialIcons } from "@expo/vector-icons";
 import BooksListComponent from "../../components/BooksListComponent";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
-import useConvertDataResponse from "../../hooks/useConvertDataResponse";
-
-import { getDatabase, ref, onValue } from "firebase/database";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { getAllBooks } from "../../redux/slice/bookSlice";
+import { setAllBooks } from "../../redux/slice/bookSlice";
 
 const LibraryScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const { data, isLoading, refetch } = useGetAllBooksQuery();
   const { height, width } = useWindowDimensions();
-  const [books, setBooks] = useState([]);
-  const bookInizializatedParams = {
-    book_data: {
-      title: "",
-      longTitle: "",
-      sinopsis: "",
-      subjects: "",
-      page: 0,
-      image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
-      publishedDate: "",
-      author: "",
-    },
-    key: null,
-  };
 
-  const db = getDatabase();
-  const starCountRef = ref(db, "books");
-  onValue(starCountRef, () => {
-    refetch();
-  });
+  const dispatch = useDispatch();
+  const { data, isLoading } = useGetAllBooksQuery();
+
+  const books = useSelector((state) => state.bookSlice.allBooks);
+  const bookInizializatedParams = useSelector((state) => state.bookSlice.book);
 
   useEffect(() => {
-    useConvertDataResponse(data, setBooks);
+    dispatch(setAllBooks(data));
   }, [data]);
 
   return (
