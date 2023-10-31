@@ -4,9 +4,9 @@ const initialState = {
   bookInizializatedParams: {
     book_data: {
       title: "",
-      sinopsis: "",
+      synopsis: "",
       subjects: "",
-      page: "",
+      pages: 0,
       image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
       author: "",
       ownerUserId: "",

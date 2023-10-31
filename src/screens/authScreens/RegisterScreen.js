@@ -34,12 +34,16 @@ const RegisterScreen = ({ navigation }) => {
       );
 
       const userBody = {
-        first_name: firstName,
-        last_name: lastName,
+        firstName,
+        lastName,
         email: response.user.email,
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
         isActive: true,
+        exchangePoint: {
+          latitude: 0,
+          longitude: 0,
+        },
       };
 
       putUser([response.user.uid, userBody]);

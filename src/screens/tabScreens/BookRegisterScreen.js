@@ -40,24 +40,23 @@ const BookRegisterScreen = ({ navigation, route }) => {
   const [deleteBook] = useDeleteBookMutation();
 
   //Book Data Form
-  const [title, setTitle] = useState(book.book_data.title);
-  const [longTitle, setLongTitle] = useState(book.book_data.longTitle);
-  const [sinopsis, setSinopsis] = useState(book.book_data.sinopsis);
-  const [subjects, setSubjects] = useState(book.book_data.subjects);
-  const [page, setPage] = useState(book.book_data.page);
   const [image, setImage] = useState(book.book_data.image);
+  const [title, setTitle] = useState(book.book_data.title);
   const [author, setAuthor] = useState(book.book_data.author);
+  const [subjects, setSubjects] = useState(book.book_data.subjects);
+  const [pages, setPages] = useState(book.book_data.pages);
+  const [synopsis, setSynopsis] = useState(book.book_data.synopsis);
 
   const userId = useSelector((state) => state.userSlice.id);
 
   const formBook = {
     book_data: {
-      title,
-      sinopsis,
-      subjects,
-      page,
       image,
+      title,
       author,
+      subjects,
+      pages: parseInt(pages),
+      synopsis,
       ownerUserId: userId,
     },
     transaction: {
@@ -147,12 +146,7 @@ const BookRegisterScreen = ({ navigation, route }) => {
           value={title}
           onChangeText={setTitle}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Subtitulo'
-          value={longTitle}
-          onChangeText={setLongTitle}
-        />
+
         <TextInput
           style={styles.input}
           placeholder='Autor'
@@ -168,16 +162,16 @@ const BookRegisterScreen = ({ navigation, route }) => {
         <TextInput
           style={styles.input}
           placeholder='Pagina'
-          value={page}
-          onChangeText={setPage}
+          value={pages.toString()}
+          onChangeText={setPages}
         />
 
         <TextInput
           style={[styles.input, { height: 200 }]}
           multiline
-          placeholder='Sinopsis'
-          value={sinopsis}
-          onChangeText={setSinopsis}
+          placeholder='Resumen'
+          value={synopsis}
+          onChangeText={setSynopsis}
         />
         {!!book.key ? (
           <>

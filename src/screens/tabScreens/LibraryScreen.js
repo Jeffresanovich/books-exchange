@@ -29,9 +29,14 @@ const LibraryScreen = ({ navigation }) => {
     (state) => state.bookSlice.bookInizializatedParams
   );
 
-  const { data, isLoading } = useGetAllBooksQuery();
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
 
   useEffect(() => {
+    dispatch(setAllBooks(data));
+  }, []);
+
+  useEffect(() => {
+    refetch();
     dispatch(setAllBooks(data));
   }, [data]);
 
