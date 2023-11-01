@@ -124,7 +124,7 @@ const ProfileScreen = () => {
             )}
           </View>
           <Text style={styles.username}>
-            {data.first_name} {data.last_name}
+            {data.firstName} {data.lastName}
           </Text>
           <Text style={styles.email}>{data.email}</Text>
 

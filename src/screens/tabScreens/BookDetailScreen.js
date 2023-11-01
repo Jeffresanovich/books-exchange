@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,8 +20,44 @@ import DescriptionComponent from "../../components/BookDetailScreenComponents/De
 //Styles
 import { flex, themeColors } from "../../theme/commonStyles";
 
+//Services
+import { useDeleteBookMutation } from "../../services/bookApi";
+
+import { useGetAllBooksQuery } from "../../services/bookApi";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
+
 const BookDetailScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+
   const { book } = route.params;
+  const { image, title, synopsis, subjects, pages, author, ownerUserId } =
+    book.book_data;
+  const { currentUserId, sharingUserId } = book.transaction;
+  const userId = useSelector((state) => state.userSlice.id);
+
+  const [editButtons, setEditButtons] = useState(false);
+
+  useEffect(() => {
+    if (
+      ownerUserId === userId &&
+      currentUserId === userId &&
+      sharingUserId === userId
+    )
+      setEditButtons(true);
+  }, []);
+
+  const [deleteBook] = useDeleteBookMutation();
+
+  const { data, refetch } = useGetAllBooksQuery();
+
+  const handleDelete = () => {
+    deleteBook(book.key);
+    refetch();
+    dispatch(setAllBooks(data));
+    navigation.navigate("LibraryScreen");
+  };
 
   return (
     <SafeAreaView>
@@ -29,34 +67,64 @@ const BookDetailScreen = ({ navigation, route }) => {
             <Image
               style={styles.image}
               source={{
-                uri: book.book_data.image,
+                uri: image,
               }}
             />
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.titleRatingStockContainer}>
-              <TitleComponent title={book.book_data.title} />
+              <TitleComponent title={title} />
             </View>
           </View>
-          <DescriptionComponent description={book.book_data.long_title} />
+          <DescriptionComponent description={synopsis} />
           <View style={styles.buttonContainer}>
-            <Pressable style={[styles.button, styles.buyButton]}>
-              <MaterialCommunityIcons
-                name='book-lock'
-                size={50}
-                color='white'
-              />
-              <Text style={styles.buttonText}>RESERVAR</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buyButton]}
-              onPress={() =>
-                navigation.navigate("BookRegisterScreen", { book: book })
-              }
-            >
-              <MaterialCommunityIcons name='book' size={50} color='white' />
-              <Text style={styles.buttonText}>EDITAR</Text>
-            </Pressable>
+            <View style={styles.transactionButtonContainer}>
+              {sharingUserId === "" && (
+                <Pressable style={[styles.button, styles.buyButton]}>
+                  <MaterialCommunityIcons
+                    name='book-lock'
+                    size={50}
+                    color='white'
+                  />
+                  <Text style={styles.buttonText}>PEDIR</Text>
+                </Pressable>
+              )}
+              {currentUserId === sharingUserId && (
+                <Pressable
+                  style={[styles.button, styles.buyButton]}
+                  onPress={() =>
+                    navigation.navigate("BookRegisterScreen", { book: book })
+                  }
+                >
+                  <MaterialCommunityIcons name='book' size={50} color='white' />
+                  <Text style={styles.buttonText}>COMPARTIR</Text>
+                </Pressable>
+              )}
+            </View>
+            {editButtons && (
+              <View style={styles.editButtonContainer}>
+                <Pressable
+                  style={[styles.button, styles.buyButton]}
+                  onPress={() =>
+                    navigation.navigate("BookRegisterScreen", { book: book })
+                  }
+                >
+                  <MaterialCommunityIcons
+                    name='book-lock'
+                    size={50}
+                    color='white'
+                  />
+                  <Text style={styles.buttonText}>EDITAR</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buyButton]}
+                  onPress={() => handleDelete()}
+                >
+                  <MaterialCommunityIcons name='book' size={50} color='white' />
+                  <Text style={styles.buttonText}>BORRAR</Text>
+                </Pressable>
+              </View>
+            )}
           </View>
         </ScrollView>
       </View>
@@ -106,6 +174,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginEnd: 10,
   },
+  /*
+  transactionButtonContainer: {
+    ...flex("space-evenly"),
+  },
+  editButtonContainer: {
+    ...flex("space-evenly"),
+  },
+  */
   buttonContainer: {
     marginVertical: 10,
     alignItems: "center",

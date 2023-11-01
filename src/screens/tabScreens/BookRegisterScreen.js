@@ -20,7 +20,6 @@ import * as ImagePicker from "expo-image-picker";
 import {
   usePostBookMutation,
   usePatchBookMutation,
-  useDeleteBookMutation,
 } from "../../services/bookApi";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
@@ -37,7 +36,6 @@ const BookRegisterScreen = ({ navigation, route }) => {
 
   const [postBook] = usePostBookMutation();
   const [patchBook] = usePatchBookMutation();
-  const [deleteBook] = useDeleteBookMutation();
 
   //Book Data Form
   const [image, setImage] = useState(book.book_data.image);
@@ -73,12 +71,6 @@ const BookRegisterScreen = ({ navigation, route }) => {
   };
   const handleUpdate = () => {
     patchBook([book.key, formBook]);
-    refetch();
-    dispatch(setAllBooks(data));
-    navigation.navigate("LibraryScreen");
-  };
-  const handleDelete = () => {
-    deleteBook(book.key);
     refetch();
     dispatch(setAllBooks(data));
     navigation.navigate("LibraryScreen");
@@ -174,14 +166,9 @@ const BookRegisterScreen = ({ navigation, route }) => {
           onChangeText={setSynopsis}
         />
         {!!book.key ? (
-          <>
-            <TouchableOpacity style={styles.button} onPress={handleUpdate}>
-              <Text style={styles.buttonText}>Actualizar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleDelete}>
-              <Text style={styles.buttonText}>Borrar</Text>
-            </TouchableOpacity>
-          </>
+          <TouchableOpacity style={styles.button} onPress={handleUpdate}>
+            <Text style={styles.buttonText}>Actualizar</Text>
+          </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleCreate}>
             <Text style={styles.buttonText}>Cargar</Text>
