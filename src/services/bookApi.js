@@ -13,6 +13,12 @@ export const bookApi = createApi({
       query: () => `books.json`,
     }),
 
+    //Read Book by Title
+    getBooksByTitle: builder.query({
+      query: (title) =>
+        `books.json?orderBy="book_data/title"&startAt="${title}"`,
+    }),
+
     //Create book
     postBook: builder.mutation({
       query: (body) => ({
@@ -107,6 +113,7 @@ export const bookApi = createApi({
 export const {
   //BOOKS
   useGetAllBooksQuery,
+  useGetBooksByTitleQuery,
   usePostBookMutation,
   usePatchBookMutation,
   useDeleteBookMutation,

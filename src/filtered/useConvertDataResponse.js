@@ -12,4 +12,13 @@ const useConvertDataResponse = (data) => {
   return convertArray;
 };
 
+export const useFilteredSharingUserId = (data) => {
+  const convertArray = useConvertDataResponse(data);
+  const filteredSharingUserId = convertArray.filter((item) =>
+    item.transaction.sharingUserId.includes("")
+  );
+
+  return filteredSharingUserId;
+};
+
 export default useConvertDataResponse;

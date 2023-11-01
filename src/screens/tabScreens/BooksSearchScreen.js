@@ -1,48 +1,58 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, TextInput, StyleSheet, ActivityIndicator } from "react-native";
 
-const data = [
-  { id: "1", name: "Resultado 1" },
-  { id: "2", name: "Resultado 2" },
-  { id: "3", name: "Resultado 3" },
-  // Agrega más datos aquí
-];
-const BooksSearchScreen = () => {
-  const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+import BooksListComponent from "../../components/BooksListComponent";
 
-  const handleSearch = (text) => {
-    const filteredData = data.filter((item) =>
-      item.name.toLowerCase().includes(text.toLowerCase())
-    );
-    setSearchResults(filteredData);
-    setQuery(text);
-  };
+import { useGetAllBooksQuery } from "../../services/bookApi";
+import { useSelector, useDispatch } from "react-redux";
+import { setAllBooks } from "../../redux/slice/bookSlice";
+
+import { filteredSharingBooksByTitle } from "../../filtered/filteredSharingBooksByTitle";
+import { filteredBooksToShared } from "../../filtered/filteredBooksToShared";
+
+const BooksSearchScreen = ({ navigation }) => {
+  //Se guardan todos todos los libros en el estado global
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
+  const dispatch = useDispatch();
+
+  //Se traer el usuario actual y todos los libros guardados en el estado global
+  const userId = useSelector((state) => state.userSlice.id);
+  const allBooks = useSelector((state) => state.bookSlice.allBooks);
+
+  //Se guarda el texto y el resultado de la busqueda
+  const [text, setText] = useState("");
+  const [sharingBooks, setSharingBooks] = useState([]);
+  const [searchBooks, setSearchBooks] = useState([]);
+
+  //Se "actualiza" el estado global de todos lo libros
+  useEffect(() => {
+    dispatch(setAllBooks(data));
+  }, []);
+
+  useEffect(() => {
+    refetch();
+    filteredSharingBooksByTitle(allBooks, text, userId, setSearchBooks);
+    filteredBooksToShared(allBooks, userId, setSharingBooks);
+  }, [text]);
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder='Buscar...'
-        onChangeText={handleSearch}
-        value={query}
+        value={text}
+        onChangeText={setText}
       />
-      <FlatList
-        data={searchResults}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.resultItem}>
-            <Text>{item.name}</Text>
-          </TouchableOpacity>
+      <View style={styles.container}>
+        {isLoading ? (
+          <ActivityIndicator size='large' color='grey' />
+        ) : (
+          <BooksListComponent
+            navigation={navigation}
+            books={text === "" ? sharingBooks : searchBooks}
+          />
         )}
-      />
+      </View>
     </View>
   );
 };

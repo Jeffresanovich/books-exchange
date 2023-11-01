@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   StyleSheet,
@@ -19,26 +19,36 @@ import { useGetAllBooksQuery } from "../../services/bookApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllBooks } from "../../redux/slice/bookSlice";
 
+import { filteredBooksReading } from "../../filtered/filteredBooksReading";
+import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrentUserBooksToShared";
+
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
 
+  //Se guardan todos todos los libros en el estado global
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
   const dispatch = useDispatch();
 
-  const books = useSelector((state) => state.bookSlice.allBooks);
+  //Se traer el usuario actual y todos los libros guardados en el estado global
+  const allBooks = useSelector((state) => state.bookSlice.allBooks);
+  const userId = useSelector((state) => state.userSlice.id);
   const bookInizializatedParams = useSelector(
     (state) => state.bookSlice.bookInizializatedParams
   );
 
-  const { data, isLoading, refetch } = useGetAllBooksQuery();
+  const [booksReading, setBooksReading] = useState([]);
+  const [booksToShared, setBooksToShared] = useState([]);
 
   useEffect(() => {
     dispatch(setAllBooks(data));
-  }, []);
+    filteredBooksReading(allBooks, userId, setBooksReading);
+    filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
+  }, [data]);
 
-  useEffect(() => {
+  const handleScroll = () => {
     refetch();
     dispatch(setAllBooks(data));
-  }, [data]);
+  };
 
   return (
     <View style={styles.container}>
@@ -46,7 +56,8 @@ const LibraryScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <BooksListComponent navigation={navigation} books={books} />
+          <BooksListComponent navigation={navigation} books={booksReading} />
+          <BooksListComponent navigation={navigation} books={booksToShared} />
           <TouchableOpacity
             style={[styles.button, { top: height - 220, left: width - 100 }]}
             onPress={() =>

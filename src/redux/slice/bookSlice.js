@@ -29,11 +29,11 @@ const bookSlice = createSlice({
   initialState,
   reducers: {
     setAllBooks: (state, action) => {
-      const finalArray = [];
+      const convertArray = [];
       for (const key in action.payload) {
-        finalArray.push({ ...action.payload[key], key });
+        convertArray.push({ ...action.payload[key], key });
       }
-      state.allBooks = finalArray;
+      state.allBooks = convertArray;
     },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
