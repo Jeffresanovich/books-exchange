@@ -47,7 +47,6 @@ const BookDetailScreen = ({ navigation, route }) => {
   const [patchSuccesfulTransaction] = usePatchSuccesfulTransactionMutation();
 
   const { data, refetch } = useGetAllBooksQuery();
-
   const refetchData = () => {
     refetch();
     dispatch(setAllBooks(data));
@@ -133,9 +132,9 @@ const BookDetailScreen = ({ navigation, route }) => {
                   </Pressable>
                 )}
             </View>
-            {ownerUserId === userId &&
-              currentUserId === userId &&
-              sharingUserId === userId && (
+            {currentUserId === userId &&
+              sharingUserId === userId &&
+              ownerUserId === userId && (
                 <View style={styles.editButtonContainer}>
                   <Pressable
                     style={[styles.button, styles.buyButton]}
