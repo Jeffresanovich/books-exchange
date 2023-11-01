@@ -21,9 +21,13 @@ import DescriptionComponent from "../../components/BookDetailScreenComponents/De
 import { flex, themeColors } from "../../theme/commonStyles";
 
 //Services
-import { useDeleteBookMutation } from "../../services/bookApi";
-
-import { useGetAllBooksQuery } from "../../services/bookApi";
+import {
+  useGetAllBooksQuery,
+  usePatchSharingBookMutation,
+  usePatchGetBookMutation,
+  usePatchSuccesfulTransactionMutation,
+  useDeleteBookMutation,
+} from "../../services/bookApi";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
@@ -37,25 +41,37 @@ const BookDetailScreen = ({ navigation, route }) => {
   const { currentUserId, sharingUserId } = book.transaction;
   const userId = useSelector((state) => state.userSlice.id);
 
-  const [editButtons, setEditButtons] = useState(false);
-
-  useEffect(() => {
-    if (
-      ownerUserId === userId &&
-      currentUserId === userId &&
-      sharingUserId === userId
-    )
-      setEditButtons(true);
-  }, []);
-
   const [deleteBook] = useDeleteBookMutation();
+  const [patchSharingBook] = usePatchSharingBookMutation();
+  const [patchGetBook] = usePatchGetBookMutation();
+  const [patchSuccesfulTransaction] = usePatchSuccesfulTransactionMutation();
 
   const { data, refetch } = useGetAllBooksQuery();
 
-  const handleDelete = () => {
-    deleteBook(book.key);
+  const refetchData = () => {
     refetch();
     dispatch(setAllBooks(data));
+  };
+
+  const handleSharingBook = () => {
+    patchSharingBook(book.key);
+    refetchData();
+    navigation.navigate("ExChangeScreen");
+  };
+  const handleGetBook = () => {
+    patchGetBook([book.key, userId]);
+    refetchData();
+    navigation.navigate("ExChangeScreen");
+  };
+  const handleDeliveryBook = () => {
+    patchSuccesfulTransaction([book.key, sharingUserId]);
+    refetchData();
+    navigation.navigate("LibraryScreen");
+  };
+
+  const handleDelete = () => {
+    deleteBook(book.key);
+    refetchData();
     navigation.navigate("LibraryScreen");
   };
 
@@ -80,7 +96,10 @@ const BookDetailScreen = ({ navigation, route }) => {
           <View style={styles.buttonContainer}>
             <View style={styles.transactionButtonContainer}>
               {sharingUserId === "" && (
-                <Pressable style={[styles.button, styles.buyButton]}>
+                <Pressable
+                  style={[styles.button, styles.buyButton]}
+                  onPress={() => handleGetBook()}
+                >
                   <MaterialCommunityIcons
                     name='book-lock'
                     size={50}
@@ -92,39 +111,58 @@ const BookDetailScreen = ({ navigation, route }) => {
               {currentUserId === sharingUserId && (
                 <Pressable
                   style={[styles.button, styles.buyButton]}
-                  onPress={() =>
-                    navigation.navigate("BookRegisterScreen", { book: book })
-                  }
+                  onPress={() => handleSharingBook()}
                 >
                   <MaterialCommunityIcons name='book' size={50} color='white' />
                   <Text style={styles.buttonText}>COMPARTIR</Text>
                 </Pressable>
               )}
+              {currentUserId !== userId &&
+                currentUserId !== sharingUserId &&
+                sharingUserId !== "" && (
+                  <Pressable
+                    style={[styles.button, styles.buyButton]}
+                    onPress={() => handleDeliveryBook()}
+                  >
+                    <MaterialCommunityIcons
+                      name='book'
+                      size={50}
+                      color='white'
+                    />
+                    <Text style={styles.buttonText}>COMPARTIDO</Text>
+                  </Pressable>
+                )}
             </View>
-            {editButtons && (
-              <View style={styles.editButtonContainer}>
-                <Pressable
-                  style={[styles.button, styles.buyButton]}
-                  onPress={() =>
-                    navigation.navigate("BookRegisterScreen", { book: book })
-                  }
-                >
-                  <MaterialCommunityIcons
-                    name='book-lock'
-                    size={50}
-                    color='white'
-                  />
-                  <Text style={styles.buttonText}>EDITAR</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buyButton]}
-                  onPress={() => handleDelete()}
-                >
-                  <MaterialCommunityIcons name='book' size={50} color='white' />
-                  <Text style={styles.buttonText}>BORRAR</Text>
-                </Pressable>
-              </View>
-            )}
+            {ownerUserId === userId &&
+              currentUserId === userId &&
+              sharingUserId === userId && (
+                <View style={styles.editButtonContainer}>
+                  <Pressable
+                    style={[styles.button, styles.buyButton]}
+                    onPress={() =>
+                      navigation.navigate("BookRegisterScreen", { book: book })
+                    }
+                  >
+                    <MaterialCommunityIcons
+                      name='book-lock'
+                      size={50}
+                      color='white'
+                    />
+                    <Text style={styles.buttonText}>EDITAR</Text>
+                  </Pressable>
+                  <Pressable
+                    style={[styles.button, styles.buyButton]}
+                    onPress={() => handleDelete()}
+                  >
+                    <MaterialCommunityIcons
+                      name='book'
+                      size={50}
+                      color='white'
+                    />
+                    <Text style={styles.buttonText}>BORRAR</Text>
+                  </Pressable>
+                </View>
+              )}
           </View>
         </ScrollView>
       </View>
