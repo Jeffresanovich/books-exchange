@@ -1,4 +1,7 @@
-export const filteredBooksUploaded = (allBooks, userId, setCallBack) => {
+import convertDataResponse from "./convertDataResponse";
+
+export const filteredBooksUploaded = (data, userId, setCallBack) => {
+  const allBooks = convertDataResponse(data);
   const filteredByOwnerUserId = allBooks.filter(
     (item) => item.book_data.ownerUserId === userId
   );

@@ -1,4 +1,7 @@
-export const filteredBooksToDeliver = (allBooks, userId, setCallBack) => {
+import convertDataResponse from "./convertDataResponse";
+
+export const filteredBooksToDeliver = (data, userId, setCallBack) => {
+  const allBooks = convertDataResponse(data);
   const filteredCurrentUserId = allBooks.filter(
     (item) => item.transaction.currentUserId === userId
   );

@@ -22,17 +22,10 @@ import {
   usePatchBookMutation,
 } from "../../services/bookApi";
 
-import { useGetAllBooksQuery } from "../../services/bookApi";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
+import { useSelector } from "react-redux";
 
 const BookRegisterScreen = ({ navigation, route }) => {
   const { book } = route.params;
-
-  const dispatch = useDispatch();
-
-  const { data, refetch } = useGetAllBooksQuery();
 
   const [postBook] = usePostBookMutation();
   const [patchBook] = usePatchBookMutation();
@@ -65,14 +58,10 @@ const BookRegisterScreen = ({ navigation, route }) => {
 
   const handleCreate = () => {
     postBook(formBook);
-    refetch();
-    dispatch(setAllBooks(data));
     navigation.navigate("LibraryScreen");
   };
   const handleUpdate = () => {
     patchBook([book.key, formBook]);
-    refetch();
-    dispatch(setAllBooks(data));
     navigation.navigate("LibraryScreen");
   };
 

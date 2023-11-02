@@ -17,26 +17,15 @@ const initialState = {
     },
     key: null,
   },
-  allBooks: [],
-  isLoading: true,
-  textSearch: null,
-  booksFilterByTitle: [],
-  navigation: {},
+  book: {},
 };
 
 const bookSlice = createSlice({
   name: "book",
   initialState,
   reducers: {
-    setAllBooks: (state, action) => {
-      const convertArray = [];
-      for (const key in action.payload) {
-        convertArray.push({ ...action.payload[key], key });
-      }
-      state.allBooks = convertArray;
-    },
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
+    setBook: (state, action) => {
+      state.book = action.payload;
     },
   },
 });

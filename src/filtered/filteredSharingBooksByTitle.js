@@ -1,9 +1,12 @@
+import convertDataResponse from "./convertDataResponse";
+
 export const filteredSharingBooksByTitle = (
-  allBooks,
+  data,
   title,
   userId,
   setCallBack
 ) => {
+  const allBooks = convertDataResponse(data);
   //Filtra por title
   const filterByTitle = allBooks.filter((item) =>
     item.book_data.title.toLowerCase().startsWith(title.toLowerCase())

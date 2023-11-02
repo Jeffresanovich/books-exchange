@@ -17,8 +17,7 @@ import BooksListComponent from "../../components/BooksListComponent";
 import { useGetAllBooksQuery } from "../../services/bookApi";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { setAllBooks } from "../../redux/slice/bookSlice";
+import { useSelector } from "react-redux";
 
 import { filteredBooksToReceive } from "../../filtered/filteredBooksToReceive";
 import { filteredBooksToDeliver } from "../../filtered/filteredBooksToDeliver";
@@ -30,10 +29,8 @@ const ExChangeScreen = ({ navigation }) => {
 
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
-  const dispatch = useDispatch();
 
   //Se traer el usuario actual y todos los libros guardados en el estado global
-  const allBooks = useSelector((state) => state.bookSlice.allBooks);
   const userId = useSelector((state) => state.userSlice.id);
 
   //Se guarda el resultado de los libros filtrados para mostar en las listas
@@ -43,16 +40,14 @@ const ExChangeScreen = ({ navigation }) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    dispatch(setAllBooks(data));
-    filteredBooksToReceive(allBooks, userId, setBooksToReceive);
-    filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
+    filteredBooksToReceive(data, userId, setBooksToReceive);
+    filteredBooksToDeliver(data, userId, setBooksToDeliver);
   }, []);
 
   useEffect(() => {
     refetch();
-    dispatch(setAllBooks(data));
-    filteredBooksToReceive(allBooks, userId, setBooksToReceive);
-    filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
+    filteredBooksToReceive(data, userId, setBooksToReceive);
+    filteredBooksToDeliver(data, userId, setBooksToDeliver);
   }, [isFocused]);
 
   return (

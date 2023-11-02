@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import {
   SafeAreaView,
   StyleSheet,
@@ -22,19 +20,15 @@ import { flex, themeColors } from "../../theme/commonStyles";
 
 //Services
 import {
-  useGetAllBooksQuery,
   usePatchSharingBookMutation,
   usePatchGetBookMutation,
   usePatchSuccesfulTransactionMutation,
   useDeleteBookMutation,
 } from "../../services/bookApi";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setLoad, setAllBooks } from "../../redux/slice/bookSlice";
+import { useSelector } from "react-redux";
 
 const BookDetailScreen = ({ navigation, route }) => {
-  const dispatch = useDispatch();
-
   const { book } = route.params;
   const { image, title, synopsis, subjects, pages, author, ownerUserId } =
     book.book_data;
@@ -46,31 +40,21 @@ const BookDetailScreen = ({ navigation, route }) => {
   const [patchGetBook] = usePatchGetBookMutation();
   const [patchSuccesfulTransaction] = usePatchSuccesfulTransactionMutation();
 
-  const { data, refetch } = useGetAllBooksQuery();
-  const refetchData = () => {
-    refetch();
-    dispatch(setAllBooks(data));
-  };
-
   const handleSharingBook = () => {
     patchSharingBook(book.key);
-    refetchData();
     navigation.navigate("LibraryScreen");
   };
   const handleGetBook = () => {
     patchGetBook([book.key, userId]);
-    refetchData();
     navigation.navigate("LibraryScreen");
   };
   const handleDeliveryBook = () => {
     patchSuccesfulTransaction([book.key, sharingUserId]);
-    refetchData();
     navigation.navigate("LibraryScreen");
   };
 
   const handleDelete = () => {
     deleteBook(book.key);
-    refetchData();
     navigation.navigate("LibraryScreen");
   };
 

@@ -16,13 +16,13 @@ import BooksListComponent from "../../components/BooksListComponent";
 import { useGetAllBooksQuery } from "../../services/bookApi";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { setAllBooks } from "../../redux/slice/bookSlice";
+import { useSelector } from "react-redux";
 
 import { filteredBooksReading } from "../../filtered/filteredBooksReading";
 import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrentUserBooksToShared";
 
 import { useIsFocused } from "@react-navigation/native";
+
 import { listenChildEvents } from "../../firebase/listenChildEvents";
 
 const LibraryScreen = ({ navigation }) => {
@@ -30,10 +30,8 @@ const LibraryScreen = ({ navigation }) => {
 
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
-  const dispatch = useDispatch();
 
   //Se traer el usuario actual y todos los libros guardados en el estado global
-  const allBooks = useSelector((state) => state.bookSlice.allBooks);
   const userId = useSelector((state) => state.userSlice.id);
   const bookInizializatedParams = useSelector(
     (state) => state.bookSlice.bookInizializatedParams
@@ -46,19 +44,15 @@ const LibraryScreen = ({ navigation }) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    dispatch(setAllBooks(data));
     filteredBooksReading(data, userId, setBooksReading);
-    filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
+    filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
   }, []);
 
   useEffect(() => {
     refetch();
-    dispatch(setAllBooks(data));
     filteredBooksReading(data, userId, setBooksReading);
-    filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
+    filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
   }, [isFocused]);
-
-  listenChildEvents();
 
   return (
     <View style={styles.container}>
