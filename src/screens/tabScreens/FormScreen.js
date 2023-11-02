@@ -24,7 +24,7 @@ import {
 
 import { useSelector } from "react-redux";
 
-const BookRegisterScreen = ({ navigation, route }) => {
+const FormScreen = ({ navigation, route }) => {
   const { book } = route.params;
 
   const [postBook] = usePostBookMutation();
@@ -214,4 +214,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookRegisterScreen;
+export default FormScreen;

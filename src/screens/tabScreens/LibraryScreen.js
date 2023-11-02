@@ -67,7 +67,7 @@ const LibraryScreen = ({ navigation }) => {
           <TouchableOpacity
             style={[styles.button, { top: height - 220, left: width - 100 }]}
             onPress={() =>
-              navigation.navigate("BookRegisterScreen", {
+              navigation.navigate("FormScreen", {
                 book: bookInizializatedParams,
               })
             }

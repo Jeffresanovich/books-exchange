@@ -123,7 +123,7 @@ const BookDetailScreen = ({ navigation, route }) => {
                   <Pressable
                     style={[styles.button, styles.buyButton]}
                     onPress={() =>
-                      navigation.navigate("BookRegisterScreen", { book: book })
+                      navigation.navigate("FormScreen", { book: book })
                     }
                   >
                     <MaterialCommunityIcons

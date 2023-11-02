@@ -4,7 +4,7 @@ import { headerStyles } from "../../theme/commonStyles";
 //Screens
 import LibraryScreen from "../../screens/tabScreens/LibraryScreen";
 import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
-import BookRegisterScreen from "../../screens/tabScreens/BookRegisterScreen";
+import FormScreen from "../../screens/tabScreens/FormScreen";
 
 //Drawer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -21,7 +21,7 @@ const LibraryStack = () => {
     >
       <Stack.Screen name='LibraryScreen' component={LibraryScreen} />
       <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
-      <Stack.Screen name='BookRegisterScreen' component={BookRegisterScreen} />
+      <Stack.Screen name='FormScreen' component={FormScreen} />
     </Stack.Navigator>
   );
 };
