@@ -6,13 +6,10 @@ export const filteredBooksToDeliver = (allBooks, userId, setCallBack) => {
   const filteredBySharingUserId = filteredCurrentUserId.filter(
     (item) => item.transaction.sharingUserId !== userId
   );
-  /*
-  console.log(
-    "BOOK TO SHARING: ",
-    JSON.stringify(filteredBySharingUserId, null, " ")
+  const filteredBySharingUserIdEmpty = filteredBySharingUserId.filter(
+    (item) => item.transaction.sharingUserId !== ""
   );
-  console.log("FILTRO USUARIO ALTUAL: " + userId);
-*/
+
   //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserId);
+  setCallBack(filteredBySharingUserIdEmpty);
 };

@@ -23,6 +23,7 @@ import { filteredBooksReading } from "../../filtered/filteredBooksReading";
 import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrentUserBooksToShared";
 
 import { useIsFocused } from "@react-navigation/native";
+import { listenChildEvents } from "../../firebase/listenChildEvents";
 
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
@@ -46,16 +47,18 @@ const LibraryScreen = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(setAllBooks(data));
-    filteredBooksReading(allBooks, userId, setBooksReading);
+    filteredBooksReading(data, userId, setBooksReading);
     filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
   }, []);
 
   useEffect(() => {
     refetch();
     dispatch(setAllBooks(data));
-    filteredBooksReading(allBooks, userId, setBooksReading);
+    filteredBooksReading(data, userId, setBooksReading);
     filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
   }, [isFocused]);
+
+  listenChildEvents();
 
   return (
     <View style={styles.container}>

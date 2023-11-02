@@ -4,7 +4,7 @@
  * @param {Object} data Data (object) like response from realtime database.
  * @returns Return an array
  */
-const useConvertDataResponse = (data) => {
+const convertDataResponse = (data) => {
   const convertArray = [];
   for (const key in data) {
     convertArray.push({ ...data[key], key });
@@ -12,13 +12,4 @@ const useConvertDataResponse = (data) => {
   return convertArray;
 };
 
-export const useFilteredSharingUserId = (data) => {
-  const convertArray = useConvertDataResponse(data);
-  const filteredSharingUserId = convertArray.filter((item) =>
-    item.transaction.sharingUserId.includes("")
-  );
-
-  return filteredSharingUserId;
-};
-
-export default useConvertDataResponse;
+export default convertDataResponse;
