@@ -42,12 +42,10 @@ const ExChangeScreen = ({ navigation }) => {
   useEffect(() => {
     filteredBooksToReceive(data, userId, setBooksToReceive);
     filteredBooksToDeliver(data, userId, setBooksToDeliver);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     refetch();
-    filteredBooksToReceive(data, userId, setBooksToReceive);
-    filteredBooksToDeliver(data, userId, setBooksToDeliver);
   }, [isFocused]);
 
   return (

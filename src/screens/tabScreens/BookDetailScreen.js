@@ -42,20 +42,20 @@ const BookDetailScreen = ({ navigation, route }) => {
 
   const handleSharingBook = () => {
     patchSharingBook(book.key);
-    navigation.navigate("LibraryScreen");
+    navigation.goBack();
   };
   const handleGetBook = () => {
     patchGetBook([book.key, userId]);
-    navigation.navigate("LibraryScreen");
+    navigation.goBack();
   };
   const handleDeliveryBook = () => {
     patchSuccesfulTransaction([book.key, sharingUserId]);
-    navigation.navigate("LibraryScreen");
+    navigation.goBack();
   };
 
   const handleDelete = () => {
     deleteBook(book.key);
-    navigation.navigate("LibraryScreen");
+    navigation.goBack();
   };
 
   return (

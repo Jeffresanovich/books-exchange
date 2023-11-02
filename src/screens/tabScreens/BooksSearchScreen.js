@@ -26,13 +26,13 @@ const BooksSearchScreen = ({ navigation }) => {
 
   //Se "actualiza" el estado global de todos lo libros
   useEffect(() => {
+    filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
     filteredBooksToShared(data, userId, setSharingBooks);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     refetch();
     filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
-    filteredBooksToShared(data, userId, setSharingBooks);
   }, [text, isFocused]);
 
   return (

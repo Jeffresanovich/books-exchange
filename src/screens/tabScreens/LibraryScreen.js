@@ -46,12 +46,10 @@ const LibraryScreen = ({ navigation }) => {
   useEffect(() => {
     filteredBooksReading(data, userId, setBooksReading);
     filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     refetch();
-    filteredBooksReading(data, userId, setBooksReading);
-    filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
   }, [isFocused]);
 
   return (
