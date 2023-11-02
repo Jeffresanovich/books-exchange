@@ -13,9 +13,6 @@ import {
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { flex, border } from "../../theme/commonStyles";
 
-//Cam and ImageGalery
-import * as ImagePicker from "expo-image-picker";
-
 //Services
 import {
   usePostBookMutation,
@@ -23,6 +20,8 @@ import {
 } from "../../services/bookApi";
 
 import { useSelector } from "react-redux";
+
+import { handleOpenCam, handleOpenGalery } from "../hook/useImagePiker";
 
 const FormScreen = ({ navigation, route }) => {
   const { book } = route.params;
@@ -65,41 +64,6 @@ const FormScreen = ({ navigation, route }) => {
     navigation.navigate("LibraryScreen");
   };
 
-  const handleOpenCam = async () => {
-    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      Alert.alert(
-        "ATENCION!",
-        "La app no tiene permiso para acceder a la camara"
-      );
-      return;
-    } else {
-      const result = await ImagePicker.launchCameraAsync({
-        base64: true,
-      });
-
-      changeImage(result);
-    }
-  };
-
-  const handleOpenGalery = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [3, 4],
-      quality: 1,
-      base64: true,
-    });
-    changeImage(result);
-  };
-
-  const changeImage = async (result) => {
-    if (!result.canceled) {
-      await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
-    }
-  };
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -107,10 +71,10 @@ const FormScreen = ({ navigation, route }) => {
           <Image source={{ uri: image }} style={styles.profileImage} />
           <View style={styles.imageEdit}>
             <View style={styles.openCamGaleryContainer}>
-              <TouchableOpacity onPress={handleOpenCam}>
+              <TouchableOpacity onPress={() => handleOpenCam(setImage)}>
                 <MaterialCommunityIcons name='camera' size={35} color='grey' />
               </TouchableOpacity>
-              <TouchableOpacity onPress={handleOpenGalery}>
+              <TouchableOpacity onPress={() => handleOpenGalery(setImage)}>
                 <MaterialCommunityIcons
                   name='folder-image'
                   size={35}
