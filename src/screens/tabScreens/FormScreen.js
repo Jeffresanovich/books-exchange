@@ -21,7 +21,7 @@ import {
 
 import { useSelector } from "react-redux";
 
-import { handleOpenCam, handleOpenGalery } from "../hook/useImagePiker";
+import { openCam, openGalery } from "../hook/useImagePiker";
 
 const FormScreen = ({ navigation, route }) => {
   const { book } = route.params;
@@ -71,10 +71,10 @@ const FormScreen = ({ navigation, route }) => {
           <Image source={{ uri: image }} style={styles.profileImage} />
           <View style={styles.imageEdit}>
             <View style={styles.openCamGaleryContainer}>
-              <TouchableOpacity onPress={() => handleOpenCam(setImage)}>
+              <TouchableOpacity onPress={() => openCam(setImage)}>
                 <MaterialCommunityIcons name='camera' size={35} color='grey' />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleOpenGalery(setImage)}>
+              <TouchableOpacity onPress={() => openGalery(setImage)}>
                 <MaterialCommunityIcons
                   name='folder-image'
                   size={35}

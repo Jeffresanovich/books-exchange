@@ -1,7 +1,7 @@
 //Cam and ImageGalery
 import * as ImagePicker from "expo-image-picker";
 
-export const handleOpenCam = async (setImage) => {
+export const openCam = async (setImage) => {
   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
   if (permissionResult.granted === false) {
@@ -21,7 +21,7 @@ export const handleOpenCam = async (setImage) => {
   }
 };
 
-export const handleOpenGalery = async (setImage) => {
+export const openGalery = async (setImage) => {
   let result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,

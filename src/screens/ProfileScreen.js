@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Pressable,
   ActivityIndicator,
   Alert,
 } from "react-native";
@@ -81,8 +80,21 @@ const ProfileScreen = () => {
   };
 
   const handleSignOut = () => {
-    signOut(firebase_auth);
-    dispatch(clearUser());
+    Alert.alert(
+      "CONFIRMAR",
+      "¿Esta seguro que desea cerrar sesion en este dispositivo?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        { text: "Si", onPress: () => logout() },
+      ]
+    );
+    const logout = () => {
+      signOut(firebase_auth);
+      dispatch(clearUser());
+    };
   };
 
   return (

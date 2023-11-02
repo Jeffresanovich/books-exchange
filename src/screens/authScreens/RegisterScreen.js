@@ -15,13 +15,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { themeColors } from "../../theme/commonStyles";
 
 import { usePutUserMutation } from "../../services/bookApi";
-import { getDatabase, ref, set } from "firebase/database";
+
+import { errorMessage } from "../../data/errorMessage";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   const [putUser] = usePutUserMutation();
 
@@ -51,7 +55,15 @@ const RegisterScreen = ({ navigation }) => {
 
       navigation.navigate("Login");
     } catch (error) {
-      console.log("RegisterError: " + error.message);
+      console.log("Error: " + error.message);
+      setErrorText(
+        errorMessage(
+          firstName === "" || lastName === ""
+            ? "campo-obligatorio"
+            : error.message
+        )
+      );
+      setIsLoading(false);
     }
   };
 
@@ -83,10 +95,19 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-
-      <TouchableOpacity style={styles.button} onPress={() => handleRegister()}>
-        <Text style={styles.buttonText}>Registrarse</Text>
-      </TouchableOpacity>
+      {isLoading ? (
+        <ActivityIndicator size='large' color='#65A6F6' />
+      ) : (
+        <>
+          <Text style={{ color: "red", marginBottom: 15 }}>{errorText}</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleRegister()}
+          >
+            <Text style={styles.buttonText}>Registrarse</Text>
+          </TouchableOpacity>
+        </>
+      )}
       <Pressable onPress={() => navigation.navigate("Login")}>
         <Text style={styles.registroText}>
           Ya tienes cuenta? Iniciar Sesión

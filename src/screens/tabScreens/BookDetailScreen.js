@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 
 //Icons
@@ -112,7 +113,7 @@ const BookDetailScreen = ({ navigation, route }) => {
                       size={50}
                       color='white'
                     />
-                    <Text style={styles.buttonText}>COMPARTIDO</Text>
+                    <Text style={styles.buttonText}>RECIBIDO</Text>
                   </Pressable>
                 )}
             </View>
