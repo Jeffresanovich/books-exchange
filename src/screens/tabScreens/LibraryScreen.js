@@ -23,8 +23,6 @@ import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrent
 
 import { useIsFocused } from "@react-navigation/native";
 
-import { listenChildEvents } from "../../firebase/listenChildEvents";
-
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
 

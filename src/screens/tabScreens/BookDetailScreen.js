@@ -6,7 +6,7 @@ import {
   Text,
   Image,
   Pressable,
-  Alert,
+  Modal,
 } from "react-native";
 
 //Icons
@@ -28,6 +28,8 @@ import {
 } from "../../services/bookApi";
 
 import { useSelector } from "react-redux";
+import UserDetailsComponent from "../../components/UserDetailsComponent";
+import { useState } from "react";
 
 const BookDetailScreen = ({ navigation, route }) => {
   const { book } = route.params;
@@ -36,10 +38,18 @@ const BookDetailScreen = ({ navigation, route }) => {
   const { currentUserId, sharingUserId } = book.transaction;
   const userId = useSelector((state) => state.userSlice.id);
 
+  //API Service
   const [deleteBook] = useDeleteBookMutation();
   const [patchSharingBook] = usePatchSharingBookMutation();
   const [patchGetBook] = usePatchGetBookMutation();
   const [patchSuccesfulTransaction] = usePatchSuccesfulTransactionMutation();
+
+  //Modal
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const handleSharingBook = () => {
     patchSharingBook(book.key);
@@ -104,17 +114,25 @@ const BookDetailScreen = ({ navigation, route }) => {
               {currentUserId !== userId &&
                 currentUserId !== sharingUserId &&
                 sharingUserId !== "" && (
-                  <Pressable
-                    style={[styles.button, styles.buyButton]}
-                    onPress={() => handleDeliveryBook()}
-                  >
-                    <MaterialCommunityIcons
-                      name='book'
-                      size={50}
-                      color='white'
-                    />
-                    <Text style={styles.buttonText}>RECIBIDO</Text>
-                  </Pressable>
+                  <>
+                    <Pressable
+                      style={[styles.button, styles.buyButton]}
+                      onPress={() => handleDeliveryBook()}
+                    >
+                      <MaterialCommunityIcons
+                        name='book'
+                        size={50}
+                        color='white'
+                      />
+                      <Text style={styles.buttonText}>RECIBIDO</Text>
+                    </Pressable>
+                    <UserDetailsComponent userId={currentUserId} />
+                  </>
+                )}
+              {currentUserId === userId &&
+                currentUserId !== sharingUserId &&
+                sharingUserId !== "" && (
+                  <UserDetailsComponent userId={sharingUserId} />
                 )}
             </View>
             {currentUserId === userId &&

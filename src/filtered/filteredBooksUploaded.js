@@ -15,6 +15,3 @@ export const filteredBooksUploaded = (data, userId, setCallBack) => {
   //Setea el estado que se pase por parametro
   setCallBack(filteredBySharingUserId);
 };
-
-//console.log("FILTRO USUARIO ALTUAL: " + userId);
-//console.log("FILTRO LIBROS: ", JSON.stringify(filteredSharingUserId, null, " "));

@@ -9,13 +9,7 @@ export const filteredCurrentUserBooksToShared = (data, userId, setCallBack) => {
   const filteredBySharingUserId = filteredCurrentUserId.filter(
     (item) => item.transaction.sharingUserId === ""
   );
-  /*
-  console.log("FILTRO USUARIO ALTUAL: " + userId);
-  console.log(
-    "FILTRO USUARIO ACTUAL COMPARTIENDO: ",
-    JSON.stringify(filteredCurrentUserId, null, " ")
-  );
-*/
+
   //Setea el estado que se pase por parametro
   setCallBack(filteredBySharingUserId);
 };

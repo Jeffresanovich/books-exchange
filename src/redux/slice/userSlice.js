@@ -16,10 +16,7 @@ const userSlice = createSlice({
 
     setUser: (state, action) => {
       const objetoSinNombre = Object.values(action.payload)[0];
-
       state.user = objetoSinNombre;
-
-      console.log("USUARIO: ", JSON.stringify(state.user, null, ""));
     },
 
     clearUser: (state) => {

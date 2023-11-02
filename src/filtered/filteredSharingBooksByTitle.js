@@ -21,13 +21,7 @@ export const filteredSharingBooksByTitle = (
   const filteredSharingUserId = filteredCurrentUserId.filter(
     (item) => item.transaction.sharingUserId === ""
   );
-  /*
-  console.log("FILTRO USUARIO ALTUAL: " + userId);
-  console.log(
-    "FILTRO POR TITULO: ",
-    JSON.stringify(filteredSharingUserId, null, " ")
-  );
-*/
+
   //Setea el estado que se pase por parametro
   setCallBack(filteredSharingUserId);
 };
