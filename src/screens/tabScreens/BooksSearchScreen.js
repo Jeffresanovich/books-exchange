@@ -27,7 +27,7 @@ const BooksSearchScreen = ({ navigation }) => {
   //Se "actualiza" el estado global de todos lo libros
   useEffect(() => {
     dispatch(setAllBooks(data));
-    //filteredBooksToShared(allBooks, userId, setSharingBooks);
+    filteredBooksToShared(allBooks, userId, setSharingBooks);
   }, []);
 
   useEffect(() => {

@@ -22,7 +22,7 @@ import { setAllBooks } from "../../redux/slice/bookSlice";
 import { filteredBooksReading } from "../../filtered/filteredBooksReading";
 import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrentUserBooksToShared";
 
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
@@ -42,20 +42,20 @@ const LibraryScreen = ({ navigation }) => {
   const [booksReading, setBooksReading] = useState([]);
   const [booksToShared, setBooksToShared] = useState([]);
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     dispatch(setAllBooks(data));
     filteredBooksReading(allBooks, userId, setBooksReading);
     filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
   }, []);
 
-  /*
-  useFocusEffect(() => {
+  useEffect(() => {
     refetch();
     dispatch(setAllBooks(data));
     filteredBooksReading(allBooks, userId, setBooksReading);
     filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
-  });
-  */
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

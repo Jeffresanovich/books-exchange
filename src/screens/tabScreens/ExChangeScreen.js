@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
+  Text,
   ActivityIndicator,
   TouchableOpacity,
   useWindowDimensions,
@@ -22,7 +23,7 @@ import { setAllBooks } from "../../redux/slice/bookSlice";
 import { filteredBooksToReceive } from "../../filtered/filteredBooksToReceive";
 import { filteredBooksToDeliver } from "../../filtered/filteredBooksToDeliver";
 
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 const ExChangeScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
@@ -39,20 +40,20 @@ const ExChangeScreen = ({ navigation }) => {
   const [booksToReceive, setBooksToReceive] = useState([]);
   const [booksToDeliver, setBooksToDeliver] = useState([]);
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     dispatch(setAllBooks(data));
     filteredBooksToReceive(allBooks, userId, setBooksToReceive);
     filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
   }, []);
 
-  /*
-  useFocusEffect(() => {
+  useEffect(() => {
     refetch();
     dispatch(setAllBooks(data));
     filteredBooksToReceive(allBooks, userId, setBooksToReceive);
     filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
-  });
-*/
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
@@ -61,12 +62,14 @@ const ExChangeScreen = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.container}>
+            <Text>Recibir</Text>
             <BooksListComponent
               navigation={navigation}
               books={booksToReceive}
             />
           </View>
           <View style={styles.container}>
+            <Text>Entregar</Text>
             <BooksListComponent
               navigation={navigation}
               books={booksToDeliver}
