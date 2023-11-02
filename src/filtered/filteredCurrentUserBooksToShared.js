@@ -10,7 +10,6 @@ export const filteredCurrentUserBooksToShared = (
   const filteredBySharingUserId = filteredCurrentUserId.filter(
     (item) => item.transaction.sharingUserId === ""
   );
-
   /*
   console.log("FILTRO USUARIO ALTUAL: " + userId);
   console.log(

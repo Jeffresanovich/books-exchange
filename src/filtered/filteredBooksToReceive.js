@@ -1,11 +1,11 @@
-export const filteredBooksToShared = (allBooks, userId, setCallBack) => {
+export const filteredBooksToReceive = (allBooks, userId, setCallBack) => {
   //Filtra, quitando los que ya tiene el usuario
   const filteredCurrentUserId = allBooks.filter(
     (item) => item.transaction.currentUserId !== userId
   );
 
   const filteredBySharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === ""
+    (item) => item.transaction.sharingUserId === userId
   );
   /*
   console.log(

@@ -1,17 +1,18 @@
-export const filteredBooksReading = (allBooks, userId, setCallBack) => {
-  const filteredByCurrentUserId = allBooks.filter(
+export const filteredBooksToDeliver = (allBooks, userId, setCallBack) => {
+  const filteredCurrentUserId = allBooks.filter(
     (item) => item.transaction.currentUserId === userId
   );
-  const filteredBySharingUserId = filteredByCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === userId
+
+  const filteredBySharingUserId = filteredCurrentUserId.filter(
+    (item) => item.transaction.sharingUserId !== userId
   );
   /*
   console.log(
-    "BOOK READING: ",
+    "BOOK TO SHARING: ",
     JSON.stringify(filteredBySharingUserId, null, " ")
   );
   console.log("FILTRO USUARIO ALTUAL: " + userId);
-  */
+*/
   //Setea el estado que se pase por parametro
   setCallBack(filteredBySharingUserId);
 };

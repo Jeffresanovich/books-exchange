@@ -55,12 +55,12 @@ const BookDetailScreen = ({ navigation, route }) => {
   const handleSharingBook = () => {
     patchSharingBook(book.key);
     refetchData();
-    navigation.navigate("ExChangeScreen");
+    navigation.navigate("LibraryScreen");
   };
   const handleGetBook = () => {
     patchGetBook([book.key, userId]);
     refetchData();
-    navigation.navigate("ExChangeScreen");
+    navigation.navigate("LibraryScreen");
   };
   const handleDeliveryBook = () => {
     patchSuccesfulTransaction([book.key, sharingUserId]);

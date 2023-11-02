@@ -22,6 +22,8 @@ import { setAllBooks } from "../../redux/slice/bookSlice";
 import { filteredBooksReading } from "../../filtered/filteredBooksReading";
 import { filteredCurrentUserBooksToShared } from "../../filtered/filteredCurrentUserBooksToShared";
 
+import { useFocusEffect } from "@react-navigation/native";
+
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
 
@@ -36,6 +38,7 @@ const LibraryScreen = ({ navigation }) => {
     (state) => state.bookSlice.bookInizializatedParams
   );
 
+  //Array para listas
   const [booksReading, setBooksReading] = useState([]);
   const [booksToShared, setBooksToShared] = useState([]);
 
@@ -43,12 +46,16 @@ const LibraryScreen = ({ navigation }) => {
     dispatch(setAllBooks(data));
     filteredBooksReading(allBooks, userId, setBooksReading);
     filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
-  }, [data]);
+  }, []);
 
-  const handleScroll = () => {
+  /*
+  useFocusEffect(() => {
     refetch();
     dispatch(setAllBooks(data));
-  };
+    filteredBooksReading(allBooks, userId, setBooksReading);
+    filteredCurrentUserBooksToShared(allBooks, userId, setBooksToShared);
+  });
+  */
 
   return (
     <View style={styles.container}>
@@ -56,8 +63,12 @@ const LibraryScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <BooksListComponent navigation={navigation} books={booksReading} />
-          <BooksListComponent navigation={navigation} books={booksToShared} />
+          <View style={styles.container}>
+            <BooksListComponent navigation={navigation} books={booksReading} />
+          </View>
+          <View style={styles.container}>
+            <BooksListComponent navigation={navigation} books={booksToShared} />
+          </View>
           <TouchableOpacity
             style={[styles.button, { top: height - 220, left: width - 100 }]}
             onPress={() =>

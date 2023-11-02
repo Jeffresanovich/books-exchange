@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   StyleSheet,
@@ -19,25 +19,59 @@ import { useGetAllBooksQuery } from "../../services/bookApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllBooks } from "../../redux/slice/bookSlice";
 
+import { filteredBooksToReceive } from "../../filtered/filteredBooksToReceive";
+import { filteredBooksToDeliver } from "../../filtered/filteredBooksToDeliver";
+
+import { useFocusEffect } from "@react-navigation/native";
+
 const ExChangeScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
 
+  //Se guardan todos todos los libros en el estado global
+  const { data, isLoading, refetch } = useGetAllBooksQuery();
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetAllBooksQuery();
 
-  const books = useSelector((state) => state.bookSlice.allBooks);
-  const bookInizializatedParams = useSelector((state) => state.bookSlice.book);
+  //Se traer el usuario actual y todos los libros guardados en el estado global
+  const allBooks = useSelector((state) => state.bookSlice.allBooks);
+  const userId = useSelector((state) => state.userSlice.id);
+
+  //Se guarda el resultado de los libros filtrados para mostar en las listas
+  const [booksToReceive, setBooksToReceive] = useState([]);
+  const [booksToDeliver, setBooksToDeliver] = useState([]);
 
   useEffect(() => {
     dispatch(setAllBooks(data));
-  }, [data]);
+    filteredBooksToReceive(allBooks, userId, setBooksToReceive);
+    filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
+  }, []);
+
+  /*
+  useFocusEffect(() => {
+    refetch();
+    dispatch(setAllBooks(data));
+    filteredBooksToReceive(allBooks, userId, setBooksToReceive);
+    filteredBooksToDeliver(allBooks, userId, setBooksToDeliver);
+  });
+*/
+
   return (
     <View style={styles.container}>
       {isLoading ? (
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <BooksListComponent navigation={navigation} books={books} />
+          <View style={styles.container}>
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToReceive}
+            />
+          </View>
+          <View style={styles.container}>
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToDeliver}
+            />
+          </View>
           <TouchableOpacity
             style={[styles.button, { top: height - 220, left: width - 100 }]}
             onPress={() =>
