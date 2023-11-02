@@ -9,10 +9,12 @@ import TabNavigation from "./TabNavigation";
 import ProfileScreen from "../screens/ProfileScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import SettingScreen from "../screens/SettingScreen";
+import { useSelector } from "react-redux";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
+  const user = useSelector((state) => state.userSlice.user);
   return (
     <Drawer.Navigator
       initialRouteName='TabNavigation'
@@ -34,7 +36,7 @@ const DrawerNavigation = () => {
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
-          title: "Perfil",
+          title: `${user.firstName} ${user.lastName}`,
           ...headerStyles,
         }}
       />

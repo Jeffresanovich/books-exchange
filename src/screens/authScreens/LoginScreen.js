@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
 
   //
   const [userUid, setUserUid] = useState("");
-  const { data, isLoading: loading } = useGetUserByUidQuery(userUid);
+  const { data } = useGetUserByUidQuery(userUid);
 
   const handleLogin = async () => {
     try {

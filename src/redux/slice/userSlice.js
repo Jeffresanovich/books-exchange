@@ -15,11 +15,11 @@ const userSlice = createSlice({
     },
 
     setUser: (state, action) => {
-      const convertArray = [];
-      for (const key in action.payload) {
-        convertArray.push({ ...action.payload[key], key });
-      }
-      state.user = convertArray[0];
+      const objetoSinNombre = Object.values(action.payload)[0];
+
+      state.user = objetoSinNombre;
+
+      console.log("USUARIO: ", JSON.stringify(state.user, null, ""));
     },
 
     clearUser: (state) => {
