@@ -16,7 +16,7 @@ import { themeColors } from "../../theme/commonStyles";
 
 import { usePutUserMutation } from "../../services/bookApi";
 
-import { errorMessage } from "../../data/errorMessage";
+import { useErrorMessage } from "../../hook/useErrorMessage";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -57,7 +57,7 @@ const RegisterScreen = ({ navigation }) => {
     } catch (error) {
       console.log("Error: " + error.message);
       setErrorText(
-        errorMessage(
+        useErrorMessage(
           firstName === "" || lastName === ""
             ? "campo-obligatorio"
             : error.message

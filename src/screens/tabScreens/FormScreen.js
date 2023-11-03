@@ -21,7 +21,7 @@ import {
 
 import { useSelector } from "react-redux";
 
-import { openCam, openGalery } from "../hook/useImagePiker";
+import { openCam, openGalery } from "../../hook/useImagePiker";
 
 const FormScreen = ({ navigation, route }) => {
   const { book } = route.params;

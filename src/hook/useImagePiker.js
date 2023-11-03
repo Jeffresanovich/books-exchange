@@ -18,6 +18,7 @@ export const openCam = async (setImage) => {
 
     if (!result.canceled) {
       setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+      return result.assets[0].base64;
     }
   }
 };
@@ -32,5 +33,6 @@ export const openGalery = async (setImage) => {
   });
   if (!result.canceled) {
     setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+    return result.assets[0].base64;
   }
 };

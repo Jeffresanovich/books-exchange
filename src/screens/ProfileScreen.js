@@ -28,29 +28,36 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearUserId } from "../redux/slice/userSlice";
 
 //Cam and ImageGalery
-import { openCam, openGalery } from "./hook/useImagePiker";
+import { openCam, openGalery } from "../hook/useImagePiker";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(data.image);
 
   const [patchUser] = usePatchUserMutation();
 
-  const handleOpenCam = () => {
-    openCam(setImage);
+  const handleOpenCam = async () => {
+    const imageBase64 = await openCam(setImage);
+    if (!!imageBase64) {
+      await patchUser([
+        userId,
+        { image: `data:image/jpeg;base64,${imageBase64}` },
+      ]);
+      refetch();
+    }
   };
 
   const handleOpenGalery = async () => {
-    openGalery(setImage);
-    await patchUser([userId, { image }]);
-    refetch();
-  };
-
-  const handleSaveImage = async () => {
-    await patchUser([userId, { image }]);
-    refetch();
+    const imageBase64 = await openGalery(setImage);
+    if (!!imageBase64) {
+      await patchUser([
+        userId,
+        { image: `data:image/jpeg;base64,${imageBase64}` },
+      ]);
+      refetch();
+    }
   };
 
   const handleSignOut = () => {
@@ -82,9 +89,6 @@ const ProfileScreen = () => {
             <View style={styles.openCamGaleryContainer}>
               <TouchableOpacity onPress={handleOpenCam}>
                 <MaterialCommunityIcons name='camera' size={35} color='grey' />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleSaveImage}>
-                <MaterialCommunityIcons name='check' size={35} color='green' />
               </TouchableOpacity>
               <TouchableOpacity onPress={handleOpenGalery}>
                 <MaterialCommunityIcons

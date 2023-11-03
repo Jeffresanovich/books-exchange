@@ -1,4 +1,4 @@
-export const errorMessage = (error) => {
+export const useErrorMessage = (error) => {
   let message = "";
   switch (error) {
     case "Firebase: Error (auth/invalid-email).":

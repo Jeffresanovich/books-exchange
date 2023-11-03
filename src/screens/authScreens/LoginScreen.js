@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { setUserId } from "../../redux/slice/userSlice";
 
 import { themeColors } from "../../theme/commonStyles";
-import { errorMessage } from "../../data/errorMessage";
+import { useErrorMessage } from "../../hook/useErrorMessage";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       console.log("Error: " + error.message);
       setErrorText(
-        errorMessage(
+        useErrorMessage(
           email === "" || password === "" ? "campo-obligatorio" : error.message
         )
       );
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   input: {
     width: "85%",
     height: 50,
-    borderColor: themeColors.mediumBlue,
+    borderColor: themeColors.heavyBlue,
     borderWidth: 2,
     borderRadius: 5,
     marginBottom: 20,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   button: {
-    backgroundColor: themeColors.mediumBlue,
+    backgroundColor: themeColors.heavyBlue,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,

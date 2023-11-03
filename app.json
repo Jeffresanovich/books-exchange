@@ -18,6 +18,12 @@
         {
           "photosPermission": "La app accedera a tus fotos."
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permitir a la app acceder a la camara?"
+        }
       ]
     ],
     "ios": {
