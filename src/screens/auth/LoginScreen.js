@@ -18,6 +18,8 @@ import { setUserId } from "../../redux/slice/userSlice";
 import { themeColors } from "../../theme/commonStyles";
 import { useErrorMessage } from "../../hook/useErrorMessage";
 
+import { saveUserIdFromStorage } from "../../hook/useAsyncStorage";
+
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +37,7 @@ const LoginScreen = ({ navigation }) => {
       );
 
       dispatch(setUserId(response.user.uid));
+      saveUserIdFromStorage(response.user.uid);
 
       setIsLoading(false);
     } catch (error) {
