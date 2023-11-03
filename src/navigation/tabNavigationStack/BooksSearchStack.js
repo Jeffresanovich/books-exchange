@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
-import BooksSearchScreen from "../../screens/tabScreens/BooksSearchScreen";
-import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
+import BooksSearchScreen from "../../screens/tab/BooksSearchScreen";
+import BookDetailScreen from "../../screens/tab/BookDetailScreen";
 
 const Stack = createNativeStackNavigator();
 

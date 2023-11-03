@@ -6,9 +6,9 @@ import { headerStyles } from "../theme/commonStyles";
 import TabNavigation from "./TabNavigation";
 
 //Direct screen
-import ProfileScreen from "../screens/ProfileScreen";
-import NotificationScreen from "../screens/NotificationScreen";
-import SettingScreen from "../screens/SettingScreen";
+import ProfileScreen from "../screens/drawer/ProfileScreen";
+import NotificationScreen from "../screens/drawer/NotificationScreen";
+import SettingScreen from "../screens/drawer/SettingScreen";
 
 import { useSelector } from "react-redux";
 import { useGetUserByUidQuery } from "../services/bookApi";

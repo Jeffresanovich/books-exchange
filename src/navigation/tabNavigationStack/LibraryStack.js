@@ -2,9 +2,9 @@
 import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
-import LibraryScreen from "../../screens/tabScreens/LibraryScreen";
-import BookDetailScreen from "../../screens/tabScreens/BookDetailScreen";
-import FormScreen from "../../screens/tabScreens/FormScreen";
+import LibraryScreen from "../../screens/tab/LibraryScreen";
+import BookDetailScreen from "../../screens/tab/BookDetailScreen";
+import FormScreen from "../../screens/tab/FormScreen";
 
 //Drawer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

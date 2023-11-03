@@ -10,25 +10,25 @@ import {
 } from "react-native";
 
 //Firebase
-import { firebase_auth } from "../firebase/authFirebase";
+import { firebase_auth } from "../../firebase/authFirebase";
 import { signOut } from "firebase/auth";
 
 //Styles
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
-import { flex, border } from "../theme/commonStyles";
+import { flex, border } from "../../theme/commonStyles";
 
 //Services
 import {
   useGetUserByUidQuery,
   usePatchUserMutation,
-} from "../services/bookApi";
+} from "../../services/bookApi";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { clearUserId } from "../redux/slice/userSlice";
+import { clearUserId } from "../../redux/slice/userSlice";
 
 //Cam and ImageGalery
-import { openCam, openGalery } from "../hook/useImagePiker";
+import { openCam, openGalery } from "../../hook/useImagePiker";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
