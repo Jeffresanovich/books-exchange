@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,9 @@ import { signOut } from "firebase/auth";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { flex, border } from "../theme/commonStyles";
 
+//Cam and ImageGalery
+import * as ImagePicker from "expo-image-picker";
+
 //Services
 import {
   useGetUserByUidQuery,
@@ -27,29 +30,51 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { clearUserId } from "../redux/slice/userSlice";
 
-//Cam and ImageGalery
-import { openCam, openGalery } from "./hook/useImagePiker";
-
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-  const [image, setImage] = useState(null);
-
+  const [editVisible, setEditVisible] = useState(false);
   const [patchUser] = usePatchUserMutation();
 
-  const handleOpenCam = () => {
-    openCam(setImage);
+  const handleOpenCam = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      Alert.alert(
+        "ATENCION!",
+        "La app no tiene permiso para acceder a la camara"
+      );
+      return;
+    } else {
+      const result = await ImagePicker.launchCameraAsync({
+        base64: true,
+      });
+
+      changeImage(result);
+    }
+    setEditVisible(false);
   };
 
   const handleOpenGalery = async () => {
-    openGalery(setImage);
-    await patchUser([userId, { image }]);
-    refetch();
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+      base64: true,
+    });
+    changeImage(result);
+    setEditVisible(false);
   };
 
-  const handleSaveImage = async () => {
-    await patchUser([userId, { image }]);
+  const changeImage = async (result) => {
+    if (!result.canceled) {
+      await patchUser([
+        userId,
+        { image: `data:image/jpeg;base64,${result.assets[0].base64}` },
+      ]);
+    }
     refetch();
   };
 
@@ -79,21 +104,35 @@ const ProfileScreen = () => {
         <>
           <Image source={{ uri: data.image }} style={styles.profileImage} />
           <View style={styles.imageEdit}>
-            <View style={styles.openCamGaleryContainer}>
-              <TouchableOpacity onPress={handleOpenCam}>
-                <MaterialCommunityIcons name='camera' size={35} color='grey' />
+            {editVisible ? (
+              <View style={styles.openCamGaleryContainer}>
+                <TouchableOpacity onPress={handleOpenCam}>
+                  <MaterialCommunityIcons
+                    name='camera'
+                    size={35}
+                    color='grey'
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setEditVisible(false)}>
+                  <MaterialCommunityIcons
+                    name='window-close'
+                    size={30}
+                    color='grey'
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleOpenGalery}>
+                  <MaterialCommunityIcons
+                    name='folder-image'
+                    size={35}
+                    color='grey'
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity onPress={() => setEditVisible(true)}>
+                <Feather name='edit-2' size={30} color='grey' />
               </TouchableOpacity>
-              <TouchableOpacity onPress={handleSaveImage}>
-                <MaterialCommunityIcons name='check' size={35} color='green' />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleOpenGalery}>
-                <MaterialCommunityIcons
-                  name='folder-image'
-                  size={35}
-                  color='grey'
-                />
-              </TouchableOpacity>
-            </View>
+            )}
           </View>
 
           <Text style={styles.email}>{data.email}</Text>

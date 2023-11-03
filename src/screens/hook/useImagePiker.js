@@ -1,5 +1,6 @@
 //Cam and ImageGalery
 import * as ImagePicker from "expo-image-picker";
+import { Alert } from "react-native";
 
 export const openCam = async (setImage) => {
   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -16,7 +17,7 @@ export const openCam = async (setImage) => {
     });
 
     if (!result.canceled) {
-      await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+      setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     }
   }
 };
@@ -30,6 +31,6 @@ export const openGalery = async (setImage) => {
     base64: true,
   });
   if (!result.canceled) {
-    await setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+    setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
   }
 };
