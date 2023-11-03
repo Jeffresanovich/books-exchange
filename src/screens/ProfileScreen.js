@@ -40,17 +40,15 @@ const ProfileScreen = () => {
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam(setImage);
-    if (!!imageBase64) {
-      await patchUser([
-        userId,
-        { image: `data:image/jpeg;base64,${imageBase64}` },
-      ]);
-      refetch();
-    }
+    saveImage(imageBase64);
   };
 
   const handleOpenGalery = async () => {
     const imageBase64 = await openGalery(setImage);
+    saveImage(imageBase64);
+  };
+
+  const saveImage = async (imageBase64) => {
     if (!!imageBase64) {
       await patchUser([
         userId,
