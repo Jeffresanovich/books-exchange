@@ -25,18 +25,18 @@ const DrawerNavigation = () => {
       }}
     >
       <Drawer.Screen
-        name='TabNavigation'
-        component={TabNavigation}
-        options={{
-          title: "Biblioteca",
-          ...headerStyles,
-        }}
-      />
-      <Drawer.Screen
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
           title: `${user.firstName} ${user.lastName}`,
+          ...headerStyles,
+        }}
+      />
+      <Drawer.Screen
+        name='TabNavigation'
+        component={TabNavigation}
+        options={{
+          title: "Biblioteca",
           ...headerStyles,
         }}
       />
