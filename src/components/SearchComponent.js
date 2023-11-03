@@ -2,11 +2,11 @@ import { StyleSheet, TextInput, View, Pressable } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
-import colors from "../theme/color";
+import { themeColors } from "../theme/commonStyles";
 
 const SearchComponent = ({ text, setText }) => {
   const clearText = () => {
-    setText(null);
+    setText("");
   };
 
   return (
@@ -15,17 +15,17 @@ const SearchComponent = ({ text, setText }) => {
         style={styles.input}
         onChangeText={setText}
         value={text}
-        placeholder='Search product...'
+        placeholder='Buscar libro compartido...'
       />
-      {text ? (
+      {text && (
         <Pressable onPress={clearText}>
           <MaterialIcons
             name='cleaning-services'
             size={30}
-            color={colors.mediumBlue}
+            color={themeColors.heavyBlue}
           />
         </Pressable>
-      ) : null}
+      )}
     </View>
   );
 };
@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 25,
+    marginHorizontal: 5,
   },
   input: {
     width: "90%",
     height: 50,
-    margin: 12,
+    margin: 5,
     fontSize: 20,
     borderWidth: 2,
     borderRadius: 15,

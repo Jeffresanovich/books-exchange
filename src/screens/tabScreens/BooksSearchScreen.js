@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, TextInput, StyleSheet, ActivityIndicator } from "react-native";
 
+import { useIsFocused } from "@react-navigation/native";
+
+import SearchComponent from "../../components/SearchComponent";
 import BooksListComponent from "../../components/BooksListComponent";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
@@ -8,13 +11,12 @@ import { useSelector } from "react-redux";
 
 import { filteredSharingBooksByTitle } from "../../filtered/filteredSharingBooksByTitle";
 import { filteredBooksToShared } from "../../filtered/filteredBooksToShared";
-import { useIsFocused } from "@react-navigation/native";
 
 const BooksSearchScreen = ({ navigation }) => {
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
-  //Se traer el usuario actual y todos los libros guardados en el estado global
+  //Se traer el usuario actual
   const userId = useSelector((state) => state.userSlice.id);
 
   //Se guarda el texto y el resultado de la busqueda
@@ -24,25 +26,20 @@ const BooksSearchScreen = ({ navigation }) => {
 
   const isFocused = useIsFocused();
 
-  //Se "actualiza" el estado global de todos lo libros
+  //
   useEffect(() => {
-    filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
     filteredBooksToShared(data, userId, setSharingBooks);
-  }, [data]);
+    filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
+  }, [data, isFocused]);
 
   useEffect(() => {
     refetch();
     filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
-  }, [text, isFocused]);
+  }, [text]);
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder='Buscar...'
-        value={text}
-        onChangeText={setText}
-      />
+      <SearchComponent text={text} setText={setText} />
       <View style={styles.container}>
         {isLoading ? (
           <ActivityIndicator size='large' color='grey' />

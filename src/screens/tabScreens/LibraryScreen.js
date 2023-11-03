@@ -63,7 +63,7 @@ const LibraryScreen = ({ navigation }) => {
             <BooksListComponent navigation={navigation} books={booksToShared} />
           </View>
           <TouchableOpacity
-            style={[styles.button, { top: height - 220, left: width - 100 }]}
+            style={[styles.button, { top: height - 230, left: width - 100 }]}
             onPress={() =>
               navigation.navigate("FormScreen", {
                 book: bookInizializatedParams,
