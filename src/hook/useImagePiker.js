@@ -2,7 +2,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { Alert } from "react-native";
 
-export const openCam = async (setImage) => {
+export const openCam = async (setImage = null) => {
   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
   if (permissionResult.granted === false) {
@@ -17,13 +17,14 @@ export const openCam = async (setImage) => {
     });
 
     if (!result.canceled) {
-      setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+      if (setImage)
+        setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
       return result.assets[0].base64;
     }
   }
 };
 
-export const openGalery = async (setImage) => {
+export const openGalery = async (setImage = null) => {
   let result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
@@ -32,7 +33,7 @@ export const openGalery = async (setImage) => {
     base64: true,
   });
   if (!result.canceled) {
-    setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+    if (setImage) setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
     return result.assets[0].base64;
   }
 };

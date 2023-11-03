@@ -56,13 +56,9 @@ const RegisterScreen = ({ navigation }) => {
       navigation.navigate("Login");
     } catch (error) {
       console.log("Error: " + error.message);
-      setErrorText(
-        useErrorMessage(
-          firstName === "" || lastName === ""
-            ? "campo-obligatorio"
-            : error.message
-        )
-      );
+      const errorMenssage =
+        email === "" || password === "" ? "campo-obligatorio" : error.message;
+      useErrorMessage(errorMenssage, setErrorText);
       setIsLoading(false);
     }
   };

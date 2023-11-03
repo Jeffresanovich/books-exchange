@@ -34,17 +34,16 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-  const [image, setImage] = useState(data.image);
 
   const [patchUser] = usePatchUserMutation();
 
   const handleOpenCam = async () => {
-    const imageBase64 = await openCam(setImage);
+    const imageBase64 = await openCam();
     saveImage(imageBase64);
   };
 
   const handleOpenGalery = async () => {
-    const imageBase64 = await openGalery(setImage);
+    const imageBase64 = await openGalery();
     saveImage(imageBase64);
   };
 

@@ -1,4 +1,4 @@
-export const useErrorMessage = (error) => {
+export const useErrorMessage = (error, setErrorText = null) => {
   let message = "";
   switch (error) {
     case "Firebase: Error (auth/invalid-email).":
@@ -25,11 +25,11 @@ export const useErrorMessage = (error) => {
     case "campo-obligatorio":
       message = "Complete todos los campos";
       break;
-
     default:
       message = "Error inesperado, intente mas tarde";
       break;
   }
+  if (setErrorText) setErrorText(message);
 
   return message;
 };
