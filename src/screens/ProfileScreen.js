@@ -28,7 +28,7 @@ import {
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { clearUser, setUser } from "../redux/slice/userSlice";
+import { clearUserId } from "../redux/slice/userSlice";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -76,7 +76,6 @@ const ProfileScreen = () => {
       ]);
     }
     refetch();
-    dispatch(setUser(data));
   };
 
   const handleSignOut = () => {
@@ -93,7 +92,7 @@ const ProfileScreen = () => {
     );
     const logout = () => {
       signOut(firebase_auth);
-      dispatch(clearUser());
+      dispatch(clearUserId());
     };
   };
 
@@ -135,9 +134,7 @@ const ProfileScreen = () => {
               </TouchableOpacity>
             )}
           </View>
-          <Text style={styles.username}>
-            {data.firstName} {data.lastName}
-          </Text>
+
           <Text style={styles.email}>{data.email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>

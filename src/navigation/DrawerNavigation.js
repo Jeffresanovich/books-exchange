@@ -9,12 +9,16 @@ import TabNavigation from "./TabNavigation";
 import ProfileScreen from "../screens/ProfileScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import SettingScreen from "../screens/SettingScreen";
+
 import { useSelector } from "react-redux";
+import { useGetUserByUidQuery } from "../services/bookApi";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-  const user = useSelector((state) => state.userSlice.user);
+  const userId = useSelector((state) => state.userSlice.id);
+  const { data, isLoading } = useGetUserByUidQuery(userId);
+
   return (
     <Drawer.Navigator
       initialRouteName='TabNavigation'
@@ -28,7 +32,9 @@ const DrawerNavigation = () => {
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
-          title: `${user.firstName} ${user.lastName}`,
+          title: isLoading
+            ? `Perfil de Usuario`
+            : `${data.firstName} ${data.lastName}`,
           ...headerStyles,
         }}
       />

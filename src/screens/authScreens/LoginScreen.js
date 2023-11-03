@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -13,12 +13,10 @@ import { firebase_auth } from "../../firebase/authFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useDispatch } from "react-redux";
-import { setUser, setUserId } from "../../redux/slice/userSlice";
+import { setUserId } from "../../redux/slice/userSlice";
 
 import { themeColors } from "../../theme/commonStyles";
 import { errorMessage } from "../../data/errorMessage";
-
-import { useGetUserByUidQuery } from "../../services/bookApi";
 
 const LoginScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -26,10 +24,6 @@ const LoginScreen = ({ navigation }) => {
   const [errorText, setErrorText] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  //
-  const [userUid, setUserUid] = useState("");
-  const { data } = useGetUserByUidQuery(userUid);
 
   const handleLogin = async () => {
     try {
@@ -41,9 +35,6 @@ const LoginScreen = ({ navigation }) => {
       );
 
       dispatch(setUserId(response.user.uid));
-
-      setUserUid(response.user.uid);
-      dispatch(setUser(data));
 
       setIsLoading(false);
     } catch (error) {
