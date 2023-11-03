@@ -9,8 +9,8 @@ import BooksListComponent from "../../components/BooksListComponent";
 import { useGetAllBooksQuery } from "../../services/bookApi";
 import { useSelector } from "react-redux";
 
-import { filteredSharingBooksByTitle } from "../../filtered/filteredSharingBooksByTitle";
-import { filteredBooksToShared } from "../../filtered/filteredBooksToShared";
+import { filteredSharingBooksByTitle } from "../../data/filteredSharingBooksByTitle";
+import { filteredBooksToShared } from "../../data/filteredBooksToShared";
 
 const BooksSearchScreen = ({ navigation }) => {
   //Se guardan todos todos los libros en el estado global

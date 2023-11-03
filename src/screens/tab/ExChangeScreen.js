@@ -19,8 +19,8 @@ import { useGetAllBooksQuery } from "../../services/bookApi";
 //Redux
 import { useSelector } from "react-redux";
 
-import { filteredBooksToReceive } from "../../filtered/filteredBooksToReceive";
-import { filteredBooksToDeliver } from "../../filtered/filteredBooksToDeliver";
+import { filteredBooksToReceive } from "../../data/filteredBooksToReceive";
+import { filteredBooksToDeliver } from "../../data/filteredBooksToDeliver";
 
 import { useIsFocused } from "@react-navigation/native";
 
