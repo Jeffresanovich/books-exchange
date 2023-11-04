@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 
+import MapScreen from "../tab/MapScreen";
+
 const SettingScreen = () => {
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);
   const [darkModeEnabled, setDarkModeEnabled] = React.useState(false);
@@ -22,6 +24,8 @@ const SettingScreen = () => {
           color='red'
         />
       </View>
+
+      <MapScreen />
     </View>
   );
 };

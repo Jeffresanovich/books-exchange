@@ -99,6 +99,15 @@ export const bookApi = createApi({
       }),
     }),
 
+    //Update user coordinates
+    patchUserCoordinates: builder.mutation({
+      query: ([userId, body]) => ({
+        url: `users/${userId}/exchangePoint.json`,
+        method: "PATCH",
+        body: body,
+      }),
+    }),
+
     //"Delete" User
     deleteUser: builder.mutation({
       query: (userId) => ({
@@ -125,5 +134,6 @@ export const {
   useGetUserByUidQuery,
   usePutUserMutation,
   usePatchUserMutation,
+  usePatchUserCoordinatesMutation,
   useDeleteUserMutation,
 } = bookApi; //EndPint en forma de HOOK: use...

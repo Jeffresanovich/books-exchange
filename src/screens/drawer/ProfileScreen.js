@@ -20,6 +20,7 @@ import { flex, border } from "../../theme/commonStyles";
 //Services
 import {
   useGetUserByUidQuery,
+  usePatchUserCoordinatesMutation,
   usePatchUserMutation,
 } from "../../services/bookApi";
 
@@ -31,13 +32,18 @@ import { clearUserId } from "../../redux/slice/userSlice";
 import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
+import { isAction } from "@reduxjs/toolkit";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
 
+  const { firstName, lastName, email, exchangePoint } = data;
+  const { latitude, longitude, placeName, isActive } = exchangePoint;
+
   const [patchUser] = usePatchUserMutation();
+  const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
@@ -57,6 +63,17 @@ const ProfileScreen = () => {
       ]);
       refetch();
     }
+  };
+
+  const handleSetUserCoordinates = () => {
+    const setUserCoordinates = {
+      placeName: "cargado",
+      latitude: -31.4135,
+      longitude: -64.18105,
+      isActive: !isActive,
+    };
+    patchUserCoordinates([userId, setUserCoordinates]);
+    refetch();
   };
 
   const handleSignOut = () => {
@@ -99,7 +116,15 @@ const ProfileScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
-
+          <View style={styles.openCamGaleryContainer}>
+            <TouchableOpacity onPress={handleSetUserCoordinates}>
+              <MaterialCommunityIcons
+                name={isActive ? "map-marker-remove" : "map-marker-plus"}
+                size={35}
+                color={isActive ? "red" : "green"}
+              />
+            </TouchableOpacity>
+          </View>
           <Text style={styles.email}>{data.email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
