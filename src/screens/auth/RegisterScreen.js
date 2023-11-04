@@ -45,9 +45,10 @@ const RegisterScreen = ({ navigation }) => {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtYqXjw6IR_opev4UADLjT8TPcLmWYQsx_YQ&usqp=CAU",
         isActive: true,
         exchangePoint: {
-          placeName: "Ninguno",
+          placeName: "Nuevo usuario",
           latitude: 0,
           longitude: 0,
+          isSharing: false,
         },
       };
 

@@ -32,15 +32,15 @@ import { clearUserId } from "../../redux/slice/userSlice";
 import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
-import { isAction } from "@reduxjs/toolkit";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
+
+  //extraer en un hook //TODO
   const userId = useSelector((state) => state.userSlice.id);
   const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-
-  const { firstName, lastName, email, exchangePoint } = data;
-  const { latitude, longitude, placeName, isActive } = exchangePoint;
+  const { image, firstName, lastName, email, exchangePoint } = data;
+  const { latitude, longitude, placeName, isSharing } = exchangePoint;
 
   const [patchUser] = usePatchUserMutation();
   const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
@@ -56,6 +56,7 @@ const ProfileScreen = () => {
   };
 
   const saveImage = async (imageBase64) => {
+    //REVISAR: la doble negacion aqui
     if (!!imageBase64) {
       await patchUser([
         userId,
@@ -65,14 +66,22 @@ const ProfileScreen = () => {
     }
   };
 
-  const handleSetUserCoordinates = () => {
+  const handleSetUserCoordinates = async () => {
     const setUserCoordinates = {
-      placeName: "cargado",
-      latitude: -31.4135,
+      //placeName: "",
+      latitude: -31.4135, //Logica para que actualice coordenadas o las mantega
       longitude: -64.18105,
-      isActive: !isActive,
+      isSharing: true,
     };
-    patchUserCoordinates([userId, setUserCoordinates]);
+
+    await patchUserCoordinates([
+      userId,
+      isSharing
+        ? {
+            isSharing: false,
+          }
+        : setUserCoordinates,
+    ]);
     refetch();
   };
 
@@ -101,7 +110,7 @@ const ProfileScreen = () => {
         <ActivityIndicator size='large' color='#65A6F6' />
       ) : (
         <>
-          <Image source={{ uri: data.image }} style={styles.profileImage} />
+          <Image source={{ uri: image }} style={styles.profileImage} />
           <View style={styles.imageEdit}>
             <View style={styles.openCamGaleryContainer}>
               <TouchableOpacity onPress={handleOpenCam}>
@@ -119,13 +128,13 @@ const ProfileScreen = () => {
           <View style={styles.openCamGaleryContainer}>
             <TouchableOpacity onPress={handleSetUserCoordinates}>
               <MaterialCommunityIcons
-                name={isActive ? "map-marker-remove" : "map-marker-plus"}
+                name={isSharing ? "map-marker-remove" : "map-marker-plus"}
                 size={35}
-                color={isActive ? "red" : "green"}
+                color={isSharing ? "red" : "green"}
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.email}>{data.email}</Text>
+          <Text style={styles.email}>{email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
             <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
