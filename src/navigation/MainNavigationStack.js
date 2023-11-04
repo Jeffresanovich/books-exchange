@@ -14,24 +14,20 @@ import { getUserIdFromStorage } from "../hook/useAsyncStorage";
 
 const MainNavigationStack = () => {
   const dispatch = useDispatch();
-  const [checkUser, setCheckUser] = useState(true);
   const user = useSelector((state) => state.userSlice.id);
 
   const getUserId = async () => {
     const userIdFromStorage = await getUserIdFromStorage();
-    if (userIdFromStorage) {
-      dispatch(setUserId(userIdFromStorage));
-      setCheckUser(userIdFromStorage);
-    } else setCheckUser(user);
+    dispatch(setUserId(userIdFromStorage));
   };
 
   useEffect(() => {
     getUserId();
-  }, [user]);
+  }, []);
 
   return (
     <NavigationContainer>
-      {checkUser ? <DrawerNavigation /> : <AuthNavigastionStack />}
+      {user ? <DrawerNavigation /> : <AuthNavigastionStack />}
     </NavigationContainer>
   );
 };
