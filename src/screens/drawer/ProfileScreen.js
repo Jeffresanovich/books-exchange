@@ -30,6 +30,8 @@ import { clearUserId } from "../../redux/slice/userSlice";
 //Cam and ImageGalery
 import { openCam, openGalery } from "../../hook/useImagePiker";
 
+import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
+
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userSlice.id);
@@ -70,8 +72,9 @@ const ProfileScreen = () => {
       ]
     );
     const logout = () => {
-      signOut(firebase_auth);
       dispatch(clearUserId());
+      removeUserIdFromStorage();
+      signOut(firebase_auth);
     };
   };
 

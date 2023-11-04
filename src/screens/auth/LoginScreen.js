@@ -36,8 +36,8 @@ const LoginScreen = ({ navigation }) => {
         password
       );
 
+      await saveUserIdFromStorage(response.user.uid);
       dispatch(setUserId(response.user.uid));
-      saveUserIdFromStorage(response.user.uid);
 
       setIsLoading(false);
     } catch (error) {
