@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 
-import MapScreen from "../tab/MapScreen";
+import MapScreen from "../other/MapScreen";
 
 const SettingScreen = () => {
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);

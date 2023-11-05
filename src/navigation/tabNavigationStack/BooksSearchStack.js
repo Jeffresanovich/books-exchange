@@ -3,7 +3,7 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import BooksSearchScreen from "../../screens/tab/BooksSearchScreen";
-import BookDetailScreen from "../../screens/tab/BookDetailScreen";
+import BookDetailScreen from "../../screens/other/BookDetailScreen";
 
 const Stack = createNativeStackNavigator();
 

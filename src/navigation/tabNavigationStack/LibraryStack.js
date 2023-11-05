@@ -3,8 +3,8 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import LibraryScreen from "../../screens/tab/LibraryScreen";
-import BookDetailScreen from "../../screens/tab/BookDetailScreen";
-import FormScreen from "../../screens/tab/FormScreen";
+import BookDetailScreen from "../../screens/other/BookDetailScreen";
+import FormScreen from "../../screens/other/FormScreen";
 
 //Drawer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
