@@ -18,8 +18,10 @@ import { useGetAllBooksQuery } from "../../services/bookApi";
 //Redux
 import { useSelector } from "react-redux";
 
-import { filteredBooksReading } from "../../data/filteredBooksReading";
-import { filteredCurrentUserBooksToShared } from "../../data/filteredCurrentUserBooksToShared";
+import {
+  filteredBooksReading,
+  filteredCurrentUserBooksToShared,
+} from "../../hook/useFilteredBooksData";
 
 import { useIsFocused } from "@react-navigation/native";
 
