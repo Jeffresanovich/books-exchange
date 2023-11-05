@@ -33,6 +33,8 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
+import * as Location from "expo-location";
+
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
@@ -42,8 +44,30 @@ const ProfileScreen = () => {
   const { image, firstName, lastName, email, exchangePoint } = data;
   const { latitude, longitude, placeName, isSharing } = exchangePoint;
 
+  const [location, setLocation] = useState({});
+
   const [patchUser] = usePatchUserMutation();
   const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
+
+  const getLocation = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "ATENCION!",
+          "La app no tiene permiso para acceder a la localizacion"
+        );
+        return;
+      }
+
+      const locationResponse = await Location.getCurrentPositionAsync({});
+      setLocation(locationResponse);
+
+      console.log("LOCATION: ", JSON.stringify(location, null, " "));
+    } catch (error) {
+      console.error("Error getting location: ", error);
+    }
+  };
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
@@ -69,10 +93,11 @@ const ProfileScreen = () => {
   const handleSetUserCoordinates = async () => {
     const setUserCoordinates = {
       //placeName: "",
-      latitude: -31.4135, //Logica para que actualice coordenadas o las mantega
-      longitude: -64.18105,
+      latitude: location.coords.latitude, //-31.4135, //Logica para que actualice coordenadas o las mantega
+      longitude: location.coords.longitude, //-64.18105,
       isSharing: true,
     };
+    getLocation();
 
     await patchUserCoordinates([
       userId,

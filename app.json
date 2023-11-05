@@ -18,6 +18,12 @@
         {
           "photosPermission": "La app accedera a tus fotos."
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Permitir a la app usa tu localizacion."
+        }
       ]
     ],
     "ios": {
