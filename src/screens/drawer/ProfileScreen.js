@@ -35,14 +35,21 @@ import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
 import useGetLocation from "../../hook/useGetLocation";
 
+import useGetUserData from "../../hook/useGetUserData";
+
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
-  //extraer en un hook //TODO
-  const userId = useSelector((state) => state.userSlice.id);
-  const { data, isLoading, refetch } = useGetUserByUidQuery(userId);
-  const { image, firstName, lastName, email, exchangePoint } = data;
-  const { latitude, longitude, placeName, isSharing } = exchangePoint;
+  const {
+    userId,
+    isLoading,
+    image,
+    email,
+    latitude,
+    longitude,
+    isSharing,
+    refetch,
+  } = useGetUserData();
 
   const { latitude: currentLatitude, longitude: currentLongitude } =
     useGetLocation();
