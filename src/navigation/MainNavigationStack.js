@@ -13,9 +13,9 @@ import { setUserId } from "../redux/slice/userSlice";
 import { getUserIdFromStorage } from "../hook/useAsyncStorage";
 
 const MainNavigationStack = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.userSlice.id);
 
+  const dispatch = useDispatch();
   const getUserId = async () => {
     const userIdFromStorage = await getUserIdFromStorage();
     dispatch(setUserId(userIdFromStorage));

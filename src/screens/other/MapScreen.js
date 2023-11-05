@@ -2,24 +2,12 @@ import { ActivityIndicator, View } from "react-native";
 
 import MapView, { Marker } from "react-native-maps";
 
-import { useSelector } from "react-redux";
-import { useGetUserByUidQuery } from "../../services/bookApi";
+import useGetUserData from "../../hook/useGetUserData";
 
 const MapScreen = () => {
-  const userId = useSelector((state) => state.userSlice.id);
+  const { isLoading, firstName, lastName, email, latitude, longitude } =
+    useGetUserData();
 
-  const { data, isLoading } = useGetUserByUidQuery(userId);
-
-  const { firstName, lastName, email, exchangePoint } = data;
-  const { latitude, longitude, placeName } = exchangePoint;
-
-  /*
-  //CORDOBA
-  const coordinate = {
-    latitude: -31.4135,
-    longitude: -64.18105,
-  };
-*/
   return (
     <View style={{ flex: 1 }}>
       {isLoading ? (

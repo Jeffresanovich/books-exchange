@@ -10,7 +10,7 @@ export default useGetUserData = () => {
   const { latitude, longitude, placeName, isSharing } = exchangePoint;
 
   return {
-    //userId,
+    userId,
     data,
     image,
     firstName,
