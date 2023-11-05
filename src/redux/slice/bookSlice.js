@@ -18,6 +18,7 @@ const initialState = {
     key: null,
   },
   book: {},
+  bookey: null,
 };
 
 const bookSlice = createSlice({
@@ -27,9 +28,12 @@ const bookSlice = createSlice({
     setBook: (state, action) => {
       state.book = action.payload;
     },
+    setBookey: (state, action) => {
+      state.bookey = action.payload;
+    },
   },
 });
 
-export const { setAllBooks, setIsLoading } = bookSlice.actions;
+export const { setAllBooks, setBookey } = bookSlice.actions;
 
 export default bookSlice.reducer;
