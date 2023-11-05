@@ -1,13 +1,5 @@
-import { useState } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import { setUserId } from "../redux/slice/userSlice";
+import { useSelector } from "react-redux";
 import { useGetUserByUidQuery } from "../services/bookApi";
-
-import {
-  getUserIdFromStorage,
-  saveUserIdFromStorage,
-} from "../hook/useAsyncStorage";
 
 export default useGetUserData = () => {
   const userId = useSelector((state) => state.userSlice.id);
@@ -17,7 +9,7 @@ export default useGetUserData = () => {
   const { latitude, longitude, placeName, isSharing } = exchangePoint;
 
   return {
-    //userId,
+    userId,
     data,
     image,
     firstName,

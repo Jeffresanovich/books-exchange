@@ -31,11 +31,24 @@ const LibraryScreen = ({ navigation }) => {
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
-  //Se traer el usuario actual y todos los libros guardados en el estado global
+  //Se traer el usuario actual
   const userId = useSelector((state) => state.userSlice.id);
-  const bookInizializatedParams = useSelector(
-    (state) => state.bookSlice.bookInizializatedParams
-  );
+  const bookInizializatedParams = {
+    book_data: {
+      title: "",
+      synopsis: "",
+      subjects: "",
+      pages: 0,
+      image: "https://www.tourdom.ru/upload/zagl/empty.jpeg",
+      author: "",
+      ownerUserId: "",
+    },
+    transaction: {
+      currentUserId: "",
+      sharingUserId: "",
+    },
+    key: null,
+  };
 
   //Array para listas
   const [booksReading, setBooksReading] = useState([]);
