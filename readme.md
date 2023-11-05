@@ -14,7 +14,7 @@
 
 ---
 
-## **03 - BooksSearchScreen**
+## **03 - SearchScreen**
 
 ![image](https://drive.google.com/uc?export=view&id=1-s-F-yFlm96h0LjaewRvXVHPQ0894vZX)
 

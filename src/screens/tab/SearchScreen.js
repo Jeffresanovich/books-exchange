@@ -14,7 +14,7 @@ import {
   filteredBooksToShared,
 } from "../../hook/useFilteredBooksData";
 
-const BooksSearchScreen = ({ navigation }) => {
+const SearchScreen = ({ navigation }) => {
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BooksSearchScreen;
+export default SearchScreen;

@@ -3,7 +3,7 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import ExChangeScreen from "../../screens/tab/ExChangeScreen";
-import BookDetailScreen from "../../screens/other/BookDetailScreen";
+import DetailsScreen from "../../screens/other/DetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ const ExchangeStack = () => {
       }}
     >
       <Stack.Screen name='ExChangeScreen' component={ExChangeScreen} />
-      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
+      <Stack.Screen name='DetailsScreen' component={DetailsScreen} />
     </Stack.Navigator>
   );
 };

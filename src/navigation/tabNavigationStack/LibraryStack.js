@@ -3,7 +3,7 @@ import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
 import LibraryScreen from "../../screens/tab/LibraryScreen";
-import BookDetailScreen from "../../screens/other/BookDetailScreen";
+import DetailsScreen from "../../screens/other/DetailsScreen";
 import FormScreen from "../../screens/other/FormScreen";
 
 //Drawer
@@ -20,7 +20,7 @@ const LibraryStack = () => {
       }}
     >
       <Stack.Screen name='LibraryScreen' component={LibraryScreen} />
-      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
+      <Stack.Screen name='DetailsScreen' component={DetailsScreen} />
       <Stack.Screen name='FormScreen' component={FormScreen} />
     </Stack.Navigator>
   );

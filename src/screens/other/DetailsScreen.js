@@ -31,7 +31,7 @@ import { useSelector } from "react-redux";
 import UserDetailsComponent from "../../components/UserDetailsComponent";
 import { useState } from "react";
 
-const BookDetailScreen = ({ navigation, route }) => {
+const DetailsScreen = ({ navigation, route }) => {
   const { book } = route.params;
   const { image, title, synopsis, subjects, pages, author, ownerUserId } =
     book.book_data;
@@ -172,7 +172,7 @@ const BookDetailScreen = ({ navigation, route }) => {
   );
 };
 
-export default BookDetailScreen;
+export default DetailsScreen;
 
 const styles = StyleSheet.create({
   container: {

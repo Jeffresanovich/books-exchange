@@ -2,21 +2,21 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { headerStyles } from "../../theme/commonStyles";
 
 //Screens
-import BooksSearchScreen from "../../screens/tab/BooksSearchScreen";
-import BookDetailScreen from "../../screens/other/BookDetailScreen";
+import SearchScreen from "../../screens/tab/SearchScreen";
+import DetailsScreen from "../../screens/other/DetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
 const BooksSearchStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName='BooksSearchScreen'
+      initialRouteName='SearchScreen'
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name='BooksSearchScreen' component={BooksSearchScreen} />
-      <Stack.Screen name='BookDetailScreen' component={BookDetailScreen} />
+      <Stack.Screen name='SearchScreen' component={SearchScreen} />
+      <Stack.Screen name='DetailsScreen' component={DetailsScreen} />
     </Stack.Navigator>
   );
 };
