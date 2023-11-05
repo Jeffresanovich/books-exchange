@@ -70,16 +70,6 @@ const ExChangeScreen = ({ navigation }) => {
               books={booksToDeliver}
             />
           </View>
-          <TouchableOpacity
-            style={[styles.button, { top: height - 220, left: width - 100 }]}
-            onPress={() =>
-              navigation.navigate("FormScreen", {
-                book: bookInizializatedParams,
-              })
-            }
-          >
-            <MaterialIcons name='post-add' size={60} color='white' />
-          </TouchableOpacity>
         </>
       )}
     </View>

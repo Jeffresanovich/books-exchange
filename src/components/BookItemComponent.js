@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { flex } from "../theme/commonStyles";
 
 const BookItemComponent = ({ book, navigation }) => {
+  const { image, title } = book.book_data;
   return (
     <View style={styles.container}>
       <Pressable
@@ -14,11 +15,11 @@ const BookItemComponent = ({ book, navigation }) => {
           style={styles.image}
           height={150}
           width={100}
-          source={{ uri: book.book_data.image }}
+          source={{ uri: image }}
           resizeMode='cover'
         />
         <View style={styles.infoContainer}>
-          <Text style={styles.title}>{book.book_data.title}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </Pressable>
     </View>

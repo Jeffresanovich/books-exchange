@@ -1,13 +1,6 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setUserId } from "../redux/slice/userSlice";
 import { useGetUserByUidQuery } from "../services/bookApi";
-
-import {
-  getUserIdFromStorage,
-  saveUserIdFromStorage,
-} from "../hook/useAsyncStorage";
 
 export default useGetUserData = () => {
   const userId = useSelector((state) => state.userSlice.id);
