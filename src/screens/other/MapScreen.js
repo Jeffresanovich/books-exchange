@@ -18,8 +18,8 @@ const MapScreen = ({ title, description, latitude, longitude }) => {
         <Marker
           //image={{ uri: data.image }}
           coordinate={{ latitude, longitude }}
-          title={title}
-          description={description}
+          title={"PUNTO DE INTERCAMBIO"}
+          description={`Usuario: `}
         />
       </MapView>
     </View>
