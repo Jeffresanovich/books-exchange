@@ -3,9 +3,9 @@ import { View } from "react-native";
 import useGetUserData from "../../hook/useGetUserData";
 
 import MapView, { Marker } from "react-native-maps";
-const MapScreen = ({ userId = null }) => {
-  const { image, firstName, lastName, latitude, longitude } =
-    useGetUserData(userId);
+
+const MapScreen = () => {
+  const { image, firstName, lastName, latitude, longitude } = useGetUserData();
 
   //TODO: add small image
 
