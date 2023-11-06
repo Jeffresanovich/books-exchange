@@ -10,14 +10,12 @@ import ProfileScreen from "../screens/drawer/ProfileScreen";
 import NotificationScreen from "../screens/drawer/NotificationScreen";
 import SettingScreen from "../screens/drawer/SettingScreen";
 
-import { useSelector } from "react-redux";
-import { useGetUserByUidQuery } from "../services/bookApi";
+import useGetUserData from "../hook/useGetUserData";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-  const userId = useSelector((state) => state.userSlice.id);
-  const { data, isLoading } = useGetUserByUidQuery(userId);
+  const { firstName, lastName } = useGetUserData();
 
   return (
     <Drawer.Navigator
@@ -32,7 +30,7 @@ const DrawerNavigation = () => {
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
-          title: `Perfil de ${data.firstName} ${data.lastName}`,
+          title: `Perfil de ${firstName} ${lastName}`,
           ...headerStyles,
         }}
       />
