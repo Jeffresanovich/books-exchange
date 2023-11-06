@@ -15,7 +15,7 @@ const SettingScreen = () => {
         <Switch
           value={notificationsEnabled}
           onValueChange={(value) => setNotificationsEnabled(value)}
-          color='gree'
+          color='green'
         />
       </View>
       <View style={styles.setting}>
