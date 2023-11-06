@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -9,23 +9,18 @@ import {
   Alert,
 } from "react-native";
 
-//Firebase
-import { firebase_auth } from "../../firebase/authFirebase";
-import { signOut } from "firebase/auth";
-
 //Styles
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { flex, border } from "../../theme/commonStyles";
 
 //Services
 import {
-  useGetUserByUidQuery,
   usePatchUserCoordinatesMutation,
   usePatchUserMutation,
 } from "../../services/bookApi";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearUserId } from "../../redux/slice/userSlice";
 
 //Cam and ImageGalery
@@ -33,11 +28,11 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
+//Custom Hook
 import useGetLocation from "../../hook/useGetLocation";
-
 import useGetUserData from "../../hook/useGetUserData";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const {
@@ -110,9 +105,9 @@ const ProfileScreen = () => {
       ]
     );
     const logout = () => {
-      dispatch(clearUserId());
       removeUserIdFromStorage();
-      signOut(firebase_auth);
+      navigation.navigate("TabNavigation");
+      dispatch(clearUserId());
     };
   };
 

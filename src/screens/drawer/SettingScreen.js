@@ -1,11 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 
 import MapScreen from "../other/MapScreen";
 
 const SettingScreen = () => {
-  const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);
-  const [darkModeEnabled, setDarkModeEnabled] = React.useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
+  const [shareExchangePoint, setShareExchangePoint] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -14,6 +15,7 @@ const SettingScreen = () => {
         <Switch
           value={notificationsEnabled}
           onValueChange={(value) => setNotificationsEnabled(value)}
+          color='gree'
         />
       </View>
       <View style={styles.setting}>
@@ -21,7 +23,15 @@ const SettingScreen = () => {
         <Switch
           value={darkModeEnabled}
           onValueChange={(value) => setDarkModeEnabled(value)}
-          color='red'
+          color='black'
+        />
+      </View>
+      <View style={styles.setting}>
+        <Text style={styles.settingText}>Compartir punto de intercambio</Text>
+        <Switch
+          value={shareExchangePoint}
+          onValueChange={(value) => setShareExchangePoint(value)}
+          color='blue'
         />
       </View>
 

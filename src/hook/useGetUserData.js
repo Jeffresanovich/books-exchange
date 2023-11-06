@@ -12,17 +12,16 @@ export default useGetUserData = () => {
   return {
     userId,
     data,
+    isSharing,
+    isLoading,
+    isFetching,
+    refetch,
     image,
     firstName,
     lastName,
     email,
     latitude,
     longitude,
-    placeName,
-    isSharing,
-    isLoading,
-    refetch,
-    isFetching,
     placeName,
   };
 };

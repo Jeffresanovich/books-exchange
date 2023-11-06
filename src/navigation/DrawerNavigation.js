@@ -42,7 +42,7 @@ const DrawerNavigation = () => {
         name='TabNavigation'
         component={TabNavigation}
         options={{
-          title: "Biblioteca",
+          title: "BIBLIOTECA",
           ...headerStyles,
         }}
       />
