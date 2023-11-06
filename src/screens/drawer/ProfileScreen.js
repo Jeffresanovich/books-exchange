@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -14,10 +13,7 @@ import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { flex, border } from "../../theme/commonStyles";
 
 //Services
-import {
-  usePatchUserCoordinatesMutation,
-  usePatchUserMutation,
-} from "../../services/bookApi";
+import { usePatchUserMutation } from "../../services/bookApi";
 
 //Redux
 import { useDispatch } from "react-redux";
@@ -29,28 +25,14 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
 //Custom Hook
-import useGetLocation from "../../hook/useGetLocation";
 import useGetUserData from "../../hook/useGetUserData";
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const {
-    userId,
-    isLoading,
-    image,
-    email,
-    latitude,
-    longitude,
-    isSharing,
-    refetch,
-  } = useGetUserData();
-
-  const { latitude: currentLatitude, longitude: currentLongitude } =
-    useGetLocation();
+  const { userId, isLoading, image, email, refetch } = useGetUserData();
 
   const [patchUser] = usePatchUserMutation();
-  const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
@@ -71,25 +53,6 @@ const ProfileScreen = ({ navigation }) => {
       ]);
       refetch();
     }
-  };
-
-  const handleSetUserCoordinates = async () => {
-    const setUserCoordinates = {
-      //placeName: "",
-      latitude: currentLatitude,
-      longitude: currentLongitude,
-      isSharing: true,
-    };
-
-    await patchUserCoordinates([
-      userId,
-      isSharing
-        ? {
-            isSharing: false,
-          }
-        : setUserCoordinates,
-    ]);
-    refetch();
   };
 
   const handleSignOut = () => {
@@ -132,15 +95,7 @@ const ProfileScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.openCamGaleryContainer}>
-            <TouchableOpacity onPress={handleSetUserCoordinates}>
-              <MaterialCommunityIcons
-                name={isSharing ? "map-marker-remove" : "map-marker-plus"}
-                size={35}
-                color={isSharing ? "red" : "green"}
-              />
-            </TouchableOpacity>
-          </View>
+
           <Text style={styles.email}>{email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
