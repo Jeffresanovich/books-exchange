@@ -20,6 +20,7 @@ import { usePatchUserCoordinatesMutation } from "../../services/bookApi";
 import useGetLocation from "../../hook/useGetLocation";
 
 import MapScreen from "../other/MapScreen";
+import useGetUserData from "../../hook/useGetUserData";
 
 const SettingScreen = () => {
   const { userId, isSharingCoordinates, refetch } = useGetUserData();

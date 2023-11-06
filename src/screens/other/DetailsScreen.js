@@ -32,6 +32,7 @@ import UserDetailsComponent from "../../components/UserDetailsComponent";
 import { useState } from "react";
 
 const DetailsScreen = ({ navigation, route }) => {
+  //TODO: optimize get book data
   const { book } = route.params;
   const { image, title, synopsis, subjects, pages, author, ownerUserId } =
     book.book_data;

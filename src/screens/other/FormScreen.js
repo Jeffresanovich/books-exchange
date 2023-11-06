@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { openCam, openGalery } from "../../hook/useImagePiker";
 
 const FormScreen = ({ navigation, route }) => {
+  //TODO: optimize get book data
   const { book } = route.params;
 
   const [postBook] = usePostBookMutation();
@@ -39,6 +40,7 @@ const FormScreen = ({ navigation, route }) => {
 
   const userId = useSelector((state) => state.userSlice.id);
 
+  //TODO: optimize blank form
   const formBook = {
     book_data: {
       image,
@@ -65,69 +67,67 @@ const FormScreen = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View>
-          <Image source={{ uri: image }} style={styles.profileImage} />
-          <View style={styles.imageEdit}>
-            <View style={styles.openCamGaleryContainer}>
-              <TouchableOpacity onPress={() => openCam(setImage)}>
-                <MaterialCommunityIcons name='camera' size={35} color='grey' />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => openGalery(setImage)}>
-                <MaterialCommunityIcons
-                  name='folder-image'
-                  size={35}
-                  color='grey'
-                />
-              </TouchableOpacity>
-            </View>
+    <ScrollView style={styles.container}>
+      <View>
+        <Image source={{ uri: image }} style={styles.profileImage} />
+        <View style={styles.imageEdit}>
+          <View style={styles.openCamGaleryContainer}>
+            <TouchableOpacity onPress={() => openCam(setImage)}>
+              <MaterialCommunityIcons name='camera' size={35} color='grey' />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openGalery(setImage)}>
+              <MaterialCommunityIcons
+                name='folder-image'
+                size={35}
+                color='grey'
+              />
+            </TouchableOpacity>
           </View>
         </View>
-
-        <TextInput
-          style={styles.input}
-          placeholder='Título'
-          value={title}
-          onChangeText={setTitle}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder='Autor'
-          value={author}
-          onChangeText={setAuthor}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Tema'
-          value={subjects}
-          onChangeText={setSubjects}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Pagina'
-          value={pages.toString()}
-          onChangeText={setPages}
-        />
-
-        <TextInput
-          style={[styles.input, { height: 200 }]}
-          multiline
-          placeholder='Resumen'
-          value={synopsis}
-          onChangeText={setSynopsis}
-        />
-        {!!book.key ? (
-          <TouchableOpacity style={styles.button} onPress={handleUpdate}>
-            <Text style={styles.buttonText}>Actualizar</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity style={styles.button} onPress={handleCreate}>
-            <Text style={styles.buttonText}>Cargar</Text>
-          </TouchableOpacity>
-        )}
       </View>
+
+      <TextInput
+        style={styles.input}
+        placeholder='Título'
+        value={title}
+        onChangeText={setTitle}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder='Autor'
+        value={author}
+        onChangeText={setAuthor}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder='Tema'
+        value={subjects}
+        onChangeText={setSubjects}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder='Pagina'
+        value={pages.toString()}
+        onChangeText={setPages}
+      />
+
+      <TextInput
+        style={[styles.input, { height: 200 }]}
+        multiline
+        placeholder='Resumen'
+        value={synopsis}
+        onChangeText={setSynopsis}
+      />
+      {!!book.key ? (
+        <TouchableOpacity style={styles.button} onPress={handleUpdate}>
+          <Text style={styles.buttonText}>Actualizar</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.button} onPress={handleCreate}>
+          <Text style={styles.buttonText}>Cargar</Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 };
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
+    margin: 50,
   },
   profileImage: {
     width: 150,

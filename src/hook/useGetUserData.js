@@ -4,25 +4,25 @@ import { useGetUserByUidQuery } from "../services/bookApi";
 
 export default useGetUserData = (userIdFromParam = null) => {
   const userIdFromRedux = useSelector((state) => state.userSlice.id);
-
   const userId = userIdFromParam ? userIdFromParam : userIdFromRedux;
+  //const userId = useSelector((state) => state.userSlice.id);
 
   const { data, isLoading, isFetching, refetch } = useGetUserByUidQuery(userId);
   const { image, firstName, lastName, email, exchangePoint } = data;
   const { latitude, longitude, isSharingCoordinates } = exchangePoint;
 
   return {
-    userId,
     data,
-    isLoading,
-    isFetching,
-    refetch,
-    image,
-    firstName,
-    lastName,
     email,
+    firstName,
+    image,
+    isFetching,
+    isLoading,
+    isSharingCoordinates,
+    lastName,
     latitude,
     longitude,
-    isSharingCoordinates,
+    refetch,
+    userId,
   };
 };

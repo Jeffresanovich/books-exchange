@@ -56,6 +56,7 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   const handleSignOut = () => {
+    //TODO: Alert
     Alert.alert(
       "CONFIRMAR",
       "¿Esta seguro que desea cerrar sesion en este dispositivo?",
