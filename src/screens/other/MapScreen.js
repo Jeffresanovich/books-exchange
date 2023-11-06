@@ -1,7 +1,10 @@
 import { View } from "react-native";
 
 import MapView, { Marker } from "react-native-maps";
-const MapScreen = ({ title, description, latitude, longitude }) => {
+const MapScreen = ({ userId = null }) => {
+  const { image, firstName, lastName, latitude, longitude } =
+    useGetUserData(userId);
+
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -19,7 +22,7 @@ const MapScreen = ({ title, description, latitude, longitude }) => {
           //image={{ uri: data.image }}
           coordinate={{ latitude, longitude }}
           title={"PUNTO DE INTERCAMBIO"}
-          description={`Usuario: `}
+          description={`Usuario: ${firstName} ${lastName}`}
         />
       </MapView>
     </View>

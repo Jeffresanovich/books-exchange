@@ -32,9 +32,7 @@ const DrawerNavigation = () => {
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
-          title: isLoading
-            ? `Perfil de Usuario`
-            : `${data.firstName} ${data.lastName}`,
+          title: `Perfil de ${data.firstName} ${data.lastName}`,
           ...headerStyles,
         }}
       />
