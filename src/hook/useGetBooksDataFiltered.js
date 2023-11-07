@@ -97,6 +97,28 @@ export default useGetBooksDataFiltered = () => {
     return filtered;
   };
 
+  const filteredBookByKey = (bookey) => {
+    const filtered = allBookConverted.filter((item) => item.key === bookey);
+
+    const { book_data, transaction, key } = filtered;
+    const { image, title, synopsis, subjects, pages, author, ownerUserId } =
+      book_data;
+    const { currentUserId, sharingUserId } = transaction;
+
+    return {
+      author,
+      currentUserId,
+      image,
+      key,
+      ownerUserId,
+      pages,
+      sharingUserId,
+      subjects,
+      synopsis,
+      title,
+    };
+  };
+
   return {
     isLoading,
     refetch,
@@ -107,5 +129,6 @@ export default useGetBooksDataFiltered = () => {
     filteredBooksUploaded,
     filteredCurrentUserBooksToShared,
     filteredSharingBooksByTitle,
+    filteredBookByKey,
   };
 };

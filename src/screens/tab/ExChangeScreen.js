@@ -12,7 +12,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 
 //Components
-import BooksListComponent from "../../components/BooksListComponent";
+import BooksListComponent from "../../components/list/BooksListComponent";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
 
@@ -61,6 +61,7 @@ const ExChangeScreen = ({ navigation }) => {
             <BooksListComponent
               navigation={navigation}
               books={booksToReceive}
+              horizontal={true}
             />
           </View>
           <View style={styles.container}>
@@ -68,6 +69,7 @@ const ExChangeScreen = ({ navigation }) => {
             <BooksListComponent
               navigation={navigation}
               books={booksToDeliver}
+              horizontal={true}
             />
           </View>
         </>

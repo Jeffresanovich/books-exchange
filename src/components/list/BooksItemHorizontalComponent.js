@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 
-import { flex } from "../theme/commonStyles";
+import { flex } from "../../theme/commonStyles";
 
-const BookItemComponent = ({ book, navigation }) => {
+const BooksItemHorizontalComponent = ({ book, navigation }) => {
   const { image, title } = book.book_data;
   return (
     <View style={styles.container}>
@@ -26,8 +26,6 @@ const BookItemComponent = ({ book, navigation }) => {
   );
 };
 
-export default BookItemComponent;
-
 const styles = StyleSheet.create({
   container: {},
   button: {
@@ -46,3 +44,5 @@ const styles = StyleSheet.create({
     width: "80%",
   },
 });
+
+export default BooksItemHorizontalComponent;

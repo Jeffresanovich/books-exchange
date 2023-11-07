@@ -4,7 +4,7 @@ import { View, TextInput, StyleSheet, ActivityIndicator } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 
 import SearchComponent from "../../components/SearchComponent";
-import BooksListComponent from "../../components/BooksListComponent";
+import BooksListComponent from "../../components/list/BooksListComponent";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
 import { useSelector } from "react-redux";

@@ -11,7 +11,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 
 //Components
-import BooksListComponent from "../../components/BooksListComponent";
+import BooksListComponent from "../../components/list/BooksListComponent";
 
 import { useGetAllBooksQuery } from "../../services/bookApi";
 
@@ -72,10 +72,18 @@ const LibraryScreen = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.container}>
-            <BooksListComponent navigation={navigation} books={booksReading} />
+            <BooksListComponent
+              navigation={navigation}
+              books={booksReading}
+              horizontal={true}
+            />
           </View>
           <View style={styles.container}>
-            <BooksListComponent navigation={navigation} books={booksToShared} />
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToShared}
+              horizontal={true}
+            />
           </View>
           <TouchableOpacity
             style={[styles.button, { top: height - 230, left: width - 100 }]}
