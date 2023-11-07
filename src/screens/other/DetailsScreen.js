@@ -82,17 +82,13 @@ const DetailsScreen = ({ navigation, route }) => {
               }}
             />
           </View>
-          <View style={styles.infoContainer}>
-            <View style={styles.titleRatingStockContainer}>
-              <TitleComponent title={title} />
-            </View>
-          </View>
+          <TitleComponent bookData={book.book_data} />
           <DescriptionComponent description={synopsis} />
           <View style={styles.buttonContainer}>
             <View style={styles.transactionButtonContainer}>
               {sharingUserId === "" && (
                 <Pressable
-                  style={[styles.button, styles.buyButton]}
+                  style={styles.button}
                   onPress={() => handleGetBook()}
                 >
                   <MaterialCommunityIcons
@@ -105,11 +101,11 @@ const DetailsScreen = ({ navigation, route }) => {
               )}
               {currentUserId === sharingUserId && (
                 <Pressable
-                  style={[styles.button, styles.buyButton]}
+                  style={styles.button}
                   onPress={() => handleSharingBook()}
                 >
-                  <MaterialCommunityIcons name='book' size={50} color='white' />
-                  <Text style={styles.buttonText}>COMPARTIR</Text>
+                  <MaterialCommunityIcons name='lock' size={50} color='white' />
+                  <Text style={styles.buttonText}>RESERVAR</Text>
                 </Pressable>
               )}
               {currentUserId !== userId &&
@@ -117,11 +113,11 @@ const DetailsScreen = ({ navigation, route }) => {
                 sharingUserId !== "" && (
                   <>
                     <Pressable
-                      style={[styles.button, styles.buyButton]}
+                      style={[styles.button, { backgroundColor: "green" }]}
                       onPress={() => handleDeliveryBook()}
                     >
                       <MaterialCommunityIcons
-                        name='book'
+                        name='check-all'
                         size={50}
                         color='white'
                       />
@@ -141,24 +137,24 @@ const DetailsScreen = ({ navigation, route }) => {
               ownerUserId === userId && (
                 <View style={styles.editButtonContainer}>
                   <Pressable
-                    style={[styles.button, styles.buyButton]}
+                    style={[styles.button, { backgroundColor: "green" }]}
                     onPress={() =>
                       navigation.navigate("FormScreen", { book: book })
                     }
                   >
                     <MaterialCommunityIcons
-                      name='book-lock'
+                      name='playlist-edit'
                       size={50}
                       color='white'
                     />
                     <Text style={styles.buttonText}>EDITAR</Text>
                   </Pressable>
                   <Pressable
-                    style={[styles.button, styles.buyButton]}
+                    style={[styles.button, { backgroundColor: "red" }]}
                     onPress={() => handleDelete()}
                   >
                     <MaterialCommunityIcons
-                      name='book'
+                      name='delete'
                       size={50}
                       color='white'
                     />
@@ -180,6 +176,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  title: {},
   imageContainer: {
     alignItems: "center",
   },
@@ -215,14 +212,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginEnd: 10,
   },
-  /*
-  transactionButtonContainer: {
-    ...flex("space-evenly"),
-  },
-  editButtonContainer: {
-    ...flex("space-evenly"),
-  },
-  */
   buttonContainer: {
     marginVertical: 10,
     alignItems: "center",
@@ -233,15 +222,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     margin: 10,
     width: 300,
+    ...flex("space-evenly"),
+    backgroundColor: themeColors.heavyBlue,
   },
   buttonText: {
     color: "white",
     fontSize: 30,
     fontWeight: "900",
-  },
-  buyButton: {
-    ...flex("space-evenly"),
-    backgroundColor: themeColors.heavyBlue,
   },
   cartButton: {
     ...flex("space-evenly"),
