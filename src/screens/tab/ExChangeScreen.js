@@ -16,6 +16,7 @@ import {
 } from "../../hook/useFilteredBooksData";
 
 import { useIsFocused } from "@react-navigation/native";
+import TitleListComponent from "../../components/list/TitleListComponent";
 
 const ExChangeScreen = ({ navigation }) => {
   //Se guardan todos todos los libros en el estado global
@@ -46,7 +47,7 @@ const ExChangeScreen = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.listContainer}>
-            <Text style={styles.titulo}>LIBROS POR RECIBIR</Text>
+            <TitleListComponent title='POR RECIBIR' />
             <BooksListComponent
               navigation={navigation}
               books={booksToReceive}
@@ -54,7 +55,7 @@ const ExChangeScreen = ({ navigation }) => {
             />
           </View>
           <View style={styles.listContainer}>
-            <Text style={styles.titulo}>LIBROS PARA ENTREGAR</Text>
+            <TitleListComponent title='PARA ENTREGAR' />
             <BooksListComponent
               navigation={navigation}
               books={booksToDeliver}
@@ -72,7 +73,6 @@ export default ExChangeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     justifyContent: "center",
   },
   listContainer: {

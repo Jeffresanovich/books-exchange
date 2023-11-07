@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   button: {
     ...flex("flex-start"),
-    height: "80%",
+    height: "85%",
   },
   image: {
     margin: 10,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 23,
+    fontSize: 25,
     fontWeight: "300",
     fontFamily: "Poppins",
   },
@@ -61,12 +61,13 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
   },
   subjects: {
-    backgroundColor: "red",
+    backgroundColor: "grey",
     borderRadius: 30,
     color: "white",
     width: 150,
     fontWeight: "900",
     textAlign: "center",
+    padding: 3,
     margin: 10,
   },
 });

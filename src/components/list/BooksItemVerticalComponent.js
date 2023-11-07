@@ -49,24 +49,23 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 23,
-    //flexWrap: "wrap",
+    fontSize: 25,
     fontWeight: "300",
-    //width: "80%",
     fontFamily: "Poppins",
   },
   pages: {
-    fontSize: 13,
+    fontSize: 12,
     textAlign: "center",
     fontFamily: "Poppins",
   },
   subjects: {
-    backgroundColor: "red",
+    backgroundColor: "grey",
     borderRadius: 30,
     color: "white",
-    width: 200,
+    width: 150,
     fontWeight: "900",
     textAlign: "center",
+    padding: 3,
     margin: 10,
   },
 });

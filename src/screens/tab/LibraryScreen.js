@@ -27,6 +27,7 @@ import {
 } from "../../hook/useFilteredBooksData";
 
 import { useIsFocused } from "@react-navigation/native";
+import TitleListComponent from "../../components/list/TitleListComponent";
 
 const LibraryScreen = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
@@ -75,24 +76,22 @@ const LibraryScreen = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.listContainer}>
-            <Text style={styles.titulo}>LEYENDO ACTUALMENTE</Text>
-            <View style={styles.container}>
-              <BooksListComponent
-                navigation={navigation}
-                books={booksReading}
-                horizontal={true}
-              />
-            </View>
+            <TitleListComponent title='LEYENDO' />
+
+            <BooksListComponent
+              navigation={navigation}
+              books={booksReading}
+              horizontal={true}
+            />
           </View>
           <View style={styles.listContainer}>
-            <Text style={styles.titulo}>LEYENDO ACTUALMENTE</Text>
-            <View style={styles.container}>
-              <BooksListComponent
-                navigation={navigation}
-                books={booksToShared}
-                horizontal={true}
-              />
-            </View>
+            <TitleListComponent title='DISPONIBLE' />
+
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToShared}
+              horizontal={true}
+            />
           </View>
           <TouchableOpacity
             style={[styles.button, { top: height - 230, left: width - 100 }]}
@@ -121,12 +120,6 @@ const styles = StyleSheet.create({
   listContainer: {
     height: "50%",
     alignContent: "center",
-  },
-  titulo: {
-    marginTop: "3%",
-    marginVertical: "1%",
-    fontSize: 30,
-    textAlign: "center",
   },
   button: {
     position: "absolute",
