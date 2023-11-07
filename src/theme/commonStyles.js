@@ -1,3 +1,4 @@
+//Theme color
 export const themeColors = {
   heavyBlue: "#65A6F6",
   mediumBlue: "#9AC4F8",
@@ -16,7 +17,7 @@ export const headerStyles = {
 };
 
 /**
- *
+ * Flex the components easily
  * @param {string} justifyContent "center"||"flex-end"||"flex-start"||"space-around"||"space-between"||"space-evenly"
  * @param {string} alignItems "center"||"flex-end"||"flex-start"||"baseline"||"stretch"
  * @param {string} flexDirectionColumn row||row-reverse||column||column-reverse
@@ -33,7 +34,7 @@ export const flex = (
 });
 
 /**
- *
+ * Show border for layout
  * @param {number} width default = 1
  * @param {string} colors default = black
  * @param {number} radius default = 0
