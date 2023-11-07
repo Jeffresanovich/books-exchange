@@ -10,7 +10,7 @@ import {
   Button,
 } from "react-native";
 //Styles
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //Services
 import { usePatchUserCoordinatesMutation } from "../../services/bookApi";
@@ -26,6 +26,7 @@ const SettingScreen = () => {
     userId,
     firstName,
     lastName,
+    isLoading,
     latitude,
     longitude,
     isSharingCoordinates,
@@ -58,28 +59,30 @@ const SettingScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.setting}>
-        <Text style={styles.settingText}>Guardar ubicacion actual</Text>
-
-        <TouchableOpacity
-          style={styles.settingText}
-          disabled={!isSharingCoordinates}
-          onPress={handleSetUserCoordinates}
-        >
-          <MaterialCommunityIcons
-            name='map-marker-plus'
-            size={40}
-            color={isSharingCoordinates ? "red" : "grey"}
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.setting}>
         <Text style={styles.settingText}>Compartir punto de intercambio</Text>
         <Switch
           value={shareExchangePoint}
           onValueChange={(value) => handleSetSharingCoordinates(value)}
         />
       </View>
+      <View style={styles.setting}>
+        <Text style={styles.settingText}>Coincidir con ubicacion actual</Text>
 
+        <TouchableOpacity
+          style={[
+            styles.buttonCurrentLocation,
+            { backgroundColor: isSharingCoordinates ? "red" : "grey" },
+          ]}
+          disabled={!isSharingCoordinates}
+          onPress={handleSetUserCoordinates}
+        >
+          <MaterialCommunityIcons
+            name='map-marker-radius'
+            size={40}
+            color='white'
+          />
+        </TouchableOpacity>
+      </View>
       <MapComponent
         name={`${firstName} ${lastName}`}
         latitude={latitude}
@@ -99,13 +102,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: 0,
+    marginBottom: 5,
   },
   settingText: {
     fontSize: 18,
   },
-  saveCoordinatesButton: {
-    backgroundColor: "blue",
+  buttonCurrentLocation: {
+    backgroundColor: "red",
+    borderRadius: 10,
   },
 });
 

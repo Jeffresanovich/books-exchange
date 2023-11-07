@@ -4,7 +4,7 @@ import MapView, { Marker } from "react-native-maps";
 
 const MapComponent = ({ name, latitude, longitude }) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, margin: 15 }}>
       <MapView
         style={{ flex: 1 }}
         initialRegion={{
@@ -13,6 +13,8 @@ const MapComponent = ({ name, latitude, longitude }) => {
           latitudeDelta: 0.02, //0.0922,
           longitudeDelta: 0.01, //0.0421,
         }}
+        scrollEnabled={false}
+        zoomEnabled={false}
       >
         <Marker
           coordinate={{ latitude, longitude }}
