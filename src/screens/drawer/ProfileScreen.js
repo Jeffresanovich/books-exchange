@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,15 +13,11 @@ import { firebase_auth } from "../../firebase/authFirebase";
 import { signOut } from "firebase/auth";
 
 //Styles
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
-import { flex, border } from "../../theme/commonStyles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { flex } from "../../theme/commonStyles";
 
 //Services
-import {
-  useGetUserByUidQuery,
-  usePatchUserCoordinatesMutation,
-  usePatchUserMutation,
-} from "../../services/bookApi";
+import { usePatchUserMutation } from "../../services/bookApi";
 
 //Redux
 import { useDispatch } from "react-redux";
@@ -33,29 +28,14 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
-import useGetLocation from "../../hook/useGetLocation";
-
 import useGetUserData from "../../hook/useGetUserData";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
-  const {
-    userId,
-    isLoading,
-    image,
-    email,
-    latitude,
-    longitude,
-    isSharing,
-    refetch,
-  } = useGetUserData();
-
-  const { latitude: currentLatitude, longitude: currentLongitude } =
-    useGetLocation();
+  const { userId, isLoading, image, email, refetch } = useGetUserData();
 
   const [patchUser] = usePatchUserMutation();
-  const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
@@ -76,25 +56,6 @@ const ProfileScreen = () => {
       ]);
       refetch();
     }
-  };
-
-  const handleSetUserCoordinates = async () => {
-    const setUserCoordinates = {
-      //placeName: "",
-      latitude: currentLatitude,
-      longitude: currentLongitude,
-      isSharing: true,
-    };
-
-    await patchUserCoordinates([
-      userId,
-      isSharing
-        ? {
-            isSharing: false,
-          }
-        : setUserCoordinates,
-    ]);
-    refetch();
   };
 
   const handleSignOut = () => {
@@ -136,15 +97,6 @@ const ProfileScreen = () => {
                 />
               </TouchableOpacity>
             </View>
-          </View>
-          <View style={styles.openCamGaleryContainer}>
-            <TouchableOpacity onPress={handleSetUserCoordinates}>
-              <MaterialCommunityIcons
-                name={isSharing ? "map-marker-remove" : "map-marker-plus"}
-                size={35}
-                color={isSharing ? "red" : "green"}
-              />
-            </TouchableOpacity>
           </View>
           <Text style={styles.email}>{email}</Text>
 

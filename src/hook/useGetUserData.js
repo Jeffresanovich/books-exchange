@@ -7,22 +7,22 @@ export default useGetUserData = () => {
 
   const { data, isLoading, isFetching, refetch } = useGetUserByUidQuery(userId);
   const { image, firstName, lastName, email, exchangePoint } = data;
-  const { latitude, longitude, placeName, isSharing } = exchangePoint;
+  const { latitude, longitude, placeName, isSharingCoordinates } =
+    exchangePoint;
 
   return {
-    userId,
     data,
-    image,
-    firstName,
-    lastName,
     email,
+    firstName,
+    image,
+    isFetching,
+    isLoading,
+    isSharingCoordinates,
+    lastName,
     latitude,
     longitude,
     placeName,
-    isSharing,
-    isLoading,
     refetch,
-    isFetching,
-    placeName,
+    userId,
   };
 };
