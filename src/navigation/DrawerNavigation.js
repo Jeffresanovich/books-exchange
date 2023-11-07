@@ -34,7 +34,7 @@ const DrawerNavigation = () => {
         options={{
           title: isLoading
             ? `Perfil de Usuario`
-            : `${data.firstName} ${data.lastName}`,
+            : `${data.firstName.toUpperCase()} ${data.lastName.toUpperCase()}`,
           ...headerStyles,
         }}
       />

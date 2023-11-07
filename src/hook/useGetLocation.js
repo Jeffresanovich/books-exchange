@@ -5,6 +5,7 @@ import * as Location from "expo-location";
 export default useGetLocation = () => {
   const [currentLatitude, setCurrentLatitude] = useState(-31);
   const [currentLongitude, setCurrentLongitude] = useState(-64);
+  const [isGranted, setIsGranted] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -15,6 +16,7 @@ export default useGetLocation = () => {
             "ATENCION!",
             "La app no tiene permiso para acceder a la localizacion"
           );
+          setIsGranted(false);
           return;
         }
 
@@ -26,5 +28,5 @@ export default useGetLocation = () => {
       }
     })();
   }, []);
-  return { currentLatitude, currentLongitude };
+  return { currentLatitude, currentLongitude, isGranted };
 };

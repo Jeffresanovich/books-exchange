@@ -6,8 +6,7 @@ import {
   Switch,
   StyleSheet,
   TouchableOpacity,
-  Alert,
-  Button,
+  ActivityIndicator,
 } from "react-native";
 //Styles
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -26,14 +25,14 @@ const SettingScreen = () => {
     userId,
     firstName,
     lastName,
-    isLoading,
+    isFetching,
     latitude,
     longitude,
     isSharingCoordinates,
     refetch,
   } = useGetUserData();
 
-  const { currentLatitude, currentLongitude } = useGetLocation();
+  const { currentLatitude, currentLongitude, isGranted } = useGetLocation();
 
   const [shareExchangePoint, setShareExchangePoint] =
     useState(isSharingCoordinates);
@@ -59,21 +58,14 @@ const SettingScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.setting}>
-        <Text style={styles.settingText}>Compartir punto de intercambio</Text>
-        <Switch
-          value={shareExchangePoint}
-          onValueChange={(value) => handleSetSharingCoordinates(value)}
-        />
-      </View>
-      <View style={styles.setting}>
         <Text style={styles.settingText}>Coincidir con ubicacion actual</Text>
 
         <TouchableOpacity
           style={[
             styles.buttonCurrentLocation,
-            { backgroundColor: isSharingCoordinates ? "red" : "grey" },
+            { backgroundColor: isGranted ? "red" : "grey" },
           ]}
-          disabled={!isSharingCoordinates}
+          disabled={!isGranted}
           onPress={handleSetUserCoordinates}
         >
           <MaterialCommunityIcons
@@ -83,11 +75,20 @@ const SettingScreen = () => {
           />
         </TouchableOpacity>
       </View>
-      <MapComponent
-        name={`${firstName} ${lastName}`}
-        latitude={latitude}
-        longitude={longitude}
-      />
+      <View style={styles.setting}>
+        <Text style={styles.settingText}>Compartir punto de intercambio</Text>
+        <Switch
+          value={shareExchangePoint}
+          onValueChange={(value) => handleSetSharingCoordinates(value)}
+        />
+      </View>
+      {!isFetching && isSharingCoordinates && (
+        <MapComponent
+          name={`${firstName} ${lastName}`}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      )}
     </View>
   );
 };
