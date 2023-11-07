@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Modal } from "react-native";
 
-//import useGetUserData from "../hook/useGetUserData";
+import { useGetUserByUidQuery } from "../services/bookApi";
 
 const UserDetailsComponent = ({ userId }) => {
-  /*const { firstName, lastName, email } = useGetUserData(userId);
+  const { data, isLoading, isSuccess } = useGetUserByUidQuery(userId);
 
   return (
     <View style={styles.container}>
@@ -13,15 +13,15 @@ const UserDetailsComponent = ({ userId }) => {
           <View style={styles.userContainer}>
             <Text style={styles.label}>Nombre: </Text>
             <Text style={styles.value}>
-              {firstName} {lastName}
+              {data.firstName} {data.lastName}
             </Text>
             <Text style={styles.label}>Correo electrónico: </Text>
-            <Text style={styles.value}>{email}</Text>
+            <Text style={styles.value}>{data.email}</Text>
           </View>
         </>
       )}
     </View>
-  );**/
+  );
 };
 
 const styles = StyleSheet.create({

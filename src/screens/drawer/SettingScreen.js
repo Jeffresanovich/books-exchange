@@ -1,81 +1,33 @@
-import { useState } from "react";
-
-import {
-  View,
-  Text,
-  Switch,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Button,
-} from "react-native";
-
-//Styles
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
-
-//Services
-import { usePatchUserCoordinatesMutation } from "../../services/bookApi";
-
-//Custom Hook
-import useGetLocation from "../../hook/useGetLocation";
+import React from "react";
+import { View, Text, Switch, StyleSheet } from "react-native";
 
 import MapScreen from "../other/MapScreen";
-//import useGetUserData from "../../hook/useGetUserData";
 
 const SettingScreen = () => {
-  /*const { userId, isSharingCoordinates, refetch } = useGetUserData();
-
-  const { currentLatitude, currentLongitude } = useGetLocation();
-
-  const [shareExchangePoint, setShareExchangePoint] =
-    useState(isSharingCoordinates);
-
-  const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
-
-  const handleSetSharingCoordinates = async (value) => {
-    setShareExchangePoint(value);
-    await patchUserCoordinates([userId, { isSharingCoordinates: value }]);
-    refetch();
-  };
-
-  const handleSetUserCoordinates = async () => {
-    const currentUserCoordinates = {
-      latitude: currentLatitude,
-      longitude: currentLongitude,
-    };
-
-    await patchUserCoordinates([userId, currentUserCoordinates]);
-    refetch();
-  };
+  const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);
+  const [darkModeEnabled, setDarkModeEnabled] = React.useState(false);
 
   return (
     <View style={styles.container}>
       <View style={styles.setting}>
-        <Text style={styles.settingText}>Guardar ubicacion actual</Text>
-
-        <TouchableOpacity
-          style={styles.settingText}
-          disabled={!isSharingCoordinates}
-          onPress={handleSetUserCoordinates}
-        >
-          <MaterialCommunityIcons
-            name='map-marker-plus'
-            size={40}
-            color={isSharingCoordinates ? "red" : "grey"}
-          />
-        </TouchableOpacity>
+        <Text style={styles.settingText}>Notificaciones</Text>
+        <Switch
+          value={notificationsEnabled}
+          onValueChange={(value) => setNotificationsEnabled(value)}
+        />
       </View>
       <View style={styles.setting}>
-        <Text style={styles.settingText}>Compartir punto de intercambio</Text>
+        <Text style={styles.settingText}>Modo oscuro</Text>
         <Switch
-          value={shareExchangePoint}
-          onValueChange={(value) => handleSetSharingCoordinates(value)}
+          value={darkModeEnabled}
+          onValueChange={(value) => setDarkModeEnabled(value)}
+          color='red'
         />
       </View>
 
       <MapScreen />
     </View>
-  );*/
+  );
 };
 
 const styles = StyleSheet.create({
@@ -83,18 +35,19 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
   setting: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: 0,
+    marginBottom: 16,
   },
   settingText: {
     fontSize: 18,
-  },
-  saveCoordinatesButton: {
-    backgroundColor: "blue",
   },
 });
 

@@ -1,36 +1,37 @@
-import { View } from "react-native";
-
-//import useGetUserData from "../../hook/useGetUserData";
+import { ActivityIndicator, View } from "react-native";
 
 import MapView, { Marker } from "react-native-maps";
 
-const MapScreen = () => {
-  /* const { image, firstName, lastName, latitude, longitude } = useGetUserData();
+import useGetUserData from "../../hook/useGetUserData";
 
-  //TODO: add small image
+const MapScreen = () => {
+  const { isLoading, firstName, lastName, email, latitude, longitude } =
+    useGetUserData();
 
   return (
     <View style={{ flex: 1 }}>
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.02, //0.0922,
-          longitudeDelta: 0.01, //0.0421,
-        }}
-        scrollEnabled={false}
-        zoomEnabled={false}
-      >
-        <Marker
-          //image={{ uri: data.image }}
-          coordinate={{ latitude, longitude }}
-          title={"PUNTO DE INTERCAMBIO"}
-          description={`Usuario: ${firstName} ${lastName}`}
-        />
-      </MapView>
+      {isLoading ? (
+        <ActivityIndicator size='large' color='grey' />
+      ) : (
+        <MapView
+          style={{ flex: 1 }}
+          initialRegion={{
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.02, //0.0922,
+            longitudeDelta: 0.01, //0.0421,
+          }}
+        >
+          <Marker
+            //image={{ uri: data.image }}
+            coordinate={{ latitude, longitude }}
+            title={`${firstName} ${lastName}`}
+            description={`(Punto de intercambio)`}
+          />
+        </MapView>
+      )}
     </View>
-  );*/
+  );
 };
 
 export default MapScreen;

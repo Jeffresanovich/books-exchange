@@ -4,29 +4,25 @@ import { useGetUserByUidQuery } from "../services/bookApi";
 
 export default useGetUserData = () => {
   const userId = useSelector((state) => state.userSlice.id);
-  console.log("IF FROM REDUX: ", userId);
 
   const { data, isLoading, isFetching, refetch } = useGetUserByUidQuery(userId);
-
-  //  const { image, firstName, lastName, email, exchangePoint } = data;
-  // const { latitude, longitude, isSharingCoordinates } = exchangePoint;
-
-  //console.log("GET DATA: ", firstName);
+  const { image, firstName, lastName, email, exchangePoint } = data;
+  const { latitude, longitude, placeName, isSharing } = exchangePoint;
 
   return {
     userId,
     data,
-    isFetching,
-    refetch,
-    isLoading,
-    /*
-    email,
     image,
-      firstName,
-      lastName,
-      isSharingCoordinates,
-      latitude,
-      longitude,
-      */
+    firstName,
+    lastName,
+    email,
+    latitude,
+    longitude,
+    placeName,
+    isSharing,
+    isLoading,
+    refetch,
+    isFetching,
+    placeName,
   };
 };

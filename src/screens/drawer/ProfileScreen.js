@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,16 +9,20 @@ import {
   Alert,
 } from "react-native";
 
-//Styles
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
-import { flex, border } from "../../theme/commonStyles";
-
 //Firebase
 import { firebase_auth } from "../../firebase/authFirebase";
 import { signOut } from "firebase/auth";
 
+//Styles
+import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { flex, border } from "../../theme/commonStyles";
+
 //Services
-import { usePatchUserMutation } from "../../services/bookApi";
+import {
+  useGetUserByUidQuery,
+  usePatchUserCoordinatesMutation,
+  usePatchUserMutation,
+} from "../../services/bookApi";
 
 //Redux
 import { useDispatch } from "react-redux";
@@ -28,15 +33,29 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 
-//Custom Hook
+import useGetLocation from "../../hook/useGetLocation";
+
 import useGetUserData from "../../hook/useGetUserData";
 
-const ProfileScreen = ({ navigation }) => {
-  const { email, image, userId, isLoading, refetch } = useGetUserData();
-
+const ProfileScreen = () => {
   const dispatch = useDispatch();
 
+  const {
+    userId,
+    isLoading,
+    image,
+    email,
+    latitude,
+    longitude,
+    isSharing,
+    refetch,
+  } = useGetUserData();
+
+  const { latitude: currentLatitude, longitude: currentLongitude } =
+    useGetLocation();
+
   const [patchUser] = usePatchUserMutation();
+  const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
 
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
@@ -59,8 +78,26 @@ const ProfileScreen = ({ navigation }) => {
     }
   };
 
+  const handleSetUserCoordinates = async () => {
+    const setUserCoordinates = {
+      //placeName: "",
+      latitude: currentLatitude,
+      longitude: currentLongitude,
+      isSharing: true,
+    };
+
+    await patchUserCoordinates([
+      userId,
+      isSharing
+        ? {
+            isSharing: false,
+          }
+        : setUserCoordinates,
+    ]);
+    refetch();
+  };
+
   const handleSignOut = () => {
-    //TODO: Alert
     Alert.alert(
       "CONFIRMAR",
       "¿Esta seguro que desea cerrar sesion en este dispositivo?",
@@ -73,7 +110,6 @@ const ProfileScreen = ({ navigation }) => {
       ]
     );
     const logout = () => {
-      navigation.navigate("TabNavigation");
       dispatch(clearUserId());
       removeUserIdFromStorage();
       signOut(firebase_auth);
@@ -101,7 +137,15 @@ const ProfileScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-
+          <View style={styles.openCamGaleryContainer}>
+            <TouchableOpacity onPress={handleSetUserCoordinates}>
+              <MaterialCommunityIcons
+                name={isSharing ? "map-marker-remove" : "map-marker-plus"}
+                size={35}
+                color={isSharing ? "red" : "green"}
+              />
+            </TouchableOpacity>
+          </View>
           <Text style={styles.email}>{email}</Text>
 
           <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
