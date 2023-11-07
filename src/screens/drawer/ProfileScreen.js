@@ -23,32 +23,32 @@ import { usePatchUserMutation } from "../../services/bookApi";
 import { useDispatch } from "react-redux";
 import { clearUserId } from "../../redux/slice/userSlice";
 
-//Cam and ImageGalery
+//Custom hook
 import { openCam, openGalery } from "../../hook/useImagePiker";
-
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
-
 import useGetUserData from "../../hook/useGetUserData";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
 
+  //Get data user from firebase
   const { userId, isLoading, image, email, refetch } = useGetUserData();
 
+  //Save data user to firebase
   const [patchUser] = usePatchUserMutation();
 
+  //Custom hook to open the cam
   const handleOpenCam = async () => {
     const imageBase64 = await openCam();
     saveImage(imageBase64);
   };
-
+  //Custom hook to open the galery
   const handleOpenGalery = async () => {
     const imageBase64 = await openGalery();
     saveImage(imageBase64);
   };
 
   const saveImage = async (imageBase64) => {
-    //REVISAR: la doble negacion aqui
     if (!!imageBase64) {
       await patchUser([
         userId,

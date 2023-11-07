@@ -32,11 +32,13 @@ const ExChangeScreen = ({ navigation }) => {
   //Update data to focus tab
   const isFocused = useIsFocused();
 
+  //Update the list book
   useEffect(() => {
     filteredBooksToReceive(data, userId, setBooksToReceive);
     filteredBooksToDeliver(data, userId, setBooksToDeliver);
   }, [data]);
 
+  //Update the list book
   useEffect(() => {
     refetch();
   }, [isFocused]);

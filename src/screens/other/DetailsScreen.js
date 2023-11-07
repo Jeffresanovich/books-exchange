@@ -6,7 +6,6 @@ import {
   Text,
   Image,
   Pressable,
-  Modal,
 } from "react-native";
 
 //Icons
@@ -15,6 +14,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 //Components
 import TitleComponent from "../../components/BookDetailScreenComponents/TitleComponent";
 import DescriptionComponent from "../../components/BookDetailScreenComponents/DescriptionComponent";
+import UserDetailsComponent from "../../components/UserDetailsComponent";
 
 //Styles
 import { flex, themeColors } from "../../theme/commonStyles";
@@ -27,9 +27,8 @@ import {
   useDeleteBookMutation,
 } from "../../services/bookApi";
 
+//Redux
 import { useSelector } from "react-redux";
-import UserDetailsComponent from "../../components/UserDetailsComponent";
-import { useState } from "react";
 
 const DetailsScreen = ({ navigation, route }) => {
   //TODO: optimize get book data
@@ -39,18 +38,11 @@ const DetailsScreen = ({ navigation, route }) => {
   const { currentUserId, sharingUserId } = book.transaction;
   const userId = useSelector((state) => state.userSlice.id);
 
-  //API Service
+  //API Services
   const [deleteBook] = useDeleteBookMutation();
   const [patchSharingBook] = usePatchSharingBookMutation();
   const [patchGetBook] = usePatchGetBookMutation();
   const [patchSuccesfulTransaction] = usePatchSuccesfulTransactionMutation();
-
-  //Modal
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
 
   const handleSharingBook = () => {
     patchSharingBook(book.key);

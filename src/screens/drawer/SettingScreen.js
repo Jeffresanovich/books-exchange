@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-import {
-  View,
-  Text,
-  Switch,
-  StyleSheet,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, Switch, StyleSheet, TouchableOpacity } from "react-native";
 //Styles
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -16,11 +9,13 @@ import { usePatchUserCoordinatesMutation } from "../../services/bookApi";
 
 //Custom Hook
 import useGetLocation from "../../hook/useGetLocation";
-
-import MapComponent from "../../components/MapComponent";
 import useGetUserData from "../../hook/useGetUserData";
 
+//Componets
+import MapComponent from "../../components/MapComponent";
+
 const SettingScreen = () => {
+  //Get user data from cuntom hook
   const {
     userId,
     firstName,
@@ -32,19 +27,23 @@ const SettingScreen = () => {
     refetch,
   } = useGetUserData();
 
+  //Get location from cuntom hook
   const { currentLatitude, currentLongitude, isGranted } = useGetLocation();
 
+  //Load the decision to share the exchange point
   const [shareExchangePoint, setShareExchangePoint] =
     useState(isSharingCoordinates);
-
+  //
   const [patchUserCoordinates] = usePatchUserCoordinatesMutation();
 
+  //Switch to the sharing exchange point
   const handleSetSharingCoordinates = async (value) => {
     setShareExchangePoint(value);
     await patchUserCoordinates([userId, { isSharingCoordinates: value }]);
     refetch();
   };
 
+  //Save de current location button
   const handleSetUserCoordinates = async () => {
     const currentUserCoordinates = {
       latitude: currentLatitude,

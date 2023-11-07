@@ -15,10 +15,10 @@ import {
 } from "../../hook/useFilteredBooksData";
 
 const SearchScreen = ({ navigation }) => {
-  //Se guardan todos todos los libros en el estado global
+  //Custom hook to bring all books from firebase
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
-  //Se traer el usuario actual
+  //Get user id from redux state
   const userId = useSelector((state) => state.userSlice.id);
 
   //Se guarda el texto y el resultado de la busqueda
@@ -29,12 +29,13 @@ const SearchScreen = ({ navigation }) => {
   //Update data to focus tab
   const isFocused = useIsFocused();
 
-  //
+  //Update the list book
   useEffect(() => {
     filteredBooksToShared(data, userId, setSharingBooks);
     filteredSharingBooksByTitle(data, text, userId, setSearchBooks);
   }, [data, isFocused]);
 
+  //Update the list book
   useEffect(() => {
     refetch();
     filteredSharingBooksByTitle(data, text, userId, setSearchBooks);

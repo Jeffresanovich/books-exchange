@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Modal } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import { useGetUserByUidQuery } from "../services/bookApi";
 

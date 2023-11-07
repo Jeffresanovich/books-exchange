@@ -9,15 +9,19 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+//Style theme
+import { themeColors } from "../../theme/commonStyles";
+
+//Firebase
 import { firebase_auth } from "../../firebase/authFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+//Redux
 import { useDispatch } from "react-redux";
 import { setUserId } from "../../redux/slice/userSlice";
 
-import { themeColors } from "../../theme/commonStyles";
+//Custom Hook
 import { useErrorMessage } from "../../hook/useErrorMessage";
-
 import { saveUserIdFromStorage } from "../../hook/useAsyncStorage";
 
 const LoginScreen = ({ navigation }) => {
@@ -36,7 +40,9 @@ const LoginScreen = ({ navigation }) => {
         password
       );
 
+      //Save the user data to storage
       await saveUserIdFromStorage(response.user.uid);
+      //Save the user data to redux state
       dispatch(setUserId(response.user.uid));
 
       setIsLoading(false);

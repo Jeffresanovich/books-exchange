@@ -9,13 +9,17 @@ import {
   Pressable,
 } from "react-native";
 
+//Styles theme
+import { themeColors } from "../../theme/commonStyles";
+
+//Firebase
 import { firebase_auth } from "../../firebase/authFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-import { themeColors } from "../../theme/commonStyles";
-
+//Redux RTK
 import { usePutUserMutation } from "../../services/bookApi";
 
+//Custom Hook
 import { useErrorMessage } from "../../hook/useErrorMessage";
 
 const RegisterScreen = ({ navigation }) => {
@@ -27,6 +31,7 @@ const RegisterScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
 
+  //Save the user data to firebase
   const [putUser] = usePutUserMutation();
 
   const handleRegister = async () => {
@@ -51,6 +56,7 @@ const RegisterScreen = ({ navigation }) => {
         },
       };
 
+      //Save the user data to firebase
       putUser([response.user.uid, userBody]);
 
       navigation.navigate("Login");

@@ -33,10 +33,10 @@ const LibraryScreen = ({ navigation }) => {
   //This hook allows to position the floating button
   const { height, width } = useWindowDimensions();
 
-  //Se guardan todos todos los libros en el estado global
+  //Custom hook to bring all books from firebase
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
-  //Se traer el usuario actual
+  //Get user id from redux state
   const userId = useSelector((state) => state.userSlice.id);
   const bookInizializatedParams = {
     book_data: {
@@ -62,11 +62,13 @@ const LibraryScreen = ({ navigation }) => {
   //Update data to focus tab
   const isFocused = useIsFocused();
 
+  //Update the list book
   useEffect(() => {
     filteredBooksReading(data, userId, setBooksReading);
     filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
   }, [data]);
 
+  //Update the list book
   useEffect(() => {
     refetch();
   }, [isFocused]);
