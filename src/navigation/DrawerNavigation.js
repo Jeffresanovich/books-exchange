@@ -10,13 +10,9 @@ import ProfileScreen from "../screens/drawer/ProfileScreen";
 import NotificationScreen from "../screens/drawer/NotificationScreen";
 import SettingScreen from "../screens/drawer/SettingScreen";
 
-import useGetUserData from "../hook/useGetUserData";
-
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-  const { firstName, lastName } = useGetUserData();
-
   return (
     <Drawer.Navigator
       initialRouteName='TabNavigation'
@@ -30,7 +26,7 @@ const DrawerNavigation = () => {
         name='ProfileScreen'
         component={ProfileScreen}
         options={{
-          title: `${firstName} ${lastName}`,
+          title: `PERFIL DE USUARIO`,
           ...headerStyles,
         }}
       />
@@ -38,7 +34,7 @@ const DrawerNavigation = () => {
         name='TabNavigation'
         component={TabNavigation}
         options={{
-          title: "BIBLIOTECA",
+          title: "Biblioteca",
           ...headerStyles,
         }}
       />

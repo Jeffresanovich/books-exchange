@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Modal } from "react-native";
 
-import useGetUserData from "../hook/useGetUserData";
+//import useGetUserData from "../hook/useGetUserData";
 
 const UserDetailsComponent = ({ userId }) => {
-  const { firstName, lastName, email } = useGetUserData(userId);
+  /*const { firstName, lastName, email } = useGetUserData(userId);
 
   return (
     <View style={styles.container}>
@@ -21,7 +21,7 @@ const UserDetailsComponent = ({ userId }) => {
         </>
       )}
     </View>
-  );
+  );**/
 };
 
 const styles = StyleSheet.create({

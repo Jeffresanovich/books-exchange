@@ -1,11 +1,11 @@
 import { View } from "react-native";
 
-import useGetUserData from "../../hook/useGetUserData";
+//import useGetUserData from "../../hook/useGetUserData";
 
 import MapView, { Marker } from "react-native-maps";
 
 const MapScreen = () => {
-  const { image, firstName, lastName, latitude, longitude } = useGetUserData();
+  /* const { image, firstName, lastName, latitude, longitude } = useGetUserData();
 
   //TODO: add small image
 
@@ -30,7 +30,7 @@ const MapScreen = () => {
         />
       </MapView>
     </View>
-  );
+  );*/
 };
 
 export default MapScreen;

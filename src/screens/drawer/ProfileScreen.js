@@ -12,6 +12,10 @@ import {
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { flex, border } from "../../theme/commonStyles";
 
+//Firebase
+import { firebase_auth } from "../../firebase/authFirebase";
+import { signOut } from "firebase/auth";
+
 //Services
 import { usePatchUserMutation } from "../../services/bookApi";
 
@@ -28,9 +32,9 @@ import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 import useGetUserData from "../../hook/useGetUserData";
 
 const ProfileScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
+  const { email, image, userId, isLoading, refetch } = useGetUserData();
 
-  const { userId, isLoading, image, email, refetch } = useGetUserData();
+  const dispatch = useDispatch();
 
   const [patchUser] = usePatchUserMutation();
 
@@ -69,9 +73,10 @@ const ProfileScreen = ({ navigation }) => {
       ]
     );
     const logout = () => {
-      removeUserIdFromStorage();
       navigation.navigate("TabNavigation");
       dispatch(clearUserId());
+      removeUserIdFromStorage();
+      signOut(firebase_auth);
     };
   };
 

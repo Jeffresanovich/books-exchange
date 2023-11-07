@@ -20,10 +20,10 @@ import { usePatchUserCoordinatesMutation } from "../../services/bookApi";
 import useGetLocation from "../../hook/useGetLocation";
 
 import MapScreen from "../other/MapScreen";
-import useGetUserData from "../../hook/useGetUserData";
+//import useGetUserData from "../../hook/useGetUserData";
 
 const SettingScreen = () => {
-  const { userId, isSharingCoordinates, refetch } = useGetUserData();
+  /*const { userId, isSharingCoordinates, refetch } = useGetUserData();
 
   const { currentLatitude, currentLongitude } = useGetLocation();
 
@@ -75,7 +75,7 @@ const SettingScreen = () => {
 
       <MapScreen />
     </View>
-  );
+  );*/
 };
 
 const styles = StyleSheet.create({
