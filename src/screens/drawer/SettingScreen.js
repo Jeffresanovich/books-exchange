@@ -1,9 +1,20 @@
 import React from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 
-import MapScreen from "../other/MapScreen";
+import MapComponent from "../../components/MapComponent";
+import useGetUserData from "../../hook/useGetUserData";
 
 const SettingScreen = () => {
+  const {
+    userId,
+    isLoading,
+    firstName,
+    lastName,
+    latitude,
+    longitude,
+    isSharing,
+    refetch,
+  } = useGetUserData();
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);
   const [darkModeEnabled, setDarkModeEnabled] = React.useState(false);
 
@@ -25,7 +36,11 @@ const SettingScreen = () => {
         />
       </View>
 
-      <MapScreen />
+      <MapComponent
+        name={`${firstName} ${lastName}`}
+        latitude={latitude}
+        longitude={longitude}
+      />
     </View>
   );
 };
