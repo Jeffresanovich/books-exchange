@@ -5,11 +5,8 @@ import {
   View,
   Text,
   ActivityIndicator,
-  TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
-
-import { MaterialIcons } from "@expo/vector-icons";
 
 //Components
 import BooksListComponent from "../../components/list/BooksListComponent";
@@ -27,8 +24,6 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 
 const ExChangeScreen = ({ navigation }) => {
-  const { height, width } = useWindowDimensions();
-
   //Se guardan todos todos los libros en el estado global
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
@@ -55,24 +50,20 @@ const ExChangeScreen = ({ navigation }) => {
       {isLoading ? (
         <ActivityIndicator size='large' color='grey' />
       ) : (
-        <>
-          <View style={styles.container}>
-            <Text>Recibir</Text>
-            <BooksListComponent
-              navigation={navigation}
-              books={booksToReceive}
-              horizontal={true}
-            />
-          </View>
-          <View style={styles.container}>
-            <Text>Entregar</Text>
-            <BooksListComponent
-              navigation={navigation}
-              books={booksToDeliver}
-              horizontal={true}
-            />
-          </View>
-        </>
+        <View style={styles.listContainer}>
+          <Text style={styles.titulo}>LIBROS PARA ENTREGAR</Text>
+          <BooksListComponent
+            navigation={navigation}
+            books={booksToReceive}
+            horizontal={true}
+          />
+          <Text style={styles.titulo}>LIBROS PARA RECIBIR</Text>
+          <BooksListComponent
+            navigation={navigation}
+            books={booksToDeliver}
+            horizontal={true}
+          />
+        </View>
       )}
     </View>
   );
@@ -81,10 +72,14 @@ const ExChangeScreen = ({ navigation }) => {
 export default ExChangeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  container: {},
+  listContainer: {
+    height: "100%",
+    alignContent: "center",
+  },
+  titulo: {
+    marginTop: "5%",
+    fontSize: 30,
+    textAlign: "center",
   },
 });

@@ -75,14 +75,14 @@ const LibraryScreen = ({ navigation }) => {
             <BooksListComponent
               navigation={navigation}
               books={booksReading}
-              horizontal={true}
+              horizontal={false}
             />
           </View>
           <View style={styles.container}>
             <BooksListComponent
               navigation={navigation}
               books={booksToShared}
-              horizontal={true}
+              horizontal={false}
             />
           </View>
           <TouchableOpacity

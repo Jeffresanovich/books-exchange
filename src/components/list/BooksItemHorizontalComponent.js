@@ -2,11 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 
 import { flex } from "../../theme/commonStyles";
-import { useWindowDimensions } from "react-native";
 
 const BooksItemHorizontalComponent = ({ book, navigation }) => {
-  const { height, width } = useWindowDimensions();
-
   const { image, title, subjects, pages, author } = book.book_data;
 
   return (
@@ -25,7 +22,8 @@ const BooksItemHorizontalComponent = ({ book, navigation }) => {
         <View style={styles.titleAndPagesContainer}>
           <View style={styles.infoContainer}>
             <Text style={styles.title}>
-              {title} <Text style={styles.pages}> ({pages} pag.)</Text>
+              {title}
+              <Text style={styles.pages}> ({pages} pag.)</Text>
             </Text>
           </View>
           <Text style={styles.author}>De {author}</Text>
@@ -37,34 +35,27 @@ const BooksItemHorizontalComponent = ({ book, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginHorizontal: 5,
+  },
   button: {
-    padding: 10,
-    fontSize: 18,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "lightblue",
-    margin: 5,
+    ...flex("flex-start"),
   },
   image: {
-    margin: 5,
+    margin: 10,
   },
-  titleAndPagesContainer: {
-    // ...flex("flex-start"),
-  },
+  titleAndPagesContainer: {},
   infoContainer: {
-    width: "70%",
+    width: 200,
   },
 
   title: {
     fontSize: 23,
-    //flexWrap: "wrap",
     fontWeight: "300",
-    //width: "80%",
     fontFamily: "Poppins",
   },
   pages: {
-    fontSize: 13,
+    fontSize: 12,
     textAlign: "center",
     fontFamily: "Poppins",
   },
@@ -72,11 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     borderRadius: 30,
     color: "white",
-    width: 200,
+    width: 150,
     fontWeight: "900",
     textAlign: "center",
     margin: 10,
   },
 });
-
 export default BooksItemHorizontalComponent;
