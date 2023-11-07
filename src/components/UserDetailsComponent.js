@@ -3,20 +3,22 @@ import { View, Text, StyleSheet, Modal } from "react-native";
 import { useGetUserByUidQuery } from "../services/bookApi";
 
 const UserDetailsComponent = ({ userId }) => {
-  const { data, isLoading, isSuccess } = useGetUserByUidQuery(userId);
+  const { data, isLoading } = useGetUserByUidQuery(userId);
+  const { firstName, lastName, email, exchangePoint } = data;
+  const { latitude, longitude, isSharingCoordinates } = exchangePoint;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>DATOS DE CONTACTO</Text>
-      {isSuccess && (
+      {!isLoading && (
         <>
           <View style={styles.userContainer}>
             <Text style={styles.label}>Nombre: </Text>
             <Text style={styles.value}>
-              {data.firstName} {data.lastName}
+              {firstName} {lastName}
             </Text>
             <Text style={styles.label}>Correo electrónico: </Text>
-            <Text style={styles.value}>{data.email}</Text>
+            <Text style={styles.value}>{email}</Text>
           </View>
         </>
       )}
