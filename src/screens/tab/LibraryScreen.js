@@ -30,6 +30,7 @@ import { useIsFocused } from "@react-navigation/native";
 import TitleListComponent from "../../components/list/TitleListComponent";
 
 const LibraryScreen = ({ navigation }) => {
+  //This hook allows to position the floating button
   const { height, width } = useWindowDimensions();
 
   //Se guardan todos todos los libros en el estado global
@@ -54,10 +55,11 @@ const LibraryScreen = ({ navigation }) => {
     key: null,
   };
 
-  //Array para listas
+  //The result of the filtered books is saved to show in the lists
   const [booksReading, setBooksReading] = useState([]);
   const [booksToShared, setBooksToShared] = useState([]);
 
+  //Update data to focus tab
   const isFocused = useIsFocused();
 
   useEffect(() => {

@@ -26,6 +26,7 @@ const SearchScreen = ({ navigation }) => {
   const [sharingBooks, setSharingBooks] = useState([]);
   const [searchBooks, setSearchBooks] = useState([]);
 
+  //Update data to focus tab
   const isFocused = useIsFocused();
 
   //

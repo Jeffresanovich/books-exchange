@@ -19,16 +19,17 @@ import { useIsFocused } from "@react-navigation/native";
 import TitleListComponent from "../../components/list/TitleListComponent";
 
 const ExChangeScreen = ({ navigation }) => {
-  //Se guardan todos todos los libros en el estado global
+  //Custom hook to bring all books from firebase
   const { data, isLoading, refetch } = useGetAllBooksQuery();
 
-  //Se traer el usuario actual y todos los libros guardados en el estado global
+  //Get user id from redux state
   const userId = useSelector((state) => state.userSlice.id);
 
-  //Se guarda el resultado de los libros filtrados para mostar en las listas
+  //The result of the filtered books is saved to show in the lists
   const [booksToReceive, setBooksToReceive] = useState([]);
   const [booksToDeliver, setBooksToDeliver] = useState([]);
 
+  //Update data to focus tab
   const isFocused = useIsFocused();
 
   useEffect(() => {
