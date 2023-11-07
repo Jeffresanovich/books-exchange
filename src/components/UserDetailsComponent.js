@@ -4,8 +4,6 @@ import { useGetUserByUidQuery } from "../services/bookApi";
 
 const UserDetailsComponent = ({ userId }) => {
   const { data, isLoading } = useGetUserByUidQuery(userId);
-  const { firstName, lastName, email, exchangePoint } = data;
-  const { latitude, longitude, isSharingCoordinates } = exchangePoint;
 
   return (
     <View style={styles.container}>
@@ -15,10 +13,10 @@ const UserDetailsComponent = ({ userId }) => {
           <View style={styles.userContainer}>
             <Text style={styles.label}>Nombre: </Text>
             <Text style={styles.value}>
-              {firstName} {lastName}
+              {data.firstName} {data.lastName}
             </Text>
             <Text style={styles.label}>Correo electrónico: </Text>
-            <Text style={styles.value}>{email}</Text>
+            <Text style={styles.value}>{data.email}</Text>
           </View>
         </>
       )}
