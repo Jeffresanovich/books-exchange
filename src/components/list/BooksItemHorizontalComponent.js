@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 
-import { flex } from "../../theme/commonStyles";
+import { flex, border } from "../../theme/commonStyles";
 
 const BooksItemHorizontalComponent = ({ book, navigation }) => {
   const { image, title, subjects, pages, author } = book.book_data;
@@ -40,13 +40,14 @@ const styles = StyleSheet.create({
   },
   button: {
     ...flex("flex-start"),
+    height: "80%",
   },
   image: {
     margin: 10,
   },
   titleAndPagesContainer: {},
   infoContainer: {
-    width: 200,
+    width: 220,
   },
 
   title: {

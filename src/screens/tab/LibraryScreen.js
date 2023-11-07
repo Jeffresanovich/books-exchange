@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
+  Text,
   ActivityIndicator,
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
+
+import { border } from "../../theme/commonStyles";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -71,19 +74,25 @@ const LibraryScreen = ({ navigation }) => {
         <ActivityIndicator size='large' color='grey' />
       ) : (
         <>
-          <View style={styles.container}>
-            <BooksListComponent
-              navigation={navigation}
-              books={booksReading}
-              horizontal={false}
-            />
+          <View style={styles.listContainer}>
+            <Text style={styles.titulo}>LEYENDO ACTUALMENTE</Text>
+            <View style={styles.container}>
+              <BooksListComponent
+                navigation={navigation}
+                books={booksReading}
+                horizontal={true}
+              />
+            </View>
           </View>
-          <View style={styles.container}>
-            <BooksListComponent
-              navigation={navigation}
-              books={booksToShared}
-              horizontal={false}
-            />
+          <View style={styles.listContainer}>
+            <Text style={styles.titulo}>LEYENDO ACTUALMENTE</Text>
+            <View style={styles.container}>
+              <BooksListComponent
+                navigation={navigation}
+                books={booksToShared}
+                horizontal={true}
+              />
+            </View>
           </View>
           <TouchableOpacity
             style={[styles.button, { top: height - 230, left: width - 100 }]}
@@ -106,13 +115,21 @@ export default LibraryScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+
     justifyContent: "center",
+  },
+  listContainer: {
+    height: "50%",
+    alignContent: "center",
+  },
+  titulo: {
+    marginTop: "3%",
+    marginVertical: "1%",
+    fontSize: 30,
+    textAlign: "center",
   },
   button: {
     position: "absolute",
-
     width: 80,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 100,

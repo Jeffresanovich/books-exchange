@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 
 //Components
 import BooksListComponent from "../../components/list/BooksListComponent";
@@ -50,20 +44,24 @@ const ExChangeScreen = ({ navigation }) => {
       {isLoading ? (
         <ActivityIndicator size='large' color='grey' />
       ) : (
-        <View style={styles.listContainer}>
-          <Text style={styles.titulo}>LIBROS PARA ENTREGAR</Text>
-          <BooksListComponent
-            navigation={navigation}
-            books={booksToReceive}
-            horizontal={true}
-          />
-          <Text style={styles.titulo}>LIBROS PARA RECIBIR</Text>
-          <BooksListComponent
-            navigation={navigation}
-            books={booksToDeliver}
-            horizontal={true}
-          />
-        </View>
+        <>
+          <View style={styles.listContainer}>
+            <Text style={styles.titulo}>LIBROS POR RECIBIR</Text>
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToReceive}
+              horizontal={true}
+            />
+          </View>
+          <View style={styles.listContainer}>
+            <Text style={styles.titulo}>LIBROS PARA ENTREGAR</Text>
+            <BooksListComponent
+              navigation={navigation}
+              books={booksToDeliver}
+              horizontal={true}
+            />
+          </View>
+        </>
       )}
     </View>
   );
@@ -72,13 +70,18 @@ const ExChangeScreen = ({ navigation }) => {
 export default ExChangeScreen;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+
+    justifyContent: "center",
+  },
   listContainer: {
-    height: "100%",
+    height: "50%",
     alignContent: "center",
   },
   titulo: {
-    marginTop: "5%",
+    marginTop: "3%",
+    marginVertical: "1%",
     fontSize: 30,
     textAlign: "center",
   },
