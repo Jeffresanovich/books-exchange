@@ -6,7 +6,7 @@ const MapComponent = ({ name, latitude, longitude }) => {
   return (
     <View style={styles.container}>
       <MapView
-        style={{ flex: 1 }}
+        style={styles.map}
         initialRegion={{
           latitude,
           longitude,
@@ -28,8 +28,14 @@ const MapComponent = ({ name, latitude, longitude }) => {
 
 const styles = StyleSheet.create({
   container: {
+    //flex: 1,
+    margin: 10,
+    width: "auto",
+    height: 350,
+    justifyContent: "center",
+  },
+  map: {
     flex: 1,
-    margin: 15,
   },
 });
 

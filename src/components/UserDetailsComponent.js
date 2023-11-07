@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Modal } from "react-native";
 
 import { useGetUserByUidQuery } from "../services/bookApi";
 
+import MapComponent from "./MapComponent";
+
 const UserDetailsComponent = ({ userId }) => {
   const { data, isLoading } = useGetUserByUidQuery(userId);
 
@@ -18,6 +20,13 @@ const UserDetailsComponent = ({ userId }) => {
             <Text style={styles.label}>Correo electrónico: </Text>
             <Text style={styles.value}>{data.email}</Text>
           </View>
+          {data.exchangePoint.isSharingCoordinates && (
+            <MapComponent
+              name={`${data.firstName} ${data.lastName}`}
+              latitude={data.exchangePoint.latitude}
+              longitude={data.exchangePoint.longitude}
+            />
+          )}
         </>
       )}
     </View>
@@ -25,14 +34,6 @@ const UserDetailsComponent = ({ userId }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    /*
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    */
-  },
   title: {
     fontSize: 24,
     fontWeight: "bold",

@@ -91,12 +91,8 @@ const DetailsScreen = ({ navigation, route }) => {
                   style={styles.button}
                   onPress={() => handleGetBook()}
                 >
-                  <MaterialCommunityIcons
-                    name='book-lock'
-                    size={50}
-                    color='white'
-                  />
-                  <Text style={styles.buttonText}>PEDIR</Text>
+                  <MaterialCommunityIcons name='lock' size={50} color='white' />
+                  <Text style={styles.buttonText}>RESERVAR</Text>
                 </Pressable>
               )}
               {currentUserId === sharingUserId && (
@@ -104,8 +100,12 @@ const DetailsScreen = ({ navigation, route }) => {
                   style={styles.button}
                   onPress={() => handleSharingBook()}
                 >
-                  <MaterialCommunityIcons name='lock' size={50} color='white' />
-                  <Text style={styles.buttonText}>RESERVAR</Text>
+                  <MaterialCommunityIcons
+                    name='share'
+                    size={50}
+                    color='white'
+                  />
+                  <Text style={styles.buttonText}>COMPARTIR</Text>
                 </Pressable>
               )}
               {currentUserId !== userId &&
