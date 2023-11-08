@@ -69,7 +69,7 @@ _Datos de inicio de sesion y registro de usuario_
 
 _Datos de usuario y configuraciones personales_
 
-![Drawer Navigator](https://drive.google.com/uc?export=view&id=10IGl2OUblx5nJKcUCqcr5O_J32ED0wDM)
+![DRAWER NAVIGATOR](https://drive.google.com/uc?export=view&id=10IGl2OUblx5nJKcUCqcr5O_J32ED0wDM)
 
 **NOTA:**En la pantalla de **Configuracion** se puede setear la localizacion actual como punto de intercambio y tambien permitir o no que otros usuario vean la ubicacion del punto de intercambio seteado (REQUIERE RECARGAR OTRA CUENTA DE USUARIO PARA VER EL EFECTO)
 
@@ -79,20 +79,21 @@ _Biblioteca de usuario, busqueda e intercambio_
 
 ![TAB NAVIGATOR](https://drive.google.com/uc?export=view&id=10MlHobKCep_pRrqUkl3Z62MzFJQl_EoD)
 
-**NOTA: APRENTANDO EL MISMO TAB DONDE SE ENCUENTRA PUEDE VOVER HACIA ATRAS**. Se agregó un label en el tab de cada pantalla.
+**NOTA:** Se agregó un label en el tab de cada pantalla.
 
 #### 4. OTRAS PANTALLAS
 
 _Detalle de los libros y formulario de carga y actualizacion_
 
-![DETALLES](https://drive.google.com/uc?export=view&id=10gE_DVhorJLHK9MYiCjfZ2dGQhdCzZXx)
-![DETALLES](https://drive.google.com/uc?export=view&id=10fHdjPqx2UUzcs0qY4EYtuZ2kPdf2MhF)
+![OTRAS PANTALLAS](https://drive.google.com/uc?export=view&id=10fHdjPqx2UUzcs0qY4EYtuZ2kPdf2MhF)
+
+**NOTA: APRENTANDO EL MISMO TAB DONDE SE ENCUENTRA PUEDE VOVER HACIA ATRAS**
 
 #### 5. BOTONES Y FUNCIONAMIENTO:
 
 _Para reutilizacion y manejo de datos de usuario y de libros con firebase_
 
-![TAB NAVIGATOR](https://drive.google.com/uc?export=view&id=10b17xBKN75SMHjongziSXPyzv1AEdc9F)
+![BOTONES Y FUNCIONAMIENTO](https://drive.google.com/uc?export=view&id=10b17xBKN75SMHjongziSXPyzv1AEdc9F)
 
 |                BOTON | PANTALLA    |                                                                           FUNCIONAMIENTO                                                                            |
 | -------------------: | ----------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -105,9 +106,9 @@ _Para reutilizacion y manejo de datos de usuario y de libros con firebase_
 
 #### 6. PERMISOS:
 
-_Para reutilizacion y manejo de datos de usuario y libros con firebase_
+_Manejo de permisos_
 
-![TAB NAVIGATOR](https://drive.google.com/uc?export=view&id=10nv6Sd5Zg5jmuwFLa71H9PlHy4iv414Q)
+![PERMISOS](https://drive.google.com/uc?export=view&id=10rv9ZuMjY4k6Pq1f82FTN3kmAQlzMPA0)
 
 **Aclaraciones:**
 _La app esta aun en proceso de produccion.
