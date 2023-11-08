@@ -1,3 +1,5 @@
+//Receives an error message in English and returns information in Spanish
+//It can also be saved in a  callback function
 export const useErrorMessage = (error, setErrorText = null) => {
   let message = "";
   switch (error) {

@@ -1,7 +1,7 @@
-//Cam and ImageGalery
 import * as ImagePicker from "expo-image-picker";
 import { Alert } from "react-native";
 
+//Allows to use the Cam and ImageGalery function
 export const openCam = async (setImage = null) => {
   const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
