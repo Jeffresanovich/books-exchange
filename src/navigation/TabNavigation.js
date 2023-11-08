@@ -22,14 +22,14 @@ const TabNavigation = () => {
         //Tab Syles
         activeTintColor: "#9AC4F8",
         inactiveTintColor: "gray",
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
       }}
     >
       <Tab.Screen
         name='LibraLibraryStackryScreen'
         component={LibraryStack}
         options={{
-          title: "Inicio",
+          title: "Biblioteca",
           tabBarIcon: ({ focused, color }) => (
             <MaterialCommunityIcons
               name='bookshelf'
