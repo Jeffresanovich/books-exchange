@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+
+import useGetBooksData from "../../hook/useGetBooksData";
 
 const NotificationScreen = () => {
   // Datos de ejemplo para las notificaciones
@@ -23,6 +25,17 @@ const NotificationScreen = () => {
     },
   ];
 
+  const { booksToShared, currentUserBooksToShared } = useGetBooksData();
+
+  const [res, setRes] = useState({});
+
+  const handleClick = () => {
+    const res = booksToShared();
+    const res2 = currentUserBooksToShared();
+
+    console.log("GET DATA IN NOTIFICATION SCREEN TO GET: " + res.length);
+    console.log("GET DATA IN NOTIFICATION SCREEN SHARING: " + res2.length);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Notificaciones</Text>
@@ -35,6 +48,9 @@ const NotificationScreen = () => {
           </TouchableOpacity>
         )}
       />
+      <TouchableOpacity style={styles.notificationItem} onPress={handleClick}>
+        <Text style={styles.notificationText}>PRESS ME!</Text>
+      </TouchableOpacity>
     </View>
   );
 };

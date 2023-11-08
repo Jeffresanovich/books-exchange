@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useGetAllBooksQuery } from "../services/bookApi";
 
-export default useGetBooksDataFiltered = () => {
-  const userId = useSelector((state) => state.userSlice.id);
+export default useGetBooksData = () => {
   const { data, isLoading, isFetching, refetch } = useGetAllBooksQuery();
-  const [allBookConverted, setAllBookConverted] = useState([]);
+  const userId = useSelector((state) => state.userSlice.id);
 
   /**
    * This custom hook slice the data (object) from firebase and the firebase key
@@ -13,123 +11,109 @@ export default useGetBooksDataFiltered = () => {
    * @param {Object} data Data (object) like response from realtime database.
    * @returns Return an array
    */
-  useEffect(() => {
+
+  const convertDataResponse = () => {
     const convertArray = [];
     for (const key in data) {
       convertArray.push({ ...data[key], key });
     }
-    setAllBookConverted(convertArray);
-  }, [data]);
+    return convertArray;
+  };
 
   //Filter the books the user is reading
-  const filteredBooksReading = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
-    const dataFiltered = allBookConverted
+  const booksReading = () => {
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.transaction.currentUserId === userId)
       .filter((item) => item.transaction.sharingUserId === userId);
-
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //Filter the books that the user has to deliver
-  const filteredBooksToDeliver = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
-    const dataFiltered = allBookConverted
+  const booksToDeliver = () => {
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.transaction.currentUserId === userId)
       .filter((item) => item.transaction.sharingUserId !== userId)
       .filter((item) => item.transaction.sharingUserId !== "");
-
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //Filter the books that the user has to receive
-  const filteredBooksToReceive = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
+  const booksToReceive = () => {
     //Filtra, quitando los que ya tiene el usuario
-    const dataFiltered = allBookConverted
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.transaction.currentUserId !== userId)
       .filter((item) => item.transaction.sharingUserId === userId)
       .filter((item) => item.transaction.sharingUserId !== "");
-
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //
-  const filteredBooksToShared = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
+  const booksToShared = () => {
     //Filtra, quitando los que ya tiene el usuario
-    const dataFiltered = allBookConverted
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.transaction.currentUserId !== userId)
       .filter((item) => item.transaction.sharingUserId === "");
-
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //Filter the books that another user is sharing
-  const filteredBooksUploaded = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
-    const dataFiltered = allBookConverted
+  const booksUploaded = (setCallBack = null) => {
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.book_data.ownerUserId === userId)
       .filter((item) => item.transaction.currentUserId === userId)
       .filter((item) => item.transaction.sharingUserId === userId);
 
     //Set the callback state that is passed by parameter
     setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //Filter the books that the current user is sharing
-  const filteredCurrentUserBooksToShared = (setCallBack = null) => {
-    const filtered = convertDataResponse(data);
-    const dataFiltered = allBookConverted
+  const currentUserBooksToShared = (setCallBack = null) => {
+    const dataFiltered = convertDataResponse()
       .filter((item) => item.transaction.currentUserId === userId)
       .filter((item) => item.transaction.sharingUserId === "");
 
     //Set the callback state that is passed by parameter
     setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
   //Filter books by title that another user is sharing
-  const filteredSharingBooksByTitle = (title, setCallBack = null) => {
-    const filtered = convertDataResponse(data);
+  const sharingBooksByTitle = (title) => {
     //Filter by title
-    const dataFiltered = allBookConverted
+    const dataFiltered = convertDataResponse()
       .filter((item) =>
         item.book_data.title.toLowerCase().startsWith(title.toLowerCase())
       )
       .filter((item) => item.transaction.currentUserId !== userId)
       .filter((item) => item.transaction.sharingUserId === "");
-
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-    return filtered;
+    return dataFiltered;
   };
 
-  //Filter a book by key
-  const filteredBookByKey = (bookey, setCallBack = null) => {
-    const filtered = convertDataResponse(data);
+  //Filter a book by key from State
+  const filteredBookByKey = (bookey) => {
     //Filter by key
-    const dataFiltered = allBookConverted.filter((item) =>
+    const dataFiltered = convertDataResponse().filter((item) =>
       item.key.startsWith(bookey)
     );
+    return getAllInfoFromDataBookObject(dataFiltered);
+  };
 
+  //Filter a book by key from firebase
+  const filteredBookByKeyFromFirebase = (bookey) => {
+    //
+    //TODO:Get book by key from FIREBASE (RTK Query)
+    //
+    return getAllInfoFromDataBookObject(dataFiltered);
+  };
+
+  //Return all user data
+  const getAllInfoFromDataBookObject = (dataObject) => {
     const { image, title, synopsis, subjects, pages, author, ownerUserId } =
-      dataFiltered[0].book_data;
-    const { currentUserId, sharingUserId } = dataFiltered[0].transaction;
+      dataObject.book_data;
+    const { currentUserId, sharingUserId } = dataObject.transaction;
 
-    //Set the callback state that is passed by parameter
-    setCallBack && setCallBack(dataFiltered);
-
-    //Return all user data
     return {
       image,
       title,
@@ -144,17 +128,19 @@ export default useGetBooksDataFiltered = () => {
   };
 
   return {
+    userId,
     data,
     isLoading,
     isFetching,
     refetch,
-    filteredBooksReading,
-    filteredBooksToDeliver,
-    filteredBooksToReceive,
-    filteredBooksToShared,
-    filteredBooksUploaded,
-    filteredCurrentUserBooksToShared,
-    filteredSharingBooksByTitle,
+    booksReading,
+    booksToDeliver,
+    booksToReceive,
+    booksToShared,
+    booksUploaded,
+    currentUserBooksToShared,
+    sharingBooksByTitle,
     filteredBookByKey,
+    filteredBookByKeyFromFirebase,
   };
 };
