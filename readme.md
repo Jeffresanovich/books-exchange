@@ -1,6 +1,7 @@
 # Proyecto Final
 
 **Comisión 47760 - CODER HOUSE**
+
 **Curso: Desarrolo de Aplicaciones**
 
 ---
@@ -110,7 +111,7 @@ _Manejo de permisos_
 
 ![PERMISOS](https://drive.google.com/uc?export=view&id=10rv9ZuMjY4k6Pq1f82FTN3kmAQlzMPA0)
 
-**Aclaraciones:**
+**NOTAS FINALES:**
 _La app esta aun en proceso de produccion.
 Errores no tiene, pero hay muchas mejoras por implementar:_
 
