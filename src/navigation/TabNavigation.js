@@ -29,7 +29,7 @@ const TabNavigation = () => {
         name='LibraLibraryStackryScreen'
         component={LibraryStack}
         options={{
-          title: "Biblioteca",
+          title: "Mis libros",
           tabBarIcon: ({ focused, color }) => (
             <MaterialCommunityIcons
               name='bookshelf'
