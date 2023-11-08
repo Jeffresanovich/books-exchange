@@ -9,9 +9,9 @@ _Nombre del Proyecto:_ **Book Exchange**
 
 _Alumno:_ **Resanovich, Jeffrey**
 
-_Profesor:_ **Martin, Rocío **
+_Profesor:_ **Martin, Rocío**
 
-_Tutor:_ **Bonavia, Mateo **
+_Tutor:_ **Bonavia, Mateo**
 
 _Fecha de Entrega:_ **Martes 07/11/2023**
 
