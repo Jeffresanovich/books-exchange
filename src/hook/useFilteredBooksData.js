@@ -12,100 +12,78 @@ const convertDataResponse = (data) => {
   return convertArray;
 };
 
+//Filter the books the user is reading
 export const filteredBooksReading = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
-  const filteredByCurrentUserId = allBooks.filter(
-    (item) => item.transaction.currentUserId === userId
-  );
-  const filteredBySharingUserId = filteredByCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.transaction.currentUserId === userId)
+    .filter((item) => item.transaction.sharingUserId === userId);
 
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserId);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//Filter the books that the user has to deliver
 export const filteredBooksToDeliver = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
-  const filteredCurrentUserId = allBooks.filter(
-    (item) => item.transaction.currentUserId === userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.transaction.currentUserId === userId)
+    .filter((item) => item.transaction.sharingUserId !== userId)
+    .filter((item) => item.transaction.sharingUserId !== "");
 
-  const filteredBySharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId !== userId
-  );
-  const filteredBySharingUserIdEmpty = filteredBySharingUserId.filter(
-    (item) => item.transaction.sharingUserId !== ""
-  );
-
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserIdEmpty);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//Filter the books that the user has to receive
 export const filteredBooksToReceive = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
   //Filtra, quitando los que ya tiene el usuario
-  const filteredCurrentUserId = allBooks.filter(
-    (item) => item.transaction.currentUserId !== userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.transaction.currentUserId !== userId)
+    .filter((item) => item.transaction.sharingUserId === userId)
+    .filter((item) => item.transaction.sharingUserId !== "");
 
-  const filteredBySharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === userId
-  );
-
-  const filteredBySharingUserIdEmpty = filteredBySharingUserId.filter(
-    (item) => item.transaction.sharingUserId !== ""
-  );
-
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserIdEmpty);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//
 export const filteredBooksToShared = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
   //Filtra, quitando los que ya tiene el usuario
-  const filteredCurrentUserId = allBooks.filter(
-    (item) => item.transaction.currentUserId !== userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.transaction.currentUserId !== userId)
+    .filter((item) => item.transaction.sharingUserId === "");
 
-  const filteredBySharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === ""
-  );
-
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserId);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//Filter the books that another user is sharing
 export const filteredBooksUploaded = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
-  const filteredByOwnerUserId = allBooks.filter(
-    (item) => item.book_data.ownerUserId === userId
-  );
-  const filteredByCurrentUserId = filteredByOwnerUserId.filter(
-    (item) => item.transaction.currentUserId === userId
-  );
-  const filteredBySharingUserId = filteredByCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.book_data.ownerUserId === userId)
+    .filter((item) => item.transaction.currentUserId === userId)
+    .filter((item) => item.transaction.sharingUserId === userId);
 
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserId);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//Filter the books that the current user is sharing
 export const filteredCurrentUserBooksToShared = (data, userId, setCallBack) => {
   const allBooks = convertDataResponse(data);
-  const filteredCurrentUserId = allBooks.filter(
-    (item) => item.transaction.currentUserId === userId
-  );
+  const dataFiltered = allBooks
+    .filter((item) => item.transaction.currentUserId === userId)
+    .filter((item) => item.transaction.sharingUserId === "");
 
-  const filteredBySharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === ""
-  );
-
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredBySharingUserId);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
 
+//Filter books by title that another user is sharing
 export const filteredSharingBooksByTitle = (
   data,
   title,
@@ -114,20 +92,13 @@ export const filteredSharingBooksByTitle = (
 ) => {
   const allBooks = convertDataResponse(data);
   //Filtra por title
-  const filterByTitle = allBooks.filter((item) =>
-    item.book_data.title.toLowerCase().startsWith(title.toLowerCase())
-  );
+  const dataFiltered = allBooks
+    .filter((item) =>
+      item.book_data.title.toLowerCase().startsWith(title.toLowerCase())
+    )
+    .filter((item) => item.transaction.currentUserId !== userId)
+    .filter((item) => item.transaction.sharingUserId === "");
 
-  //Filtra quitando los que ya tiene el usuario
-  const filteredCurrentUserId = filterByTitle.filter(
-    (item) => item.transaction.currentUserId !== userId
-  );
-
-  //Filtra los que estan disponibles (no estan pedidos por nadie)
-  const filteredSharingUserId = filteredCurrentUserId.filter(
-    (item) => item.transaction.sharingUserId === ""
-  );
-
-  //Setea el estado que se pase por parametro
-  setCallBack(filteredSharingUserId);
+  //Set the callback state that is passed by parameter
+  setCallBack(dataFiltered);
 };
