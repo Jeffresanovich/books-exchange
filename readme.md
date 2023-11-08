@@ -1,7 +1,7 @@
 # Proyecto Final
 
-**_Comisión 47760 - CODER HOUSE_**
-**_Curso: Desarrolo de Aplicaciones _**
+**Comisión 47760 - CODER HOUSE**
+**Curso: Desarrolo de Aplicaciones**
 
 ---
 
@@ -119,4 +119,4 @@ Errores no tiene, pero hay muchas mejoras por implementar:_
 - Chat entre usuarios
 - Etc.
 
-####END
+#### END
