@@ -19,6 +19,11 @@ export const bookApi = createApi({
         `books.json?orderBy="book_data/title"&startAt="${title}"`,
     }),
 
+    //Read Book by Title
+    getBooksByIdKey: builder.query({
+      query: (title) => `books.json/"${title}"`,
+    }),
+
     //Create book
     postBook: builder.mutation({
       query: (body) => ({

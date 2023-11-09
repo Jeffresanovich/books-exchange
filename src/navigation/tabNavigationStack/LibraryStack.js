@@ -1,6 +1,3 @@
-//Styles
-import { headerStyles } from "../../theme/commonStyles";
-
 //Screens
 import LibraryScreen from "../../screens/tab/LibraryScreen";
 import DetailsScreen from "../../screens/other/DetailsScreen";
