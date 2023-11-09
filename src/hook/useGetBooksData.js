@@ -94,9 +94,10 @@ export default useGetBooksData = () => {
   //Filter a book by key from State
   const filteredBookByKey = (bookey) => {
     //Filter by key
-    const dataFiltered = convertDataResponse().filter((item) =>
+    const [dataFiltered] = convertDataResponse().filter((item) =>
       item.key.startsWith(bookey)
     );
+
     return getAllInfoFromDataBookObject(dataFiltered);
   };
 
@@ -105,16 +106,18 @@ export default useGetBooksData = () => {
     //
     //TODO:Get book by key from FIREBASE (RTK Query)
     //
-    return getAllInfoFromDataBookObject(dataFiltered);
+    return getAllInfoFromDataBookObject([dataFiltered]);
   };
 
   //Return all user data
   const getAllInfoFromDataBookObject = (dataObject) => {
+    const { book_data, transaction } = dataObject;
     const { image, title, synopsis, subjects, pages, author, ownerUserId } =
-      dataObject.book_data;
-    const { currentUserId, sharingUserId } = dataObject.transaction;
+      book_data;
+    const { currentUserId, sharingUserId } = transaction;
 
     return {
+      userId,
       image,
       title,
       synopsis,
@@ -124,6 +127,7 @@ export default useGetBooksData = () => {
       ownerUserId,
       currentUserId,
       sharingUserId,
+      refetch,
     };
   };
 

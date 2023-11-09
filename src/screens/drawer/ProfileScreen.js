@@ -28,7 +28,7 @@ import { openCam, openGalery } from "../../hook/useImagePiker";
 import { removeUserIdFromStorage } from "../../hook/useAsyncStorage";
 import useGetUserData from "../../hook/useGetUserData";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   //Get data user from firebase
@@ -71,6 +71,7 @@ const ProfileScreen = () => {
       ]
     );
     const logout = () => {
+      navigation.navigate("TabNavigation");
       dispatch(clearUserId());
       removeUserIdFromStorage();
       signOut(firebase_auth);

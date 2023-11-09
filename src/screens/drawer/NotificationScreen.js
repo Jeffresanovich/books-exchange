@@ -25,16 +25,18 @@ const NotificationScreen = () => {
     },
   ];
 
-  const { booksToShared, currentUserBooksToShared } = useGetBooksData();
+  const { filteredBookByKey } = useGetBooksData();
 
   const [res, setRes] = useState({});
 
   const handleClick = () => {
-    const res = booksToShared();
-    const res2 = currentUserBooksToShared();
-
-    console.log("GET DATA IN NOTIFICATION SCREEN TO GET: " + res.length);
-    console.log("GET DATA IN NOTIFICATION SCREEN SHARING: " + res2.length);
+    const { title } = filteredBookByKey("-Ni61xqJH3qlUClrPfCq");
+    /*
+    console.log(
+      "GET DATA IN NOTIFICATION SCREEN TO GET: ",
+      JSON.stringify(title, null, " ")
+    );
+    */
   };
   return (
     <View style={styles.container}>

@@ -3,41 +3,34 @@ import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   ActivityIndicator,
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
-
-import { border } from "../../theme/commonStyles";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
 //Components
 import BooksListComponent from "../../components/list/BooksListComponent";
 
-import { useGetAllBooksQuery } from "../../services/bookApi";
-
-//Redux
-import { useSelector } from "react-redux";
-
-import {
-  filteredBooksReading,
-  filteredCurrentUserBooksToShared,
-} from "../../hook/useFilteredBooksData";
-
 import { useIsFocused } from "@react-navigation/native";
 import TitleListComponent from "../../components/list/TitleListComponent";
+import useGetBooksData from "../../hook/useGetBooksData";
 
 const LibraryScreen = ({ navigation }) => {
   //This hook allows to position the floating button
   const { height, width } = useWindowDimensions();
 
   //Custom hook to bring all books from firebase
-  const { data, isLoading, refetch } = useGetAllBooksQuery();
+  const {
+    data,
+    isLoading,
+    refetch,
+    booksReading: readingBook,
+    currentUserBooksToShared,
+  } = useGetBooksData();
 
   //Get user id from redux state
-  const userId = useSelector((state) => state.userSlice.id);
   const bookInizializatedParams = {
     book_data: {
       title: "",
@@ -56,16 +49,18 @@ const LibraryScreen = ({ navigation }) => {
   };
 
   //The result of the filtered books is saved to show in the lists
-  const [booksReading, setBooksReading] = useState([]);
-  const [booksToShared, setBooksToShared] = useState([]);
+  const [booksReading, setBooksReading] = useState(readingBook());
+  const [booksToShared, setBooksToShared] = useState(
+    currentUserBooksToShared()
+  );
 
   //Update data to focus tab
   const isFocused = useIsFocused();
 
   //Update the list book
   useEffect(() => {
-    filteredBooksReading(data, userId, setBooksReading);
-    filteredCurrentUserBooksToShared(data, userId, setBooksToShared);
+    setBooksReading(readingBook());
+    setBooksToShared(currentUserBooksToShared());
   }, [data]);
 
   //Update the list book

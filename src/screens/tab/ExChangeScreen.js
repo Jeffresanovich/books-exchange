@@ -1,41 +1,35 @@
 import { useEffect, useState } from "react";
 
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 
 //Components
 import BooksListComponent from "../../components/list/BooksListComponent";
 
-import { useGetAllBooksQuery } from "../../services/bookApi";
-
-//Redux
-import { useSelector } from "react-redux";
-
-import {
-  filteredBooksToReceive,
-  filteredBooksToDeliver,
-} from "../../hook/useFilteredBooksData";
+import useGetBooksData from "../../hook/useGetBooksData";
 
 import { useIsFocused } from "@react-navigation/native";
 import TitleListComponent from "../../components/list/TitleListComponent";
 
 const ExChangeScreen = ({ navigation }) => {
   //Custom hook to bring all books from firebase
-  const { data, isLoading, refetch } = useGetAllBooksQuery();
-
-  //Get user id from redux state
-  const userId = useSelector((state) => state.userSlice.id);
+  const { data, isLoading, refetch, booksToReceive, booksToDeliver } =
+    useGetBooksData();
 
   //The result of the filtered books is saved to show in the lists
-  const [booksToReceive, setBooksToReceive] = useState([]);
-  const [booksToDeliver, setBooksToDeliver] = useState([]);
+  const [booksToReceiveList, setBooksToReceiveList] = useState(
+    booksToReceive()
+  );
+  const [booksToDeliverList, setBooksToDeliverList] = useState(
+    booksToDeliver()
+  );
 
   //Update data to focus tab
   const isFocused = useIsFocused();
 
   //Update the list book
   useEffect(() => {
-    filteredBooksToReceive(data, userId, setBooksToReceive);
-    filteredBooksToDeliver(data, userId, setBooksToDeliver);
+    setBooksToReceiveList(booksToReceive());
+    setBooksToDeliverList(booksToDeliver());
   }, [data]);
 
   //Update the list book
@@ -53,7 +47,7 @@ const ExChangeScreen = ({ navigation }) => {
             <TitleListComponent title='POR RECIBIR' />
             <BooksListComponent
               navigation={navigation}
-              books={booksToReceive}
+              books={booksToReceiveList}
               horizontal={true}
             />
           </View>
@@ -61,7 +55,7 @@ const ExChangeScreen = ({ navigation }) => {
             <TitleListComponent title='PARA ENTREGAR' />
             <BooksListComponent
               navigation={navigation}
-              books={booksToDeliver}
+              books={booksToDeliverList}
               horizontal={true}
             />
           </View>

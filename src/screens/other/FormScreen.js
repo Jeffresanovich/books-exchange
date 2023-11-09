@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,8 @@ import {
 } from "react-native";
 
 //Styles
-import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
-import { flex, border } from "../../theme/commonStyles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { flex } from "../../theme/commonStyles";
 
 //Services
 import {
@@ -19,26 +19,32 @@ import {
   usePatchBookMutation,
 } from "../../services/bookApi";
 
-import { useSelector } from "react-redux";
-
 import { openCam, openGalery } from "../../hook/useImagePiker";
 
 const FormScreen = ({ navigation, route }) => {
   //TODO: optimize get book data
-  const { book } = route.params;
+  //const { book } = route.params;
+
+  const {
+    userId,
+    image: img,
+    title: tit,
+    author: aut,
+    subjects: sub,
+    pages: pag,
+    synopsis: syn,
+  } = filteredBookByKey(route.params.book.key);
 
   const [postBook] = usePostBookMutation();
   const [patchBook] = usePatchBookMutation();
 
   //Book Data Form
-  const [image, setImage] = useState(book.book_data.image);
-  const [title, setTitle] = useState(book.book_data.title);
-  const [author, setAuthor] = useState(book.book_data.author);
-  const [subjects, setSubjects] = useState(book.book_data.subjects);
-  const [pages, setPages] = useState(book.book_data.pages);
-  const [synopsis, setSynopsis] = useState(book.book_data.synopsis);
-
-  const userId = useSelector((state) => state.userSlice.id);
+  const [image, setImage] = useState(img);
+  const [title, setTitle] = useState(tit);
+  const [author, setAuthor] = useState(aut);
+  const [subjects, setSubjects] = useState(sub);
+  const [pages, setPages] = useState(pag);
+  const [synopsis, setSynopsis] = useState(syn);
 
   //TODO: optimize blank form
   const formBook = {
