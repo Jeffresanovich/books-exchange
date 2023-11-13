@@ -1,9 +1,16 @@
 import { useSelector } from "react-redux";
-import { useGetAllBooksQuery } from "../services/bookApi";
+import {
+  useGetAllBooksQuery,
+  useGetBooksByIdKeyQuery,
+} from "../services/bookApi";
 
 export default useGetBooksData = () => {
   const { data, isLoading, isFetching, refetch } = useGetAllBooksQuery();
-  const userId = useSelector((state) => state.userSlice.id);
+  const userIdFromState = useSelector((state) => state.userSlice.id);
+
+  const bookeyFromState = useSelector((state) => state.userSlice.bookey);
+  //const { data, isLoading, isFetching, refetch } =
+  //  useGetBooksByIdKeyQuery(bookeyFromState);
 
   /**
    * This custom hook slice the data (object) from firebase and the firebase key
@@ -23,16 +30,16 @@ export default useGetBooksData = () => {
   //Filter the books the user is reading
   const booksReading = () => {
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.transaction.currentUserId === userId)
-      .filter((item) => item.transaction.sharingUserId === userId);
+      .filter((item) => item.transaction.currentUserId === userIdFromState)
+      .filter((item) => item.transaction.sharingUserId === userIdFromState);
     return dataFiltered;
   };
 
   //Filter the books that the user has to deliver
   const booksToDeliver = () => {
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.transaction.currentUserId === userId)
-      .filter((item) => item.transaction.sharingUserId !== userId)
+      .filter((item) => item.transaction.currentUserId === userIdFromState)
+      .filter((item) => item.transaction.sharingUserId !== userIdFromState)
       .filter((item) => item.transaction.sharingUserId !== "");
     return dataFiltered;
   };
@@ -41,8 +48,8 @@ export default useGetBooksData = () => {
   const booksToReceive = () => {
     //Filtra, quitando los que ya tiene el usuario
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.transaction.currentUserId !== userId)
-      .filter((item) => item.transaction.sharingUserId === userId)
+      .filter((item) => item.transaction.currentUserId !== userIdFromState)
+      .filter((item) => item.transaction.sharingUserId === userIdFromState)
       .filter((item) => item.transaction.sharingUserId !== "");
     return dataFiltered;
   };
@@ -51,7 +58,7 @@ export default useGetBooksData = () => {
   const booksToShared = () => {
     //Filtra, quitando los que ya tiene el usuario
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.transaction.currentUserId !== userId)
+      .filter((item) => item.transaction.currentUserId !== userIdFromState)
       .filter((item) => item.transaction.sharingUserId === "");
     return dataFiltered;
   };
@@ -59,9 +66,9 @@ export default useGetBooksData = () => {
   //Filter the books that another user is sharing
   const booksUploaded = (setCallBack = null) => {
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.book_data.ownerUserId === userId)
-      .filter((item) => item.transaction.currentUserId === userId)
-      .filter((item) => item.transaction.sharingUserId === userId);
+      .filter((item) => item.book_data.ownerUserId === userIdFromState)
+      .filter((item) => item.transaction.currentUserId === userIdFromState)
+      .filter((item) => item.transaction.sharingUserId === userIdFromState);
 
     //Set the callback state that is passed by parameter
     setCallBack && setCallBack(dataFiltered);
@@ -71,7 +78,7 @@ export default useGetBooksData = () => {
   //Filter the books that the current user is sharing
   const currentUserBooksToShared = (setCallBack = null) => {
     const dataFiltered = convertDataResponse()
-      .filter((item) => item.transaction.currentUserId === userId)
+      .filter((item) => item.transaction.currentUserId === userIdFromState)
       .filter((item) => item.transaction.sharingUserId === "");
 
     //Set the callback state that is passed by parameter
@@ -86,7 +93,7 @@ export default useGetBooksData = () => {
       .filter((item) =>
         item.book_data.title.toLowerCase().startsWith(title.toLowerCase())
       )
-      .filter((item) => item.transaction.currentUserId !== userId)
+      .filter((item) => item.transaction.currentUserId !== userIdFromState)
       .filter((item) => item.transaction.sharingUserId === "");
     return dataFiltered;
   };
@@ -102,7 +109,7 @@ export default useGetBooksData = () => {
   };
 
   //Filter a book by key from firebase
-  const filteredBookByKeyFromFirebase = (bookey) => {
+  const filteredBookByKeyFromFirebase = () => {
     //
     //TODO:Get book by key from FIREBASE (RTK Query)
     //

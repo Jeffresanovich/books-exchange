@@ -127,6 +127,7 @@ export const bookApi = createApi({
 export const {
   //BOOKS
   useGetAllBooksQuery,
+  useGetBooksByIdKeyQuery,
   useGetBooksByTitleQuery,
   usePostBookMutation,
   usePatchBookMutation,
