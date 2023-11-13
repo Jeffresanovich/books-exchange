@@ -124,7 +124,6 @@ export default useGetBooksData = () => {
     const { currentUserId, sharingUserId } = transaction;
 
     return {
-      userId,
       image,
       title,
       synopsis,
@@ -139,7 +138,7 @@ export default useGetBooksData = () => {
   };
 
   return {
-    userId,
+    userId: userIdFromState,
     data,
     isLoading,
     isFetching,
